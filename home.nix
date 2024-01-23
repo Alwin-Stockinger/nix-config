@@ -70,6 +70,12 @@
     enable = true;
     userName = "Alwin";
     userEmail = "alwin@stockinger.tech";
+    extraConfig = {
+      push = {
+        autoSetupRemote = true;
+      };
+    };
+    
   };
 
   # Let Home Manager install and manage itself.
