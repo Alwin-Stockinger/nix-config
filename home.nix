@@ -74,8 +74,11 @@
       push = {
         autoSetupRemote = true;
       };
-    };
-    
+    }; 
+  };
+
+  programs.gh = {
+    enable = true;
   };
 
   # Let Home Manager install and manage itself.
