@@ -81,6 +81,20 @@
     enable = true;
   };
 
+  programs.zsh = {
+    enable = true;
+    enableAutosuggestions = true;
+    enableCompletion = true;
+
+    oh-my-zsh = {
+      enable = true;
+      plugins = [
+        "git"
+        ];
+      theme = "robbyrussell";
+    };
+  };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
