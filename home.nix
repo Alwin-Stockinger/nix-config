@@ -86,6 +86,9 @@
     enableAutosuggestions = true;
     enableCompletion = true;
 
+    initExtra = "path+=('/run/current-system/sw/bin/')";
+
+
     oh-my-zsh = {
       enable = true;
       plugins = [
