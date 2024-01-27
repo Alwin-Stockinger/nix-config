@@ -89,6 +89,7 @@
     initExtra = "
       path+=('/run/current-system/sw/bin/')
       path+=('/Applications/Visual Studio Code.app/Contents/Resources/app/bin')
+      path+=('/etc/profiles/per-user/alwin/bin')
     ";
 
 
