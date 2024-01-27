@@ -16,6 +16,7 @@
       # $ nix-env -qaP | grep wget
       environment.systemPackages =
         [
+          pkgs.htop
         ];
 
       # Auto upgrade nix package and the daemon service.
