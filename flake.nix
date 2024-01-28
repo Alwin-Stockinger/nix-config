@@ -9,7 +9,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager }:
+  outputs = { self, nix-darwin, nixpkgs, home-manager }:
   let
     configuration = { pkgs, ... }: {
       # List packages installed in system profile. To search by name, run:
@@ -51,15 +51,36 @@
       system.stateVersion = 4;
 
       # The platform the configuration will be used on.
-      nixpkgs.hostPlatform = "x86_64-darwin";
+      
     };
   in
   {
-    # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#Alwins-MacBook-Pro
-    darwinConfigurations."Alwins-MacBook-Pro" = nix-darwin.lib.darwinSystem {
+
+    darwinConfigurations."Holden" = nix-darwin.lib.darwinSystem {
+            
       modules = [ 
-        configuration
+        configuration {
+          nixpkgs.hostPlatform = "aarch64-darwin";
+        }
+        home-manager.darwinModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.alwin = import ./home.nix;
+
+            # Optionally, use home-manager.extraSpecialArgs to pass
+            # arguments to home.nix
+          }
+       ];
+    };
+    # Build darwin flake using:
+    # $ darwin-rebuild build --flake .#Chrisjen
+    darwinConfigurations."Chrisjen" = nix-darwin.lib.darwinSystem {
+      
+      modules = [ 
+        configuration {
+          nixpkgs.hostPlatform = "x86_64-darwin";
+        }
         home-manager.darwinModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -73,6 +94,6 @@
     };
 
     # Expose the package set, including overlays, for convenience.
-    darwinPackages = self.darwinConfigurations."Alwins-MacBook-Pro".pkgs;
+    darwinPackages = self.darwinConfigurations."Chrisjen".pkgs;
   };
 }
