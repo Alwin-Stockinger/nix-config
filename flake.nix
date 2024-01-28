@@ -70,7 +70,7 @@
     #x86 Tower
     nixosConfigurations."bobby" = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs outputs;};
-      system = system = "x86_64-linux";
+      system = "x86_64-linux";
 
 
       modules = [
