@@ -69,7 +69,7 @@
 
     #x86 Tower
     nixosConfigurations."bobby" = nixpkgs.lib.nixosSystem {
-      #nixpkgs.config.allowUnfree = true;
+        nixpkgs.config.allowUnfree = true;
 
         nix.settings = {
           # Enable flakes and new 'nix' command
@@ -114,6 +114,10 @@
             packages = with nixpkgs; [];
           };
         };
+
+        imports = [
+          ./hardware
+          ];
 
         modules = [
           home-manager.nixosModules.home-manager
