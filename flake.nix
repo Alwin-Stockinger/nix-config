@@ -69,66 +69,22 @@
 
     #x86 Tower
     nixosConfigurations."bobby" = nixpkgs.lib.nixosSystem {
-        nixpkgs.config.allowUnfree = true;
-
-        nix.settings = {
-          # Enable flakes and new 'nix' command
-          experimental-features = "nix-command flakes";
-          # Deduplicate and optimize nix store
-          auto-optimise-store = true;
-        };
-
-        system = "x86_64-linux";
-
-        networking.hostName = "bobby";
-        networking.networkmanager.enable = true;
-
-        # Bootloader.
-        boot.loader.grub.enable = true;
-        boot.loader.grub.device = "/dev/sda";
-        boot.loader.grub.useOSProber = true;
-
-        time.timeZone = "Europe/Vienna";
-
-        i18n.defaultLocale = "en_US.UTF-8";
-        i18n.extraLocaleSettings = {
-          LC_ADDRESS = "de_AT.UTF-8";
-          LC_IDENTIFICATION = "de_AT.UTF-8";
-          LC_MEASUREMENT = "de_AT.UTF-8";
-          LC_MONETARY = "de_AT.UTF-8";
-          LC_NAME = "de_AT.UTF-8";
-          LC_NUMERIC = "de_AT.UTF-8";
-          LC_PAPER = "de_AT.UTF-8";
-          LC_TELEPHONE = "de_AT.UTF-8";
-          LC_TIME = "de_AT.UTF-8";
-        };
-
-        console.keyMap = "de";
+      specialArgs = {inherit inputs outputs;};
+      system = system = "x86_64-linux";
 
 
-        users.users = {
-          alwin = {
-            isNormalUser = true;
-            description = "Alwin Stockinger";
-            extraGroups = [ "networkmanager" "wheel" ];
-          };
-        };
+      modules = [
+        ./nixos
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.alwin = import ./home.nix;
 
-        imports = [
-          ./hardware
-          ];
-
-        modules = [
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.alwin = import ./home.nix;
-
-            # Optionally, use home-manager.extraSpecialArgs to pass
-            # arguments to home.nix
-          }
-        ];
+          # Optionally, use home-manager.extraSpecialArgs to pass
+          # arguments to home.nix
+        }
+      ];
       
     };
 
