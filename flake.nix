@@ -8,10 +8,9 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
-
   outputs = { self, nix-darwin, nixpkgs, home-manager }:
   let
-    configuration = { pkgs, ... }: {
+    darwinConfiguration = { pkgs, ... }: {
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
       environment.systemPackages =
@@ -59,7 +58,7 @@
     darwinConfigurations."Holden" = nix-darwin.lib.darwinSystem {
             
       modules = [ 
-        configuration {
+        darwinConfiguration {
           nixpkgs.hostPlatform = "aarch64-darwin";
         }
         home-manager.darwinModules.home-manager
@@ -78,7 +77,7 @@
     darwinConfigurations."Chrisjen" = nix-darwin.lib.darwinSystem {
       
       modules = [ 
-        configuration {
+        darwinConfiguration {
           nixpkgs.hostPlatform = "x86_64-darwin";
         }
         home-manager.darwinModules.home-manager
@@ -94,6 +93,6 @@
     };
 
     # Expose the package set, including overlays, for convenience.
-    darwinPackages = self.darwinConfigurations."Chrisjen".pkgs;
+    #darwinPackages = self.darwinConfigurations."Chrisjen".pkgs;
   };
 }
