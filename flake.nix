@@ -111,7 +111,6 @@
             isNormalUser = true;
             description = "Alwin Stockinger";
             extraGroups = [ "networkmanager" "wheel" ];
-            packages = with nixpkgs; [];
           };
         };
 
