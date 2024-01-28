@@ -1,5 +1,5 @@
 {
-  description = "Darwin system flake";
+  description = "Alwin Systems Flake";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
@@ -19,20 +19,9 @@
   };
 
 
-  outputs = inputs@{ self, darwin, nixpkgs, home-manager, ... }:
+  outputs = { self, darwin, nixpkgs, home-manager, ... }:
   let
-    systems = [
-      "aarch64-linux"
-      "i686-linux"
-      "x86_64-linux"
-      "aarch64-darwin"
-      "x86_64-darwin"
-    ];
-    # This is a function that generates an attribute by calling a function you
-    # pass to it, with each system as an argument
-    forAllSystems = nixpkgs.lib.genAttrs systems;
-    
-    nixpkgs.config.allowUnfree = true;
+
     darwinConfiguration = { pkgs, ... }: {
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
