@@ -13,12 +13,15 @@
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
-  home.stateVersion = "24.05"; # Please read the comment before changing.
+  home.stateVersion = "23.11"; # Please read the comment before changing.
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
-    pkgs.helix
+  home.packages = with pkgs; [
+    helix
+    neofetch
+    tldr
+    vim
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -64,7 +67,7 @@
   #  /etc/profiles/per-user/alwin/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    EDITOR = "vim";
   };
 
   programs.git = {
@@ -96,7 +99,7 @@
 
     oh-my-zsh = {
       enable = true;
-      plugins = [
+      plugins = [ 
         "git"
         ];
       theme = "robbyrussell";

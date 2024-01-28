@@ -2,14 +2,26 @@
   description = "Darwin system flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nix-darwin.url = "github:LnL7/nix-darwin";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
+    
+
+    home-manager = {
+      url = "github:nix-community/home-manager/release-23.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    #hyprland.url = "github:hyprwm/Hyprland";
   };
-  outputs = { self, nix-darwin, nixpkgs, home-manager }:
+
+
+  outputs = inputs@{ self, darwin, nixpkgs, home-manager, ... }:
   let
+    nixpkgs.config.allowUnfree = true;
     darwinConfiguration = { pkgs, ... }: {
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
@@ -55,7 +67,75 @@
   in
   {
 
-    darwinConfigurations."Holden" = nix-darwin.lib.darwinSystem {
+    #x86 Tower
+    nixosConfigurations."bobby" = nixpkgs.lib.nixosSystem {
+      #nixpkgs.config.allowUnfree = true;
+
+        nix.settings = {
+          # Enable flakes and new 'nix' command
+          experimental-features = "nix-command flakes";
+          # Deduplicate and optimize nix store
+          auto-optimise-store = true;
+        };
+
+        system = "x86_64-linux";
+
+        networking.hostName = "bobby";
+        networking.networkmanager.enable = true;
+
+        # Bootloader.
+        boot.loader.grub.enable = true;
+        boot.loader.grub.device = "/dev/sda";
+        boot.loader.grub.useOSProber = true;
+
+        time.timeZone = "Europe/Vienna";
+
+        i18n.defaultLocale = "en_US.UTF-8";
+        i18n.extraLocaleSettings = {
+          LC_ADDRESS = "de_AT.UTF-8";
+          LC_IDENTIFICATION = "de_AT.UTF-8";
+          LC_MEASUREMENT = "de_AT.UTF-8";
+          LC_MONETARY = "de_AT.UTF-8";
+          LC_NAME = "de_AT.UTF-8";
+          LC_NUMERIC = "de_AT.UTF-8";
+          LC_PAPER = "de_AT.UTF-8";
+          LC_TELEPHONE = "de_AT.UTF-8";
+          LC_TIME = "de_AT.UTF-8";
+        };
+
+        console.keyMap = "de";
+
+
+        users.users = {
+          alwin = {
+            isNormalUser = true;
+            description = "Alwin Stockinger";
+            extraGroups = [ "networkmanager" "wheel" ];
+            packages = with nixpkgs; [];
+          };
+        };
+
+        modules = [
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.alwin = import ./home.nix;
+
+            # Optionally, use home-manager.extraSpecialArgs to pass
+            # arguments to home.nix
+          }
+        ];
+
+
+
+
+      
+    };
+
+
+    #M2 Macbook Pro
+    darwinConfigurations."holden" = darwin.lib.darwinSystem {
             
       modules = [ 
         darwinConfiguration {
@@ -72,9 +152,10 @@
           }
        ];
     };
-    # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#Chrisjen
-    darwinConfigurations."Chrisjen" = nix-darwin.lib.darwinSystem {
+
+
+    #2019 Macbook Pro
+    darwinConfigurations."chrisjen" = darwin.lib.darwinSystem {
       
       modules = [ 
         darwinConfiguration {
@@ -85,6 +166,8 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.alwin = import ./home.nix;
+
+
 
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix
