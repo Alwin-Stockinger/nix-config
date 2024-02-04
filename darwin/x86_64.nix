@@ -1,3 +1,6 @@
 { pkgs, lib, inputs, outputs, ... }: {
-    common = import ./common.nix {inherit pkgs lib inputs outputs;};
+    imports = [
+        ./common.nix
+    ];
+    nixpkgs.hostPlatform = "x86_64-darwin";
 }

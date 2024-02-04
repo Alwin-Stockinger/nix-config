@@ -1,3 +1,6 @@
 { pkgs, lib, inputs, outputs, ... }: {
-    import ./common.nix {inherit pkgs lib inputs outputs;}
+    imports = [
+        ./common.nix
+    ];
+    nixpkgs.hostPlatform = "aarch64-darwin";
 }

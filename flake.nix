@@ -48,9 +48,6 @@
             
       modules = [
         ./darwin/aarch64.nix
-        # darwinConfiguration {
-        #   nixpkgs.hostPlatform = "aarch64-darwin";
-        # }
         home-manager.darwinModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -69,9 +66,6 @@
 
       modules = [ 
         ./darwin/x86_64.nix
-        # darwinConfiguration {
-        #   nixpkgs.hostPlatform = "x86_64-darwin";
-        # }
         home-manager.darwinModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
