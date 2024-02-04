@@ -19,7 +19,7 @@
   };
 
 
-  outputs = { self, darwin, nixpkgs, home-manager, ... }:
+  outputs = inputs@{ self, darwin, nixpkgs, home-manager, ... }:
   {
 
     #x86 Tower
@@ -44,9 +44,10 @@
 
     #M2 Macbook Pro
     darwinConfigurations."holden" = darwin.lib.darwinSystem {
+      specialArgs = {inherit inputs self;};
             
       modules = [
-        ./darwin/aarch64.nix { inherit self; }
+        ./darwin/aarch64.nix
         # darwinConfiguration {
         #   nixpkgs.hostPlatform = "aarch64-darwin";
         # }
@@ -64,9 +65,10 @@
 
     #2019 Macbook Pro
     darwinConfigurations."chrisjen" = darwin.lib.darwinSystem {
-      
+      specialArgs = {inherit inputs self;};
+
       modules = [ 
-        ./darwin/x86_64.nix { inherit self; }
+        ./darwin/x86_64.nix
         # darwinConfiguration {
         #   nixpkgs.hostPlatform = "x86_64-darwin";
         # }

@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, lib, inputs, outputs, ... }: {
     # List packages installed in system profile. To search by name, run:
     # $ nix-env -qaP | grep wget
     environment.systemPackages =
@@ -26,11 +26,11 @@
     #   /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
     # '';
 
-    defaults.dock.wvous-tr-corner = 2;
+        defaults.dock.wvous-tr-corner = 2;
     };
 
     # Set Git commit hash for darwin-version.
-    system.configurationRevision = outputs.rev or outputs.dirtyRev or null;
+    #system.configurationRevision = outputs.rev or outputs.dirtyRev or null;
 
     # Used for backwards compatibility, please read the changelog before changing.
     # $ darwin-rebuild changelog

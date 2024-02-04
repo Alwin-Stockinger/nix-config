@@ -1,5 +1,3 @@
-{ pkgs, outputs, ... }: {
-    imports = [
-        ./common.nix { inherit outputs; }
-    ];
+{ pkgs, lib, inputs, outputs, ... }: {
+    common = import ./common.nix {inherit pkgs lib inputs outputs;};
 }
