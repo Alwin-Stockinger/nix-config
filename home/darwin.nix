@@ -1,0 +1,6 @@
+{ cofig, pkgs, ... }:
+{
+  imports = [
+    ./common
+  ];
+}
