@@ -53,8 +53,11 @@
         isNormalUser = true;
         description = "Alwin Stockinger";
         extraGroups = [ "networkmanager" "wheel" ];
+        shell = pkgs.zsh;
         };
     };
+
+    programs.zsh.enable = true;
 
     programs.hyprland = {
 	enable = true;

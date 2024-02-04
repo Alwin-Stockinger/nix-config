@@ -2,8 +2,8 @@
 {
 
   home.packages = with pkgs; [
-    kitty
-  ];
+    firefox
+ ];
 
   wayland.windowManager.hyprland = {
 	enable = true;
@@ -22,7 +22,7 @@ monitor=,preferred,auto,auto
 
 # Set programs that you use
 $terminal = kitty
-$fileManager = dolphin
+$fileManager = dolphin:
 $menu = wofi --show drun
 
 # Some default env vars.
@@ -31,7 +31,7 @@ env = QT_QPA_PLATFORMTHEME,qt5ct # change to qt6ct if you have that
 
 # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
 input {
-    kb_layout = us
+    kb_layout = de
     kb_variant =
     kb_model =
     kb_options =
@@ -132,7 +132,7 @@ windowrulev2 = nomaximizerequest, class:.* # You'll probably like this.
 $mainMod = SUPER
 
 # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-bind = $mainMod, Q, exec, $terminal
+bind = $mainMod, T, exec, $terminal
 bind = $mainMod, C, killactive, 
 bind = $mainMod, M, exit, 
 bind = $mainMod, E, exec, $fileManager
@@ -140,6 +140,7 @@ bind = $mainMod, V, togglefloating,
 bind = $mainMod, R, exec, $menu
 bind = $mainMod, P, pseudo, # dwindle
 bind = $mainMod, J, togglesplit, # dwindle
+bind = $mainMod, B, exec, firefox
 
 # Move focus with mainMod + arrow keys
 bind = $mainMod, left, movefocus, l
