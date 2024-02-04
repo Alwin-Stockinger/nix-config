@@ -56,6 +56,14 @@
         };
     };
 
+    programs.hyprland = {
+	enable = true;
+	package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+    };
+
+    system.stateVersion = "23.11";
+    
+
     imports = [
         ./hardware
         ];

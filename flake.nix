@@ -15,7 +15,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    #hyprland.url = "github:hyprwm/Hyprland";
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
 
@@ -26,13 +26,15 @@
     nixosConfigurations."bobby" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
 
+      specialArgs = {inherit inputs self;};
+
       modules = [
         ./nixos
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.alwin = import ./home.nix;
+          home-manager.users.alwin = import ./home/nixos.nix;
 
           # Optionally, use home-manager.extraSpecialArgs to pass
           # arguments to home.nix
