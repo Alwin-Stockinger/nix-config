@@ -1,5 +1,8 @@
-{ cofig, pkgs, ... }:
 {
+  cofig,
+  pkgs,
+  ...
+}: {
   imports = [
     ./common.nix
   ];

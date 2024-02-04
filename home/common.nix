@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "alwin";
@@ -62,7 +64,7 @@
       push = {
         autoSetupRemote = true;
       };
-    }; 
+    };
   };
 
   programs.gh = {
@@ -80,12 +82,11 @@
       path+=('/etc/profiles/per-user/alwin/bin')
     ";
 
-
     oh-my-zsh = {
       enable = true;
-      plugins = [ 
+      plugins = [
         "git"
-        ];
+      ];
       theme = "robbyrussell";
     };
   };
@@ -98,11 +99,16 @@
     enable = true;
     defaultEditor = true;
     languages = {
-      language = [{
-        name = "nix";
-        indent = { tab-width = 2; unit = " ";};
-        auto-format = true;
-      }];
+      language = [
+        {
+          name = "nix";
+          indent = {
+            tab-width = 2;
+            unit = " ";
+          };
+          auto-format = true;
+        }
+      ];
     };
     settings = {
       editor = {
