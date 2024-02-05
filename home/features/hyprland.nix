@@ -12,7 +12,11 @@
     enable = true;
     extraConfig = ''
 
-      monitor=,preferred,auto,auto
+      monitor = DVI-D-2, 1680x1050, 0x0, 1
+      monitor = DP-1, 2560x1440, 1680x0, 1
+
+      workspace = 1, monitor:DVI-D-2
+      workspace = 2, monitor:DP-1 
 
 
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
@@ -43,7 +47,7 @@
           follow_mouse = 1
 
           touchpad {
-              natural_scroll = no
+              natural_scroll = yes
           }
 
           sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
@@ -114,7 +118,7 @@
 
       misc {
           # See https://wiki.hyprland.org/Configuring/Variables/ for more
-          force_default_wallpaper = -1 # Set to 0 or 1 to disable the anime mascot wallpapers
+          force_default_wallpaper = 0 # Set to 0 or 1 to disable the anime mascot wallpapers
       }
 
       # Example per-device config
