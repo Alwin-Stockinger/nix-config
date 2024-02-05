@@ -91,10 +91,6 @@
     };
   };
 
-  programs.kitty = {
-    enable = true;
-  };
-
   programs.helix = {
     enable = true;
     defaultEditor = true;
