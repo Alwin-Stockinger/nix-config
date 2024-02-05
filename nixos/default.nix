@@ -62,6 +62,7 @@
   system.stateVersion = "23.11";
 
   imports = [
+    ./features/pipewire.nix
     ./hardware
   ];
 }

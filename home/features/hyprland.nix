@@ -4,6 +4,10 @@
   ...
 }: {
 
+  home.packages = with pkgs; [
+    dunst
+  ];
+
   programs.kitty = {
     enable = true;
   };
