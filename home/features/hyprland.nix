@@ -5,7 +5,7 @@
 }: {
 
   home.packages = with pkgs; [
-    dunst
+    mako
   ];
 
   programs.kitty = {
@@ -152,6 +152,7 @@
       bind = $mainMod, P, pseudo, # dwindle
       bind = $mainMod, J, togglesplit, # dwindle
       bind = $mainMod, B, exec, firefox
+      bind = $mainMod, D, exec, vencorddesktop
 
       # Move focus with mainMod + arrow keys
       bind = $mainMod, left, movefocus, l
