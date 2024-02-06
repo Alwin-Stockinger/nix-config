@@ -38,6 +38,12 @@
     alejandra,
     ...
   }: {
+    nix.settings.auto-optimise-store = true;
+    nix.gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 1w";
+    };
     #x86 Tower
     nixosConfigurations."bobby" = nixpkgs.lib.nixosSystem rec {
       system = "x86_64-linux";
