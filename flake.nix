@@ -14,10 +14,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    alejandra.url = "github:kamadorueda/alejandra/3.0.0";
-    alejandra.inputs.nixpkgs.follows = "nixpkgs";
+    alejandra = {
+      url = "github:kamadorueda/alejandra/3.0.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-homebrew = {
+      url = "github:zhaofengli-wip/nix-homebrew";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
@@ -52,10 +62,15 @@
     };
 
     #M2 Macbook Pro
-    darwinConfigurations."holden" = darwin.lib.darwinSystem {
+    darwinConfigurations."holden" = darwin.lib.darwinSystem rec {
       specialArgs = {inherit inputs self;};
 
+      system = "aarch64-darwin";
+
       modules = [
+        {
+          environment.systemPackages = [alejandra.defaultPackage.${system}];
+        }
         ./darwin/aarch64.nix
         home-manager.darwinModules.home-manager
         {
@@ -69,10 +84,15 @@
     };
 
     #2019 Macbook Pro
-    darwinConfigurations."chrisjen" = darwin.lib.darwinSystem {
+    darwinConfigurations."chrisjen" = darwin.lib.darwinSystem rec {
       specialArgs = {inherit inputs self;};
 
+      system = "x86_64-darwin";
+
       modules = [
+        {
+          environment.systemPackages = [alejandra.defaultPackage.${system}];
+        }
         ./darwin/x86_64.nix
         home-manager.darwinModules.home-manager
         {
