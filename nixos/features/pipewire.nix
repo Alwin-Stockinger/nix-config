@@ -2,7 +2,7 @@
 # and may be overwritten by future invocations.  Please make changes
 # to /etc/nixos/configuration.nix instead.
 {
-inputs,
+  inputs,
   lib,
   config,
   pkgs,
@@ -16,5 +16,4 @@ inputs,
     jack.enable = true;
     pulse.enable = true;
   };
-
 }

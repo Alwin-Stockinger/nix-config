@@ -3,7 +3,6 @@
   pkgs,
   ...
 }: {
-
   home.packages = with pkgs; [
     mako
   ];
@@ -20,7 +19,7 @@
       monitor = DP-1, 2560x1440, 1680x0, 1
 
       workspace = 1, monitor:DVI-D-2
-      workspace = 2, monitor:DP-1 
+      workspace = 2, monitor:DP-1
 
 
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
