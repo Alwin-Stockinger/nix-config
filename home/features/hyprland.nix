@@ -20,7 +20,7 @@
         output = "DP-1";
         # "layer": "top", // Waybar at top layer
         #// "position": "bottom", // Waybar position (top|bottom|left|right)
-        #height = 30; #// Waybar height (to be removed for auto height)
+        #        height = 15; #// Waybar height (to be removed for auto height)
         #// "width": 1280, // Waybar width
         spacing = 4; #// Gaps between modules (4px)
         #// Choose the order of the modules
@@ -33,13 +33,14 @@
       };
     };
     style = ''
+      * { font-size: 15px; }
       window#waybar {
        background: transparent;
       }
       #clock {
        background: transparent;
        color: white;
-       padding: 0 10px;
+       padding: 10px 0 0 0;
       }
     '';
   };
