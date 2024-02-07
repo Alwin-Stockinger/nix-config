@@ -5,6 +5,8 @@
 }: {
   home.packages = with pkgs; [
     mako
+    xdg-desktop-portal-hyprland
+    polkit-kde-agent
   ];
 
   programs.kitty = {
@@ -26,6 +28,7 @@
 
       # Execute your favorite apps at launch
       # exec-once = waybar & hyprpaper & firefox
+        exec-once = mako & polkit-kde-agent
 
       # Source a file (multi-file configs)
       # source = ~/.config/hypr/myColors.conf
