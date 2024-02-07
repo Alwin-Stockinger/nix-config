@@ -152,6 +152,7 @@
       bind = $mainMod, J, togglesplit, # dwindle
       bind = $mainMod, B, exec, firefox
       bind = $mainMod, D, exec, vencorddesktop
+      bind = $mainMod, F, fullscreen, 1
 
       # Move focus with mainMod + arrow keys
       bind = $mainMod, left, movefocus, l
