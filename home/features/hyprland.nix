@@ -17,23 +17,29 @@
     enable = true;
     settings = {
       mainBar = {
+        output = "DP-1";
         # "layer": "top", // Waybar at top layer
         #// "position": "bottom", // Waybar position (top|bottom|left|right)
-        height = 20; #// Waybar height (to be removed for auto height)
+        #height = 30; #// Waybar height (to be removed for auto height)
         #// "width": 1280, // Waybar width
         spacing = 4; #// Gaps between modules (4px)
         #// Choose the order of the modules
         modules-center = ["clock"];
         clock = {
           # "timezone": "America/New_York",
-          tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+          #tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
           format-alt = "{:%Y-%m-%d}";
         };
       };
     };
     style = ''
+      window#waybar {
+       background: transparent;
+      }
       #clock {
-       background-color: #4c107a;
+       background: transparent;
+       color: white;
+       padding: 0 10px;
       }
     '';
   };
