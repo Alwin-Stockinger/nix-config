@@ -103,6 +103,9 @@
             unit = " ";
           };
           auto-format = true;
+          formatter = {
+            command = "alejandra";
+          };
         }
       ];
     };
