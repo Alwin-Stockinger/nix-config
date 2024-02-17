@@ -4,8 +4,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
 
-    home-manager = {
-      url = "github:nix-community/home-manager/release-23.11";
+    home = {
+      url = "github:nix-community/home-manager/release";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -13,6 +13,9 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    parts.url = "github:hercules-ci/flake-parts";
+
 
     hyprland = {
       url = "github:hyprwm/Hyprland";
@@ -28,87 +31,80 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
+  outputs = inputs: inputs.parts.lib.mkFlake { inherit inputs; }
+  {
 
-  outputs = inputs @ {
-    self,
-    darwin,
-    nixpkgs,
-    home-manager,
-    alejandra,
-    ...
-  }: {
-    nix.settings.auto-optimise-store = true;
-    nix.gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 1w";
-    };
+    systems = [ "aarch64-darwin" "x86_64-darwin" "x86_64-linux" "aarch64-linux"];
+    imports = [ ./modules/parts ./hosts ./users ];
+
     #x86 Tower
-    nixosConfigurations."bobby" = nixpkgs.lib.nixosSystem rec {
-      system = "x86_64-linux";
+    # nixosConfigurations."bobby" = nixpkgs.lib.nixosSystem rec {
+    #   system = "x86_64-linux";
 
-      specialArgs = {inherit inputs self;};
+    #   specialArgs = {inherit inputs self;};
 
-      modules = [
-        {
-          environment.systemPackages = [alejandra.defaultPackage.${system}];
-        }
-        ./nixos
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.alwin = import ./home/nixos.nix;
+    #   modules = [
+        # {
+        #   environment.systemPackages = [alejandra.defaultPackage.${system}];
+        # }
+    #     ./nixos
+    #     home-manager.nixosModules.home-manager
+    #     {
+    #       home-manager.useGlobalPkgs = true;
+    #       home-manager.useUserPackages = true;
+    #       home-manager.users.alwin = import ./home/nixos.nix;
 
-          # Optionally, use home-manager.extraSpecialArgs to pass
-          # arguments to home.nix
-        }
-      ];
-    };
+    #       # Optionally, use home-manager.extraSpecialArgs to pass
+    #       # arguments to home.nix
+    #     }
+    #   ];
+      
+    # };
 
-    #M2 Macbook Pro
-    darwinConfigurations."holden" = darwin.lib.darwinSystem rec {
-      specialArgs = {inherit inputs self;};
 
-      system = "aarch64-darwin";
+    # #M2 Macbook Pro
+    # darwinConfigurations."holden" = darwin.lib.darwinSystem rec {
+    #   specialArgs = {inherit inputs self;};
 
-      modules = [
-        {
-          environment.systemPackages = [alejandra.defaultPackage.${system}];
-        }
-        ./darwin/aarch64.nix
-        home-manager.darwinModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.alwin = import ./home/darwin.nix;
-          # Optionally, use home-manager.extraSpecialArgs to pass
-          # arguments to home.nix
-        }
-      ];
-    };
+    #  system = "aarch64-darwin";
 
-    #2019 Macbook Pro
-    darwinConfigurations."chrisjen" = darwin.lib.darwinSystem rec {
-      specialArgs = {inherit inputs self;};
+    #   modules = [
+        # {
+        #   environment.systemPackages = [alejandra.defaultPackage.${system}];
+        # }
+    #     ./darwin/aarch64.nix
+    #     home-manager.darwinModules.home-manager
+  #       {
+  #         home-manager.useGlobalPkgs = true;
+  #         home-manager.useUserPackages = true;
+  #         home-manager.users.alwin = import ./home/darwin.nix;
+  #         # Optionally, use home-manager.extraSpecialArgs to pass
+  #         # arguments to home.nix
+  #       }
+   #    ];
+    # };
 
-      system = "x86_64-darwin";
+    # #2019 Macbook Pro
+    # darwinConfigurations."chrisjen" = darwin.lib.darwinSystem rec {
+    #   specialArgs = {inherit inputs self;};
 
-      modules = [
-        {
-          environment.systemPackages = [alejandra.defaultPackage.${system}];
-        }
-        ./darwin/x86_64.nix
-        home-manager.darwinModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.alwin = import ./home/darwin.nix;
-          # Optionally, use home-manager.extraSpecialArgs to pass
-          # arguments to home.nix
-        }
-      ];
-    };
+    #  system = "x86_64-darwin";
+
+    #   modules = [
+        # {
+        #   environment.systemPackages = [alejandra.defaultPackage.${system}];
+        # }
+    #     ./darwin/x86_64.nix
+    #     home-manager.darwinModules.home-manager
+  #       {
+  #         home-manager.useGlobalPkgs = true;
+  #         home-manager.useUserPackages = true;
+  #         home-manager.users.alwin = import ./home/darwin.nix;
+  #         # Optionally, use home-manager.extraSpecialArgs to pass
+  #         # arguments to home.nix
+  #       }
+   #    ];
+    # };
 
     # Expose the package set, including overlays, for convenience.
     #darwinPackages = self.darwinConfigurations."Chrisjen".pkgs;
