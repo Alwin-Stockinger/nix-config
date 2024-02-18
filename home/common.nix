@@ -123,6 +123,7 @@
     };
           extensions = with pkgs.vscode-marketplace; [
             jnoortheen.nix-ide
+            ms-python.black-formatter
       ];
 #    extensions = with pkgs.vscode-extensions; [
 #

@@ -45,17 +45,17 @@
       options = "--delete-older-than 1w";
     };
     #x86 Tower
-    nixosConfigurations."bobby" = nixpkgs.lib.nixosSystem rec {
+    nixosConfigurations."bobby" = inputs.nixpkgs.lib.nixosSystem rec {
       system = "x86_64-linux";
 
-      specialArgs = {inherit inputs self;};
+      specialArgs = {inherit inputs;};
 
       modules = [
         {
-          environment.systemPackages = [alejandra.defaultPackage.${system}];
+          environment.systemPackages = [inputs.alejandra.defaultPackage.${system}];
         }
         ./nixos
-        home-manager.nixosModules.home-manager
+        inputs.home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
@@ -68,20 +68,23 @@
     };
 
     #M2 Macbook Pro
-    darwinConfigurations."holden" = darwin.lib.darwinSystem rec {
-      specialArgs = {inherit inputs self;};
+    darwinConfigurations."holden" = inputs.darwin.lib.darwinSystem rec {
+      specialArgs = {inherit inputs;};
 
       system = "aarch64-darwin";
 
       modules = [
         {
-          environment.systemPackages = [alejandra.defaultPackage.${system}];
+          environment.systemPackages = [inputs.alejandra.defaultPackage.${system}];
         }
         ./darwin/aarch64.nix
-        home-manager.darwinModules.home-manager
+        inputs.home-manager.darwinModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
+          nixpkgs.overlays = [
+            inputs.nix-vscode-extensions.overlays.default
+          ];
           home-manager.users.alwin = import ./home/darwin.nix;
           # Optionally, use home-manager.extraSpecialArgs to pass
           # arguments to home.nix
@@ -90,23 +93,20 @@
     };
 
     #2019 Macbook Pro
-    darwinConfigurations."chrisjen" = darwin.lib.darwinSystem {
-      specialArgs = {inherit inputs self;};
+    darwinConfigurations."chrisjen" = inputs.darwin.lib.darwinSystem rec {
+      specialArgs = {inherit inputs;};
 
       system = "x86_64-darwin";
 
       modules = [
         {
-          environment.systemPackages = [alejandra.defaultPackage.${system}];
+          environment.systemPackages = [inputs.alejandra.defaultPackage.${system}];
         }
         ./darwin/x86_64.nix
-        home-manager.darwinModules.home-manager
+        inputs.home-manager.darwinModules.home-manager
         {
      #     home-manager.useGlobalPkgs = true;
     #      home-manager.useUserPackages = true;
-          home-manager.nixpkgs.overlays = [
-      inputs.nix-vscode-extensions.overlays.default
-    ];
           home-manager.users.alwin = import ./home/darwin.nix;
           # Optionally, use home-manager.extraSpecialArgs to pass
           # arguments to home.nix
