@@ -24,6 +24,7 @@
     tldr
     vim
     htop
+    bat
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -111,6 +112,27 @@
         line-number = "relative";
       };
     };
+  };
+
+  programs.vscode = {
+    enable = true;
+    userSettings = {
+      "window.zoomLevel" = 1;
+      "editor.formatOnSave" = true;
+      "editor.formatOnSaveMode" = "file";
+    };
+          extensions = with pkgs.vscode-marketplace; [
+            jnoortheen.nix-ide
+      ];
+#    extensions = with pkgs.vscode-extensions; [
+#
+#    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+#      {
+#        name = "nix-ide";
+#        publisher = "jnoortheen";
+#        version = "0.2.2";
+#      }
+#    ];
   };
 
   # Let Home Manager install and manage itself.

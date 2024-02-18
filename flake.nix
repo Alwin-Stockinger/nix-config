@@ -28,16 +28,16 @@
       url = "github:zhaofengli-wip/nix-homebrew";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-vscode-extensions = {
+      url = "github:nix-community/nix-vscode-extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs @ {
-    self,
-    darwin,
-    nixpkgs,
-    home-manager,
-    alejandra,
-    ...
-  }: {
+  outputs = inputs: 
+  
+   {
     nix.settings.auto-optimise-store = true;
     nix.gc = {
       automatic = true;
@@ -90,7 +90,7 @@
     };
 
     #2019 Macbook Pro
-    darwinConfigurations."chrisjen" = darwin.lib.darwinSystem rec {
+    darwinConfigurations."chrisjen" = darwin.lib.darwinSystem {
       specialArgs = {inherit inputs self;};
 
       system = "x86_64-darwin";
@@ -102,8 +102,11 @@
         ./darwin/x86_64.nix
         home-manager.darwinModules.home-manager
         {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
+     #     home-manager.useGlobalPkgs = true;
+    #      home-manager.useUserPackages = true;
+          home-manager.nixpkgs.overlays = [
+      inputs.nix-vscode-extensions.overlays.default
+    ];
           home-manager.users.alwin = import ./home/darwin.nix;
           # Optionally, use home-manager.extraSpecialArgs to pass
           # arguments to home.nix
