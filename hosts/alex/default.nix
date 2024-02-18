@@ -19,7 +19,7 @@ in {
   };
 
   sops.secret.password = {
-    sopsFile = ./secrets.yaml;
+    #sopsFile = ./secrets.yaml;
     neededForUsers = true;
   };
 
