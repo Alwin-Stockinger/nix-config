@@ -35,6 +35,7 @@
     vim
     htop
     bat
+    pinentry-curses # for gpg
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -79,6 +80,16 @@
   };
 
   programs.gh = {
+    enable = true;
+  };
+
+  services.gpg-agent = {
+    enable = true;
+    enableSshSupport = true;
+    pinentryFlavor = "curses";
+  };
+
+  programs.gpg = {
     enable = true;
   };
 
@@ -140,15 +151,6 @@
       ms-python.black-formatter
       kamadorueda.alejandra
     ];
-    #    extensions = with pkgs.vscode-extensions; [
-    #
-    #    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-    #      {
-    #        name = "nix-ide";
-    #        publisher = "jnoortheen";
-    #        version = "0.2.2";
-    #      }
-    #    ];
   };
 
   # Let Home Manager install and manage itself.
