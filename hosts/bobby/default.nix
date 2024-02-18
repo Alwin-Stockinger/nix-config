@@ -13,6 +13,8 @@
 
   system.stateVersion = "23.11";
 
+  networking.networkmanager.enable = true;
+
   imports = [
     ../common
     ../common/features/pipewire.nix
