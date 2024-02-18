@@ -130,6 +130,7 @@
   programs.vscode = {
     enable = true;
     userSettings = {
+      "window.titleBarStyle" = "custom";
       "window.zoomLevel" = 1;
       "editor.formatOnSave" = true;
       "editor.formatOnSaveMode" = "file";
