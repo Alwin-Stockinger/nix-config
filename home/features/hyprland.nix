@@ -67,8 +67,6 @@
 
       # Set programs that you use
       $terminal = kitty
-      $fileManager = dolphin:
-      $menu = wofi --show drun
 
       # Some default env vars.
       env = XCURSOR_SIZE,24
@@ -158,7 +156,6 @@
           # See https://wiki.hyprland.org/Configuring/Variables/ for more
           force_default_wallpaper = 0 # Set to 0 or 1 to disable the anime mascot wallpapers
       }
-
       # Example per-device config
       # See https://wiki.hyprland.org/Configuring/Keywords/#executing for more
       device:epic-mouse-v1 {
@@ -178,16 +175,13 @@
 
       # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
       bind = $mainMod, T, exec, $terminal
-      bind = $mainMod, C, killactive,
+      bind = $mainMod, K, killactive,
       bind = $mainMod, M, exit,
-      bind = $mainMod, E, exec, $fileManager
-      bind = $mainMod, V, togglefloating,
-      bind = $mainMod, R, exec, $menu
-      bind = $mainMod, P, pseudo, # dwindle
       bind = $mainMod, J, togglesplit, # dwindle
+      bind = $mainMod, F, fullscreen, 1
       bind = $mainMod, B, exec, firefox
       bind = $mainMod, D, exec, vencorddesktop
-      bind = $mainMod, F, fullscreen, 1
+      bind = $mainMod, C, exec, code
 
       # Move focus with mainMod + arrow keys
       bind = $mainMod, left, movefocus, l
