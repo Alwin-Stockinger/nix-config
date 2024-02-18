@@ -18,13 +18,7 @@
     auto-optimise-store = true;
   };
 
-  networking.hostName = "bobby";
   networking.networkmanager.enable = true;
-
-  # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.useOSProber = true;
 
   time.timeZone = "Europe/Vienna";
 
@@ -54,15 +48,8 @@
 
   programs.zsh.enable = true;
 
-  programs.hyprland = {
-    enable = true;
-    package = inputs.hyprland.packages."${pkgs.system}".hyprland;
-  };
-
   system.stateVersion = "23.11";
 
   imports = [
-    ./features/pipewire.nix
-    ./hardware
   ];
 }

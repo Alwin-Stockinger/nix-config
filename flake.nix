@@ -36,12 +36,20 @@
 
   outputs = inputs: let
   in {
-    nix.settings.auto-optimise-store = true;
-    nix.gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 1w";
+    #Raspberry Pi
+    nixosConfigurations."alex" = inputs.nixpkgs.lib.nixosSystem rec {
+      system = "aarch64-linux";
+
+      specialArgs = {inherit inputs;};
+
+      modules = [
+        {
+          environment.systemPackages = [inputs.alejandra.defaultPackage.${system}];
+        }
+        ./hosts/alex
+      ];
     };
+
     #x86 Tower
     nixosConfigurations."bobby" = inputs.nixpkgs.lib.nixosSystem rec {
       system = "x86_64-linux";
@@ -52,15 +60,12 @@
         {
           environment.systemPackages = [inputs.alejandra.defaultPackage.${system}];
         }
-        ./nixos
+        ./hosts/bobby
         inputs.home-manager.nixosModules.home-manager
         {
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = {inherit inputs;};
           home-manager.users.alwin = import ./home/nixos.nix;
-
-          # Optionally, use home-manager.extraSpecialArgs to pass
-          # arguments to home.nix
         }
       ];
     };
