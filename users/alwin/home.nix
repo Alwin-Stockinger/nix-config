@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   ...
 }: {
@@ -114,6 +115,15 @@
         line-number = "relative";
       };
     };
+  };
+
+
+  programs.vscode = {
+    enable = true;
+    mutableExtensionsDir = true;
+    extensions = (with pkgs.vscode-marketplace; [
+        ms-python.black-formatter
+      ]);
   };
 
   # Let Home Manager install and manage itself.

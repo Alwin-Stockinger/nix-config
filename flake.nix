@@ -14,8 +14,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    parts.url = "github:hercules-ci/flake-parts";
-
+    parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
 
     hyprland = {
       url = "github:hyprwm/Hyprland";
@@ -30,6 +32,12 @@
       url = "github:zhaofengli-wip/nix-homebrew";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-vscode-extensions = {
+      url = "github:nix-community/nix-vscode-extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
   outputs = inputs: inputs.parts.lib.mkFlake { inherit inputs; }
   {
