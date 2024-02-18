@@ -13,13 +13,13 @@ in {
 
   sops.age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
 
-  sops.secret.wireless = {
+  sops.secrets.wireless = {
     sopsFile = ./secrets.yaml;
-    neededForUsers = true;
   };
 
-  sops.secret.password = {
-    #sopsFile = ./secrets.yaml;
+
+  sops.secrets.password = {
+    sopsFile = ./secrets.yaml;
     neededForUsers = true;
   };
 
@@ -45,7 +45,7 @@ in {
     wireless = {
       enable = true;
       environmentFile = config.sops.secrets.wireless.path;
-      networks."${SSID}".psk = "@TCL-25KR@";
+      networks."${SSID}".psk = "@TCL25KR@";  
       interfaces = [interface];
     };
   };

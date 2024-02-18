@@ -48,7 +48,7 @@
       specialArgs = {inherit inputs;};
 
       modules = [
-        inputs.sops-nix.nixosModules.sops
+        #inputs.sops-nix.nixosModules.sops
         {
           environment.systemPackages = [inputs.alejandra.defaultPackage.${system}];
         }
