@@ -1,6 +1,7 @@
 {
-  cofig,
+  config,
   pkgs,
+  inputs,
   ...
 }: {
   imports = [

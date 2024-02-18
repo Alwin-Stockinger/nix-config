@@ -1,8 +1,18 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: {
+  nixpkgs = {
+    overlays = [
+      inputs.nix-vscode-extensions.overlays.default
+    ];
+    config = {
+      allowUnfree = true;
+    };
+  };
+
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "alwin";
@@ -121,19 +131,20 @@
       "editor.formatOnSave" = true;
       "editor.formatOnSaveMode" = "file";
     };
-          extensions = with pkgs.vscode-marketplace; [
-            jnoortheen.nix-ide
-            ms-python.black-formatter
-      ];
-#    extensions = with pkgs.vscode-extensions; [
-#
-#    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-#      {
-#        name = "nix-ide";
-#        publisher = "jnoortheen";
-#        version = "0.2.2";
-#      }
-#    ];
+    extensions = with pkgs.vscode-marketplace; [
+      jnoortheen.nix-ide
+      ms-python.black-formatter
+      kamadorueda.alejandra
+    ];
+    #    extensions = with pkgs.vscode-extensions; [
+    #
+    #    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+    #      {
+    #        name = "nix-ide";
+    #        publisher = "jnoortheen";
+    #        version = "0.2.2";
+    #      }
+    #    ];
   };
 
   # Let Home Manager install and manage itself.

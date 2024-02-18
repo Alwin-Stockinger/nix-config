@@ -35,9 +35,8 @@
     };
   };
 
-  outputs = inputs: 
-  
-   {
+  outputs = inputs: let
+  in {
     nix.settings.auto-optimise-store = true;
     nix.gc = {
       automatic = true;
@@ -57,8 +56,8 @@
         ./nixos
         inputs.home-manager.nixosModules.home-manager
         {
-          home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
+          home-manager.extraSpecialArgs = {inherit inputs;};
           home-manager.users.alwin = import ./home/nixos.nix;
 
           # Optionally, use home-manager.extraSpecialArgs to pass
@@ -80,14 +79,9 @@
         ./darwin/aarch64.nix
         inputs.home-manager.darwinModules.home-manager
         {
-          home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          nixpkgs.overlays = [
-            inputs.nix-vscode-extensions.overlays.default
-          ];
+          home-manager.extraSpecialArgs = {inherit inputs;};
           home-manager.users.alwin = import ./home/darwin.nix;
-          # Optionally, use home-manager.extraSpecialArgs to pass
-          # arguments to home.nix
         }
       ];
     };
@@ -99,17 +93,12 @@
       system = "x86_64-darwin";
 
       modules = [
-        {
-          environment.systemPackages = [inputs.alejandra.defaultPackage.${system}];
-        }
         ./darwin/x86_64.nix
         inputs.home-manager.darwinModules.home-manager
         {
-     #     home-manager.useGlobalPkgs = true;
-    #      home-manager.useUserPackages = true;
+          home-manager.useUserPackages = true;
+          home-manager.extraSpecialArgs = {inherit inputs;};
           home-manager.users.alwin = import ./home/darwin.nix;
-          # Optionally, use home-manager.extraSpecialArgs to pass
-          # arguments to home.nix
         }
       ];
     };
