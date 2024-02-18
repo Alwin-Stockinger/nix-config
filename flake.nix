@@ -32,6 +32,11 @@
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs: let
@@ -43,6 +48,7 @@
       specialArgs = {inherit inputs;};
 
       modules = [
+        inputs.sops-nix.nixosModules.sops
         {
           environment.systemPackages = [inputs.alejandra.defaultPackage.${system}];
         }
@@ -57,6 +63,7 @@
       specialArgs = {inherit inputs;};
 
       modules = [
+        inputs.sops-nix.nixosModules.sops
         {
           environment.systemPackages = [inputs.alejandra.defaultPackage.${system}];
         }
