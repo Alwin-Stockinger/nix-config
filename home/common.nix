@@ -35,7 +35,6 @@
     vim
     htop
     bat
-    pinentry-curses # for gpg
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -80,16 +79,6 @@
   };
 
   programs.gh = {
-    enable = true;
-  };
-
-  services.gpg-agent = {
-    enable = true;
-    enableSshSupport = true;
-    pinentryFlavor = "curses";
-  };
-
-  programs.gpg = {
     enable = true;
   };
 
