@@ -16,7 +16,7 @@
 
   networking.networkmanager.enable = true;
 
-  environment.systemPackages = [inputs.alejandra.defaultPackage.${system}];
+  environment.systemPackages = [inputs.alejandra.defaultPackage.${system} pkgs.pulseaudio];
 
   imports = [
     ../common
