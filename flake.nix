@@ -72,7 +72,7 @@
         {
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = {inherit inputs;};
-          home-manager.users.alwin = import ./home/nixos.nix;
+          home-manager.users.alwin = import ./home/linux.nix;
         }
       ];
     };
