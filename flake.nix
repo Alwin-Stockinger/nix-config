@@ -48,10 +48,6 @@
       specialArgs = {inherit inputs;};
 
       modules = [
-        #inputs.sops-nix.nixosModules.sops
-        {
-          environment.systemPackages = [inputs.alejandra.defaultPackage.${system}];
-        }
         ./hosts/alex
       ];
     };
@@ -60,13 +56,10 @@
     nixosConfigurations."bobby" = inputs.nixpkgs.lib.nixosSystem rec {
       system = "x86_64-linux";
 
-      specialArgs = {inherit inputs;};
+      specialArgs = {inherit inputs system;};
 
       modules = [
         inputs.sops-nix.nixosModules.sops
-        {
-          environment.systemPackages = [inputs.alejandra.defaultPackage.${system}];
-        }
         ./hosts/bobby
         inputs.home-manager.nixosModules.home-manager
         {
@@ -84,9 +77,6 @@
       system = "aarch64-darwin";
 
       modules = [
-        {
-          environment.systemPackages = [inputs.alejandra.defaultPackage.${system}];
-        }
         ./darwin/aarch64.nix
         inputs.home-manager.darwinModules.home-manager
         {
@@ -99,14 +89,11 @@
 
     #2019 Macbook Pro
     darwinConfigurations."chrisjen" = inputs.darwin.lib.darwinSystem rec {
-      specialArgs = {inherit inputs;};
+      specialArgs = {inherit inputs system;};
 
       system = "x86_64-darwin";
 
       modules = [
-        {
-          environment.systemPackages = [inputs.alejandra.defaultPackage.${system}];
-        }
         ./darwin/x86_64.nix
         inputs.home-manager.darwinModules.home-manager
         {

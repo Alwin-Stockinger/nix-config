@@ -3,9 +3,9 @@
   lib,
   inputs,
   outputs,
+  system,
   ...
 }: {
-
   nixpkgs.config.allowUnfree = true;
   nix.settings.auto-optimise-store = true;
   nix.gc = {
@@ -16,6 +16,7 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = [
+    inputs.alejandra.defaultPackage.${system}
   ];
 
   # Auto upgrade nix package and the daemon service.

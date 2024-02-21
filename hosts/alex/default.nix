@@ -17,7 +17,6 @@ in {
     sopsFile = ./secrets.yaml;
   };
 
-
   sops.secrets.password = {
     sopsFile = ./secrets.yaml;
     neededForUsers = true;
@@ -45,12 +44,10 @@ in {
     wireless = {
       enable = true;
       environmentFile = config.sops.secrets.wireless.path;
-      networks."${SSID}".psk = "@TCL25KR@";  
+      networks."${SSID}".psk = "@TCL25KR@";
       interfaces = [interface];
     };
   };
-
-  environment.systemPackages = with pkgs; [vim];
 
   services.openssh.enable = true;
 

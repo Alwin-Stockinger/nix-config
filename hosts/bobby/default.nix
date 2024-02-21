@@ -7,6 +7,7 @@
   lib,
   config,
   pkgs,
+  system,
   ...
 }: {
   networking.hostName = "bobby";
@@ -14,6 +15,8 @@
   system.stateVersion = "23.11";
 
   networking.networkmanager.enable = true;
+
+  environment.systemPackages = [inputs.alejandra.defaultPackage.${system}];
 
   imports = [
     ../common
