@@ -104,6 +104,9 @@
       system = "x86_64-darwin";
 
       modules = [
+        {
+          environment.systemPackages = [inputs.alejandra.defaultPackage.${system}];
+        }
         ./darwin/x86_64.nix
         inputs.home-manager.darwinModules.home-manager
         {
