@@ -72,6 +72,9 @@
     userName = "Alwin";
     userEmail = "alwin@stockinger.tech";
     extraConfig = {
+      pull = {
+        rebase = true;
+      };
       push = {
         autoSetupRemote = true;
       };
