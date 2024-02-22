@@ -22,7 +22,6 @@
   };
 
   environment.systemPackages = [
-    inputs.alejandra.defaultPackage.${system}
     pkgs.vim
   ];
 

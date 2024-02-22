@@ -30,13 +30,13 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    fzf
-    zoxide
-    neofetch
-    tldr
-    vim
-    htop
-    bat
+    inputs.alejandra.defaultPackage.${system}
+    pkgs.fzf
+    pkgs.zoxide
+    pkgs.neofetch
+    pkgs.tldr
+    pkgs.htop
+    pkgs.bat
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
