@@ -16,10 +16,10 @@
 
   networking.networkmanager.enable = true;
 
-  environment.systemPackages = [inputs.alejandra.defaultPackage.${system} pkgs.pulseaudio];
+  environment.systemPackages = [pkgs.pulseaudio];
 
   imports = [
-    ../common
+    ../common/nixos.nix
     ../common/features/pipewire.nix
     ../common/features/hyprland.nix
     ./hardware

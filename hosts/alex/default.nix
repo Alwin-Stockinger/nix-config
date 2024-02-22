@@ -9,7 +9,10 @@
   interface = "wlan0";
   hostname = "alex";
 in {
-  imports = [inputs.sops-nix.nixosModules.sops ../common];
+  imports = [
+    inputs.sops-nix.nixosModules.sops
+    ../common/nixos.nix
+  ];
 
   sops.age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
 
