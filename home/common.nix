@@ -30,6 +30,8 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    fzf
+    zoxide
     neofetch
     tldr
     vim
@@ -94,6 +96,7 @@
       path+=('/run/current-system/sw/bin/')
       path+=('/Applications/Visual Studio Code.app/Contents/Resources/app/bin')
       path+=('/etc/profiles/per-user/alwin/bin')
+      eval \"$(zoxide init zsh)\"
     ";
 
     oh-my-zsh = {
