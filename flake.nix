@@ -72,12 +72,12 @@
 
     #M2 Macbook Pro
     darwinConfigurations."holden" = inputs.darwin.lib.darwinSystem rec {
-      specialArgs = {inherit inputs;};
+      specialArgs = {inherit inputs system;};
 
       system = "aarch64-darwin";
 
       modules = [
-        ./darwin/aarch64.nix
+        ./hosts/holden
         inputs.home-manager.darwinModules.home-manager
         {
           home-manager.useUserPackages = true;
@@ -94,7 +94,7 @@
       system = "x86_64-darwin";
 
       modules = [
-        ./darwin/x86_64.nix
+        ./hosts/chrisjen
         inputs.home-manager.darwinModules.home-manager
         {
           home-manager.useUserPackages = true;

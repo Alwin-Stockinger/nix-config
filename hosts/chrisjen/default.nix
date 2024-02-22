@@ -3,10 +3,11 @@
   lib,
   inputs,
   outputs,
+  system,
   ...
 }: {
   imports = [
-    ./common.nix
+    ../common/darwin.nix
   ];
   nixpkgs.hostPlatform = "x86_64-darwin";
 }
