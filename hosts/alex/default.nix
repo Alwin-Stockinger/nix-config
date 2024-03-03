@@ -64,7 +64,7 @@ in {
     users."alwin" = {
       isNormalUser = true;
       hashedPasswordFile = config.sops.secrets.password.path;
-      extraGroups = ["wheel"];
+      extraGroups = ["wheel" "docker"];
     };
   };
 
@@ -90,7 +90,6 @@ in {
       };
     };
   };
-  users.users.alwin.extraGroups = ["docker"];
 
   hardware.enableRedistributableFirmware = true;
   system.stateVersion = "23.11";
