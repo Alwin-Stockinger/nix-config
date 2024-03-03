@@ -40,6 +40,11 @@ in {
       fsType = "ext4";
       options = ["noatime"];
     };
+    "/data" = {
+      device = "/dev/disk/by-uuid/af40487f-a450-4412-b7cb-7af1f44b1026";
+      fsType = "ext4";
+      options = ["nofail"];
+    };
   };
 
   networking = {
