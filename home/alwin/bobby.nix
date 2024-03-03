@@ -18,6 +18,7 @@
     firefox
     vesktop
     pinentry-curses # for gpg
+    wl-clipboard
   ];
 
   imports = [

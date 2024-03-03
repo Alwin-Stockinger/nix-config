@@ -91,10 +91,10 @@
     enableCompletion = true;
 
     initExtra = "
-      path+=('/run/current-system/sw/bin/')
-      path+=('/Applications/Visual Studio Code.app/Contents/Resources/app/bin')
-      path+=('/etc/profiles/per-user/alwin/bin')
-      eval \"$(zoxide init zsh)\"
+path+=('/run/current-system/sw/bin/')
+path+=('/Applications/Visual Studio Code.app/Contents/Resources/app/bin')
+path+=('/etc/profiles/per-user/alwin/bin')
+eval \"$(zoxide init zsh)\"
     ";
 
     oh-my-zsh = {
@@ -102,7 +102,7 @@
       plugins = [
         "git"
       ];
-      theme = "robbyrussell";
+      theme = "aussiegeek"; # TODO make custom theme https://nix-community.github.io/home-manager/options.xhtml#opt-programs.zsh.oh-my-zsh.custom
     };
   };
 
