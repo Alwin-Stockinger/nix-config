@@ -49,6 +49,12 @@
 
       modules = [
         ./hosts/alex
+        inputs.home-manager.nixosModules.home-manager
+        {
+          home-manager.useUserPackages = true;
+          home-manager.extraSpecialArgs = {inherit inputs;};
+          home-manager.users.alwin = import ./home/alwin/alex.nix;
+        }
       ];
     };
 
@@ -65,7 +71,7 @@
         {
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = {inherit inputs;};
-          home-manager.users.alwin = import ./home/linux.nix;
+          home-manager.users.alwin = import ./home/alwin/bobby.nix;
         }
       ];
     };
@@ -82,7 +88,7 @@
         {
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = {inherit inputs;};
-          home-manager.users.alwin = import ./home/darwin.nix;
+          home-manager.users.alwin = import ./home/alwin/holden.nix;
         }
       ];
     };
@@ -99,7 +105,7 @@
         {
           home-manager.useUserPackages = true;
           home-manager.extraSpecialArgs = {inherit inputs;};
-          home-manager.users.alwin = import ./home/darwin.nix;
+          home-manager.users.alwin = import ./home/alwin/chrisjen.nix;
         }
       ];
     };

@@ -4,8 +4,6 @@
   inputs,
   ...
 }: {
-
-
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true;
@@ -23,7 +21,8 @@
   ];
 
   imports = [
-    ./common.nix
+    ./common
     ./features/hyprland.nix
+    ./features/vscode.nix
   ];
 }
