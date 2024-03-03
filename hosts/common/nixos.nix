@@ -36,5 +36,7 @@
     };
   };
 
+  environment.systemPackages = [pkgs.parted];
+
   system.stateVersion = "23.11";
 }
