@@ -5,6 +5,6 @@
   ...
 }: {
   imports = [
-    ./common
+    ./common/common.nix
   ];
 }

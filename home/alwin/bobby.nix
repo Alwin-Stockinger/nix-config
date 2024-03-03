@@ -21,7 +21,7 @@
   ];
 
   imports = [
-    ./common
+    ./common/desktop.nix
     ./features/hyprland.nix
     ./features/vscode.nix
   ];

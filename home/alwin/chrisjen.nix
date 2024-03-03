@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    ./common
+    ./common/desktop.nix
     ./features/vscode.nix
   ];
 }
