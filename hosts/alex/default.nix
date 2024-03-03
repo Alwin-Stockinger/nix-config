@@ -14,15 +14,15 @@ in {
     ../common/nixos.nix
   ];
 
-  sops.age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
-
-  sops.secrets.wireless = {
-    sopsFile = ./secrets.yaml;
-  };
-
-  sops.secrets.password = {
-    sopsFile = ./secrets.yaml;
-    neededForUsers = true;
+  sops = {
+    age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+    secrets.wireless = {
+      sopsFile = ./secrets.yaml;
+    };
+    secrets.password = {
+      sopsFile = ./secrets.yaml;
+      neededForUsers = true;
+    };
   };
 
   boot = {
