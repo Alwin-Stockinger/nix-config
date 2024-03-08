@@ -89,12 +89,17 @@
     enable = true;
     enableAutosuggestions = true;
     enableCompletion = true;
+    autocd = true;
 
     initExtra = "
 path+=('/run/current-system/sw/bin/')
 path+=('/Applications/Visual Studio Code.app/Contents/Resources/app/bin')
 path+=('/etc/profiles/per-user/alwin/bin')
 eval \"$(zoxide init zsh)\"
+if [ -n \"\${commands[fzf-share]}\" ]; then
+  source \"$(fzf-share)/key-bindings.zsh\"
+  source \"$(fzf-share)/completion.zsh\"
+fi
     ";
 
     oh-my-zsh = {
