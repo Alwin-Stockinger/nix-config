@@ -4,11 +4,7 @@
   lib,
   inputs,
   ...
-}: let
-  SSID = "TCL-25KR";
-  interface = "wlan0";
-  hostname = "alex";
-in {
+}: {
   imports = [
     inputs.sops-nix.nixosModules.sops
     ../common/nixos.nix
@@ -48,13 +44,21 @@ in {
   };
 
   networking = {
-    hostName = hostname;
+    hostName = "alex";
     wireless = {
       enable = true;
       environmentFile = config.sops.secrets.wireless.path;
-      networks."${SSID}".psk = "@TCL25KR@";
-      interfaces = [interface];
+      networks."TCL-25KR".psk = "@TCL25KR@";
+      interfaces = ["wlan0"];
     };
+    interfaces.wlan0.ipv4.addresses = [
+      {
+        address = "192.168.1.30";
+        prefixLength = 24;
+      }
+    ];
+    defaultGateway = "192.168.1.1";
+    nameservers = ["192.168.1.1"];
   };
 
   services.openssh.enable = true;
