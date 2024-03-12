@@ -22,6 +22,7 @@
       jnoortheen.nix-ide
       ms-python.black-formatter
       kamadorueda.alejandra
+      tailscale.vscode-tailscale
     ];
   };
 }
