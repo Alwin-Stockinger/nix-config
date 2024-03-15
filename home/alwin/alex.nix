@@ -6,5 +6,6 @@
 }: {
   imports = [
     ./common/common.nix
+    ./features/vscode.nix
   ];
 }
