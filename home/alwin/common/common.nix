@@ -101,6 +101,10 @@ if [ -n \"\${commands[fzf-share]}\" ]; then
   source \"$(fzf-share)/key-bindings.zsh\"
   source \"$(fzf-share)/completion.zsh\"
 fi
+terminal=$(basename \"/\"$(ps -o cmd -f -p $(cat /proc/$(echo $$)/stat | cut -d \\  -f 4) | tail -1 | sed 's/ .*$//'))
+if [[ $terminal=\"kitty\" ]]; then
+  alias ssh=\"kitten ssh\"
+fi
     ";
 
     oh-my-zsh = {
