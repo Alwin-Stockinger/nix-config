@@ -102,7 +102,8 @@ if [ -n \"\${commands[fzf-share]}\" ]; then
   source \"$(fzf-share)/completion.zsh\"
 fi
 terminal=$(basename \"/\"$(ps -o cmd -f -p $(cat /proc/$(echo $$)/stat | cut -d \\  -f 4) | tail -1 | sed 's/ .*$//'))
-if [[ $terminal=\"kitty\" ]]; then
+if [[ $terminal == \"kitty\" ]]; then
+  echo \"kitten detected\"
   alias ssh=\"kitten ssh\"
 fi
     ";
