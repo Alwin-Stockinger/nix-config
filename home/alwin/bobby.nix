@@ -8,6 +8,7 @@
     firefox
     vesktop
     wl-clipboard
+    makemkv
   ];
 
   imports = [

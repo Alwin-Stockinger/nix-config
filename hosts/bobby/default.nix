@@ -18,6 +18,9 @@
 
   environment.systemPackages = [pkgs.pulseaudio];
 
+  #for blue ray
+  boot.kernelModules = ["sg"];
+
   imports = [
     ../common/nixos.nix
     ../common/features/pipewire.nix

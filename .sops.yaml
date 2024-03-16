@@ -10,7 +10,7 @@ creation_rules:
       - *alwin
       age:
       - *alex
-  - path_regex: hosts/alex/docker-compose.yaml
+  - path_regex: hosts/alex/docker-compose.*.yaml
     encrypted_regex: environment
     key_groups:
     - pgp:

@@ -10,8 +10,8 @@ services:
             - 80:80
             - 443:443
         environment:
-            - ENC[AES256_GCM,data:zjJY5zoPhh2QPzW8mSqgjX2tBgKzW71qT3JEPnqdCLXdWwJ/M9A=,iv:Y4+wDTOC/cKgQjVyxSztJ7t32QYDLpupuiuyLjKSX2c=,tag:HbwLViDduYStTD51hS/LpQ==,type:str]
-            - ENC[AES256_GCM,data:aj0oloS+6TJfzIlEowI3uutg6SRYaht0pf24w3EhHwxJ2lFdinlwHl3AHaEXazN/9OpgEhSHw+U=,iv:jBflUVnuYU0MI9T/W2ejntAqBwF4nzShrqTM/zW6eFM=,tag:SOBd39n8I1B/fMBpnJauQA==,type:str]
+            - ENC[AES256_GCM,data:3bUxVlPEckL5dMQrYP3Aqd2p2Az/HCN5V+mw+YRs1HNutKB2Ah8=,iv:Rxg/FVdjM9L5YEZD6+KEhWVeVnBlbJQRdPb/lEuN5zQ=,tag:JsWPsYxzjUd/mpEg+2SJ3A==,type:str]
+            - ENC[AES256_GCM,data:5fzs9Rso6MMSKWidmwwBNoOPm/tXprdQLC8TlvLWxEFS2NMk87APy+Rxfro9xWX3xrzBs2AJxw0=,iv:K/iT6W18S7bmrcGRORUmUkJgL4ohEYZi3f0TVAEyHXo=,tag:ROMnQlkci/lZys2moNx2sg==,type:str]
         command:
             - --providers.docker=true
             - --entrypoints.web.address=:80
@@ -40,7 +40,24 @@ services:
               source: /data/actual/data
               target: /data
         restart: unless-stopped
-secrets: null
+    jellyfin:
+        image: jellyfin/jellyfin
+        container_name: jellyfin
+        user: uid:gid
+        network_mode: host
+        volumes:
+            - /data/jellyfin/config:/config
+            - /data/jellyfin/cache:/cache
+            - type: bind
+              source: /data/media
+              target: /media
+        restart: unless-stopped
+        # Optional - alternative address used for autodiscovery
+        # environment:
+        #     - JELLYFIN_PublishedServerUrl=http://example.com
+        # Optional - may be necessary for docker healthcheck to pass if running in host network mode
+        extra_hosts:
+            - host.docker.internal:host-gateway
 sops:
     kms: []
     gcp_kms: []
@@ -50,33 +67,33 @@ sops:
         - recipient: age1n0lqflctwvj2krxq3u06pzajqx3qx72vdnpca8dq6f4dlzm4pdxqqr6tza
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBaU2tjaW1wTTdZenAzVi9j
-            WXVmc2pkUllON05YUkFmS1Juek1yckNvOEZRCkhZNG93OEhKQnI1c253ekxveDRC
-            K1M2YVRlMFZ6U1JMTW9Hc2hENFFTK3MKLS0tIHZFZVhsY2ZoVG9zNzZUa3hFN3p6
-            MkNRUVJLeCszY2NZSnJZRjdWZUdrRXMKNGoUfrtZnW9S8Pxy/px+wvx73SJV+kED
-            x0q2jdSn08GQAo/L/nlZ7DaFz0iPgnz2LnTdqGwhsLL8JpDedyX48w==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBZNzQ4RW4vZ3NrNE9xVXpq
+            bFlkWEF4azRrOGZ2bmd4STFieGhUT3VrT0RVCnZsQWRHYWxjbUhJclJ4QklkWmF6
+            RDdPeHBpTGwzbjV2WWZiNzRPNXNCd1UKLS0tIHMxeW9KUkhwYVAwQ2xjQnM2b3VI
+            UTgrcU9NaGZnNWtmaWJ1VFBNSXlwREUKpx0893EyKPe74WjzqjxIyE14P/xDA5cK
+            f63mJ7v8GlVTAOaH87U1TORdJPmfEP3I9+MZcDQvELLdqq9JOZY1lQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2024-03-16T08:08:54Z"
-    mac: ENC[AES256_GCM,data:9lF6mavqCbB/2KVaT0PJpRQwFMdccZrwow8ZaDwm7TuBC63MzptcvhuCxHHtq8QEXZrGVtvnqKLzSRiCkiBj76VGRTXybcgJQqPua3AnheDMlxRoV0uUlEwVHwjt3pTPAJrRqqd1yWVowFIDX0ALFz3iOpwNmQjdF9IWZkAalc4=,iv:OjlzrXrYAp1sZlytmPsLs68qhBkPFE5d/RI8KimwMqc=,tag:XIRMGEsBxfaHdbhxJMsobg==,type:str]
+    lastmodified: "2024-03-16T15:43:52Z"
+    mac: ENC[AES256_GCM,data:8rx3Fg4q2FvOv1Mo1puM/qrnO3ESElTXRUks+U5j/LCyBcyciadBy0eckmy2nH9Re/o03PIiEoc+kpw1Z/bMDZVgJzKUfuIetBF+NuLTCDIpkDUaUSPKISQt0bjH1MA/i5qKdHbm1bEa+Ql2EkzrPxm18mUo7B1bZBJzdQwk6Cg=,iv:uTvejyzqJkngT55j2DwHOlnbdWHTlzIs1K7hftbpH8Y=,tag:GtOu8UW7q2kCFiGmNLdyDg==,type:str]
     pgp:
-        - created_at: "2024-03-16T08:08:54Z"
+        - created_at: "2024-03-16T15:43:52Z"
           enc: |-
             -----BEGIN PGP MESSAGE-----
 
-            hQIMA0nh7MUnONy2AQ//RfJguIaVpJ2Fv0jAkvvd/7GE+Y5buiwsYyKyVtO92ZW4
-            ZvLgeRjGA8NyF50imupvRGlYt1aJ8pFC1W8i2AvpNLdYrwr5QyLPwwo3uHwPinut
-            I1ypWOrpZejE6r9clY7YKFVeaDLRTcJac7agfhaNnxmt20BLSZUrevotDLt8Jtiv
-            pvZWBmk6+DM/1nIC97mQ4si3mO+XYLB1bJCtxv/u8V1GU4xsZyhtkJ5I+Y+66HVq
-            shGLJw6Q/He8ajMtJBrZ2n7C+jKYHTknFvh2eGMoz04DbzitY7WgehngRqILZcbJ
-            yRXB/XFeB7/caLoH04VhyBhIHN0YjQhKWSpy/SvGoalGwaKYHNDxqJsrDS+yoN9I
-            cLMqCtQHbY/I8cU7pu4ahsTcqDiJWw/eVJvbZ0cXkMw7OHGCE/ab/zYSglTogUe5
-            XyqlpKvMzG9FmBcjYAmC+pXyKQNnhWDveisD2x0+qblihXpCmJSDkoSpvrFwM//f
-            HF7TCQIIIm+p8qrwMnNdsbZOKRWmcCJRkkZ7Ed4uZNBuX/EUq0KLVn1+BZhQ23HW
-            KAWiGCa+QhycVLo0JoZmYo0mXYMayCljqyyNeRxbNsGzspoxyItS1Ne5kBcOOeYm
-            4wuiqD8FZWXAQqqOBYCiiux04wY4i9Fr/3qGo1w6Fbo/A1eYF1KUlsWaLsqEosvS
-            XAGUZvyehO/n2TZPQEkpTucHunLT65SQkUyg1707GvJ55LwDcn5X1FjSaseMEn3d
-            57XbT6KNp6sTdQqngjmDLWXnFGWY3sBYpHTE4Op6GiAJdDDicP432bQg6l5/
-            =XLs3
+            hQIMA0nh7MUnONy2AQ//QHyS2rlNWF4MqbmOF/RRYC944I9pnUxuglVMmReJBHYD
+            pvmyENP2YRdFBMlpW4dXwknHstnnJobzmytKyz3GmOHunMFBd6ZC44+dGaMG87c8
+            QCVdtMdxXATIAHkCKRJvzPFvzYZYj9YUNtvHsrLUl9fqBuZV2RNVCKpL/17asPU1
+            ubnXX50rFBdhE7NlHw+yeOb2TzP9j1v2l/iVIJ4XVFOKRk0wbb7brOKNEZO7x5Re
+            e8bT//n9gkSkQ9vybhryB2gcP0s1IULYIPsxG+CxQVRqhYB+6Vadl9rU70u3CdIK
+            Qz6zbaYpu9RIqJ7AM17bWBSiR6XoyBFJKOvyGHYTCmXieohP8nDSQ3icPst7RZYY
+            QtsaXwL3YgrlZJisJ1gtN1Dzw03CvP0tLRQPMzU8VeVoCdaxUYRnJ+RmeMRD2FTX
+            ZCyngKvoW7dpARFBHm/tIUQiAmf+7XlUg+FJ+FY3xbzpvry443lQXsBSszT0IBNm
+            IiRZVYbKJrpnemm0bUnNYSDclKHZdW4gJ2p1rKwxXsbdEoO2USoRNqGtvVD2faei
+            Ym4nkyEjdmoGYlPhAy9SA+ymNoW3qhFqoRxBHrXnKV0Dn8xuBM4DUynDxiKwkqG6
+            7mfWnN1A6lwrrBkXM2F8EyniAK9nh1QzY4LLSdSOk4MRDMY1aDlifbQBdubqi0fS
+            XAF10TA4OaHR2gpO9WZaYOVKFh5DYOF7qlK3V0uBRTQEsHZdftXzdP2hSm7EU8jy
+            Ar1QmLboS8eWEim++HRxg/E6kL3KpmmUk+V/AsxOneClFRxBkk+54t9/K8ka
+            =Et3b
             -----END PGP MESSAGE-----
           fp: "0xB348B2BDC7E49D64"
     encrypted_regex: environment

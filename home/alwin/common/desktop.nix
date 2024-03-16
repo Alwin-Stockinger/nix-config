@@ -10,5 +10,6 @@
 
   home.packages = with pkgs; [
     pkgs.nixops_unstable
+    vlc
   ];
 }
