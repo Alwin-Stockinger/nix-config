@@ -16,5 +16,14 @@
 
   programs.gpg = {
     enable = true;
+
+    mutableTrust = false;
+
+    publicKeys = [
+      {
+        source = "bobby.pub";
+        trust = 5;
+      }
+    ];
   };
 }

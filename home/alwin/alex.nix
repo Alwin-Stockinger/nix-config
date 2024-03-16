@@ -7,6 +7,6 @@
   imports = [
     ./common/common.nix
     ./features/vscode.nix
-    ./features/gpg.nix
+    ./features/gpg
   ];
 }
