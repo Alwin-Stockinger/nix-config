@@ -14,3 +14,10 @@ creation_rules:
       - *alwin
       age:
       - *alex
+  - path_regex: hosts/alex/docker-compose.yaml
+    encrypted_regex: CLOUDFLARE_API_KEY
+    key_groups:
+    - pgp:
+      - *alwin
+      age:
+      - *alex
