@@ -73,6 +73,7 @@
     userName = "Alwin";
     userEmail = "alwin@stockinger.tech";
     extraConfig = {
+      rebase.autostash = true;
       pull = {
         rebase = true;
       };
