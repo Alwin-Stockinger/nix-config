@@ -21,7 +21,7 @@
 
     publicKeys = [
       {
-        source = "./bobby.pub";
+        source = ./bobby.pub;
         trust = 5;
       }
     ];

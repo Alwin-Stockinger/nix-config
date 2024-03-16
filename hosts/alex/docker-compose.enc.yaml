@@ -1,0 +1,83 @@
+version: "3"
+services:
+    traefik:
+        image: traefik
+        container_name: traefik
+        volumes:
+            - /data/traefik/letsencrypt:/letsencrypt
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+        ports:
+            - 80:80
+            - 443:443
+        environment:
+            - ENC[AES256_GCM,data:zjJY5zoPhh2QPzW8mSqgjX2tBgKzW71qT3JEPnqdCLXdWwJ/M9A=,iv:Y4+wDTOC/cKgQjVyxSztJ7t32QYDLpupuiuyLjKSX2c=,tag:HbwLViDduYStTD51hS/LpQ==,type:str]
+            - ENC[AES256_GCM,data:aj0oloS+6TJfzIlEowI3uutg6SRYaht0pf24w3EhHwxJ2lFdinlwHl3AHaEXazN/9OpgEhSHw+U=,iv:jBflUVnuYU0MI9T/W2ejntAqBwF4nzShrqTM/zW6eFM=,tag:SOBd39n8I1B/fMBpnJauQA==,type:str]
+        command:
+            - --providers.docker=true
+            - --entrypoints.web.address=:80
+            - --entrypoints.web.http.redirections.entryPoint.to=websecure
+            - --entrypoints.web.http.redirections.entryPoint.scheme=https
+            - --entrypoints.websecure.address=:443
+            - --certificatesresolvers.cloudflare.acme.dnschallenge=true
+            - --certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare
+            - --certificatesresolvers.cloudflare.acme.dnschallenge.disablepropagationcheck
+            - --certificatesresolvers.cloudflare.acme.email=alwin@stockinger.tech
+            - --certificatesresolvers.cloudflare.acme.storage=/letsencrypt/acme.json
+            - --certificatesresolvers.cloudflare.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+    actual:
+        image: actualbudget/actual-server:latest-alpine
+        container_name: actual-compose
+        ports:
+            - 5006:5006
+        labels:
+            - traefik.enable=true
+            - traefik.http.routers.nginx.rule=Host(`budget.stockinger.tech`)
+            - traefik.http.routers.nginx.tls.certresolver=cloudflare
+            - traefik.http.routers.actual-server.entrypoints=websecure
+            - traefik.http.services.actual-server.loadbalancer.server.port=5006
+        volumes:
+            - type: bind
+              source: /data/actual/data
+              target: /data
+        restart: unless-stopped
+secrets: null
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1n0lqflctwvj2krxq3u06pzajqx3qx72vdnpca8dq6f4dlzm4pdxqqr6tza
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBaU2tjaW1wTTdZenAzVi9j
+            WXVmc2pkUllON05YUkFmS1Juek1yckNvOEZRCkhZNG93OEhKQnI1c253ekxveDRC
+            K1M2YVRlMFZ6U1JMTW9Hc2hENFFTK3MKLS0tIHZFZVhsY2ZoVG9zNzZUa3hFN3p6
+            MkNRUVJLeCszY2NZSnJZRjdWZUdrRXMKNGoUfrtZnW9S8Pxy/px+wvx73SJV+kED
+            x0q2jdSn08GQAo/L/nlZ7DaFz0iPgnz2LnTdqGwhsLL8JpDedyX48w==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2024-03-16T08:08:54Z"
+    mac: ENC[AES256_GCM,data:9lF6mavqCbB/2KVaT0PJpRQwFMdccZrwow8ZaDwm7TuBC63MzptcvhuCxHHtq8QEXZrGVtvnqKLzSRiCkiBj76VGRTXybcgJQqPua3AnheDMlxRoV0uUlEwVHwjt3pTPAJrRqqd1yWVowFIDX0ALFz3iOpwNmQjdF9IWZkAalc4=,iv:OjlzrXrYAp1sZlytmPsLs68qhBkPFE5d/RI8KimwMqc=,tag:XIRMGEsBxfaHdbhxJMsobg==,type:str]
+    pgp:
+        - created_at: "2024-03-16T08:08:54Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            hQIMA0nh7MUnONy2AQ//RfJguIaVpJ2Fv0jAkvvd/7GE+Y5buiwsYyKyVtO92ZW4
+            ZvLgeRjGA8NyF50imupvRGlYt1aJ8pFC1W8i2AvpNLdYrwr5QyLPwwo3uHwPinut
+            I1ypWOrpZejE6r9clY7YKFVeaDLRTcJac7agfhaNnxmt20BLSZUrevotDLt8Jtiv
+            pvZWBmk6+DM/1nIC97mQ4si3mO+XYLB1bJCtxv/u8V1GU4xsZyhtkJ5I+Y+66HVq
+            shGLJw6Q/He8ajMtJBrZ2n7C+jKYHTknFvh2eGMoz04DbzitY7WgehngRqILZcbJ
+            yRXB/XFeB7/caLoH04VhyBhIHN0YjQhKWSpy/SvGoalGwaKYHNDxqJsrDS+yoN9I
+            cLMqCtQHbY/I8cU7pu4ahsTcqDiJWw/eVJvbZ0cXkMw7OHGCE/ab/zYSglTogUe5
+            XyqlpKvMzG9FmBcjYAmC+pXyKQNnhWDveisD2x0+qblihXpCmJSDkoSpvrFwM//f
+            HF7TCQIIIm+p8qrwMnNdsbZOKRWmcCJRkkZ7Ed4uZNBuX/EUq0KLVn1+BZhQ23HW
+            KAWiGCa+QhycVLo0JoZmYo0mXYMayCljqyyNeRxbNsGzspoxyItS1Ne5kBcOOeYm
+            4wuiqD8FZWXAQqqOBYCiiux04wY4i9Fr/3qGo1w6Fbo/A1eYF1KUlsWaLsqEosvS
+            XAGUZvyehO/n2TZPQEkpTucHunLT65SQkUyg1707GvJ55LwDcn5X1FjSaseMEn3d
+            57XbT6KNp6sTdQqngjmDLWXnFGWY3sBYpHTE4Op6GiAJdDDicP432bQg6l5/
+            =XLs3
+            -----END PGP MESSAGE-----
+          fp: "0xB348B2BDC7E49D64"
+    encrypted_regex: environment
+    version: 3.8.1

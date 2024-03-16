@@ -1,6 +1,6 @@
 keys:
   - &users:
-    - &alwin alwin@stockinger.tech
+    - &alwin 0xB348B2BDC7E49D64
   - &hosts:
     - &alex age1n0lqflctwvj2krxq3u06pzajqx3qx72vdnpca8dq6f4dlzm4pdxqqr6tza
 creation_rules:
@@ -11,7 +11,7 @@ creation_rules:
       age:
       - *alex
   - path_regex: hosts/alex/docker-compose.yaml
-    encrypted_regex: CLOUDFLARE_API_KEY
+    encrypted_regex: environment
     key_groups:
     - pgp:
       - *alwin
