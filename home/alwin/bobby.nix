@@ -9,6 +9,7 @@
     vesktop
     wl-clipboard
     makemkv
+    unstable.vlc
   ];
 
   imports = [

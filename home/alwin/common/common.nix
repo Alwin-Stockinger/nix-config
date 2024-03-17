@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  outputs,
   ...
 }: {
   nixpkgs = {
@@ -29,9 +30,9 @@
   home.packages = with pkgs; [
     inputs.alejandra.defaultPackage.${system}
     pkgs.fzf
-    pkgs.zoxide
+    pkgs.unstable.zoxide
     pkgs.neofetch
-    pkgs.tldr
+    pkgs.unstable.tldr
     pkgs.htop
     pkgs.bat
     pkgs.sops

@@ -109,7 +109,7 @@
         inputs.home-manager.darwinModules.home-manager
         {
           home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = {inherit inputs;};
+          home-manager.extraSpecialArgs = {inherit inputs outputs;};
           home-manager.users.alwin = import ./home/alwin/chrisjen.nix;
         }
       ];
