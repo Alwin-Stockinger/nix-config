@@ -60,19 +60,16 @@
     defaultGateway = "192.168.1.1";
     nameservers = ["192.168.1.1"];
     firewall = {
-      allowedTCPPorts = [80 443 8096];
+      allowedTCPPorts = [80 443];
     };
   };
 
   services.openssh.enable = true;
 
-  users = {
-    mutableUsers = false;
-    users."alwin" = {
-      isNormalUser = true;
-      hashedPasswordFile = config.sops.secrets.password.path;
-      extraGroups = ["wheel" "docker"];
-    };
+  services.jellyfin = {
+    enable = true;
+    openFirewall = true;
+    user = "alwin";
   };
 
   virtualisation = {
