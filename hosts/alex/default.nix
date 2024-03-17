@@ -71,6 +71,11 @@
     openFirewall = true;
     user = "alwin";
   };
+  environment.systemPackages = [
+    pkgs.jellyfin
+    pkgs.jellyfin-web
+    pkgs.jellyfin-ffmpeg
+  ];
 
   virtualisation = {
     podman = {
