@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
 
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -39,8 +41,11 @@
     };
   };
 
-  outputs = inputs: let
+  outputs = {self, ...} @ inputs: let
+    inherit (self) outputs;
   in {
+    overlays = import ./overlays {inherit inputs;};
+
     #Raspberry Pi
     nixosConfigurations."alex" = inputs.nixpkgs.lib.nixosSystem rec {
       system = "aarch64-linux";
@@ -70,7 +75,7 @@
         inputs.home-manager.nixosModules.home-manager
         {
           home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = {inherit inputs;};
+          home-manager.extraSpecialArgs = {inherit inputs outputs;};
           home-manager.users.alwin = import ./home/alwin/bobby.nix;
         }
       ];
