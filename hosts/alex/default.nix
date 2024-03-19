@@ -5,9 +5,12 @@
   inputs,
   ...
 }: {
+  disabledModules = ["services/misc/jellyfin.nix"];
+
   imports = [
     inputs.sops-nix.nixosModules.sops
     ../common/nixos.nix
+    <nixos-unstable/nixos/modules/services/misc/jellyfin.nix>
   ];
 
   sops = {
@@ -68,13 +71,16 @@
 
   services.jellyfin = {
     enable = true;
+    package = pkgs.unstable.jellyfin;
     openFirewall = true;
     user = "alwin";
+    cacheDir = "/data/jellyfin/cache";
+    dataDir = "/data/media";
+    configDir = "/data/jellyfin/config";
   };
   environment.systemPackages = [
-    pkgs.jellyfin
-    pkgs.jellyfin-web
-    pkgs.jellyfin-ffmpeg
+    pkgs.unstable.jellyfin-web
+    pkgs.unstable.jellyfin-ffmpeg
   ];
 
   virtualisation = {
