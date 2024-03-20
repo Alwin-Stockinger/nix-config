@@ -37,6 +37,8 @@
     pkgs.bat
     pkgs.sops
     pkgs.dig
+    pkgs.yq
+    pkgs.jq
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
