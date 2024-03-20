@@ -4,8 +4,7 @@
   lib,
   inputs,
   ...
-} : {
-
+}: {
   imports = [
     inputs.sops-nix.nixosModules.sops
     ../common/nixos.nix
@@ -13,13 +12,16 @@
   ];
   disabledModules = ["services/misc/jellyfin.nix"];
 
-
   sops = {
     age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
     secrets.wireless = {
       sopsFile = ./secrets.yaml;
     };
     secrets.password = {
+      sopsFile = ./secrets.yaml;
+      neededForUsers = true;
+    };
+    secrets.cloudflare = {
       sopsFile = ./secrets.yaml;
       neededForUsers = true;
     };
@@ -65,6 +67,29 @@
     nameservers = ["192.168.1.1"];
     firewall = {
       allowedTCPPorts = [80 443];
+    };
+  };
+
+  security.acme = {
+    acceptTerms = true;
+    email = "alwin@stockinger.tech";
+    certs."stockinger.tech" = {
+      dnsProvider = "cloudflare";
+      dnsResolver = "1.1.1.1:53";
+      credentialsFile = config.sops.secrets.cloudflare.path;
+      dnsPropagationCheck = true;
+      domain = "stockinger.tech";
+      extraDomainNames = ["*.stockinger.tech"];
+      reloadServices = ["nginx"];
+    };
+  };
+
+  services.nginx.virtualHosts = {
+    enable = true;
+    "media.stockinger.tech" = {
+      enableACME = true;
+      addSSL = true;
+      locations."/".proxyPass = "http://127.0.0.1:8096/";
     };
   };
 
