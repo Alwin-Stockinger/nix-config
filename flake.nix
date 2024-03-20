@@ -57,7 +57,7 @@
         inputs.home-manager.nixosModules.home-manager
         {
           home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = {inherit inputs;};
+          home-manager.extraSpecialArgs = {inherit inputs outputs;};
           home-manager.users.alwin = import ./home/alwin/alex.nix;
         }
       ];
@@ -92,7 +92,7 @@
         inputs.home-manager.darwinModules.home-manager
         {
           home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = {inherit inputs;};
+          home-manager.extraSpecialArgs = {inherit inputs outputs;};
           home-manager.users.alwin = import ./home/alwin/holden.nix;
         }
       ];

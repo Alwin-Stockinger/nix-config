@@ -4,14 +4,15 @@
   lib,
   inputs,
   ...
-}: {
-  disabledModules = ["services/misc/jellyfin.nix"];
+} : {
 
   imports = [
     inputs.sops-nix.nixosModules.sops
     ../common/nixos.nix
-    <nixos-unstable/nixos/modules/services/misc/jellyfin.nix>
+    "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/jellyfin.nix"
   ];
+  disabledModules = ["services/misc/jellyfin.nix"];
+
 
   sops = {
     age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
@@ -71,7 +72,7 @@
 
   services.jellyfin = {
     enable = true;
-    package = pkgs.unstable.jellyfin;
+    package = pkgs.jellyfin;
     openFirewall = true;
     user = "alwin";
     cacheDir = "/data/jellyfin/cache";
@@ -79,8 +80,8 @@
     configDir = "/data/jellyfin/config";
   };
   environment.systemPackages = [
-    pkgs.unstable.jellyfin-web
-    pkgs.unstable.jellyfin-ffmpeg
+    pkgs.jellyfin-web
+    pkgs.jellyfin-ffmpeg
   ];
 
   virtualisation = {
