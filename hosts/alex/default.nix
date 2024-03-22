@@ -21,7 +21,11 @@
       sopsFile = ./secrets.yaml;
       neededForUsers = true;
     };
-    secrets.cloudflare = {
+    secrets.cloudflare_token = {
+      sopsFile = ./secrets.yaml;
+      neededForUsers = true;
+    };
+    secrets.cloudflare_email = {
       sopsFile = ./secrets.yaml;
       neededForUsers = true;
     };
@@ -51,13 +55,13 @@
 
   networking = {
     hostName = "alex";
-    wireless = {
-      enable = true;
-      environmentFile = config.sops.secrets.wireless.path;
-      networks."TCL-25KR".psk = "@TCL25KR@";
-      interfaces = ["wlan0"];
-    };
-    interfaces.wlan0.ipv4.addresses = [
+#    wireless = {
+#      enable = true;
+#      environmentFile = config.sops.secrets.wireless.path;
+#      networks."TCL-25KR".psk = "@TCL25KR@";
+#      interfaces = ["wlan0"];
+#   };
+    interfaces.end0.ipv4.addresses = [
       {
         address = "192.168.1.30";
         prefixLength = 24;
@@ -72,21 +76,33 @@
 
   security.acme = {
     acceptTerms = true;
-    email = "alwin@stockinger.tech";
-    certs."stockinger.tech" = {
+    defaults = {
+      email = "alwin@stockinger.tech";
+      dnsPropagationCheck = false;
       dnsProvider = "cloudflare";
-      dnsResolver = "1.1.1.1:53";
-      credentialsFile = config.sops.secrets.cloudflare.path;
-      dnsPropagationCheck = true;
-      domain = "stockinger.tech";
-      extraDomainNames = ["*.stockinger.tech"];
+#      server = "https://acme-staging-v02.api.letsencrypt.org/directory";
+      credentialFiles = {
+        "CLOUDFLARE_EMAIL_FILE" = config.sops.secrets.cloudflare_email.path;
+        "CLOUDFLARE_API_KEY_FILE" = config.sops.secrets.cloudflare_token.path;
+      };
       reloadServices = ["nginx"];
+    };
+    certs."stockinger.tech" = {
+      domain= "*.stockinger.tech";
+      dnsResolver = "1.1.1.1:53";
+      extraDomainNames = ["*.stockinger.tech"];
     };
   };
 
+  services.nginx = {
+	enable = true;
+	    recommendedProxySettings = true;
+    recommendedTlsSettings = true;
+};
+
   services.nginx.virtualHosts = {
-    enable = true;
     "media.stockinger.tech" = {
+	acmeRoot = null;
       enableACME = true;
       addSSL = true;
       locations."/".proxyPass = "http://127.0.0.1:8096/";
