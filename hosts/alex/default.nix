@@ -107,6 +107,12 @@
       addSSL = true;
       locations."/".proxyPass = "http://127.0.0.1:8096/";
     };
+    "budget.stockinger.tech" = {
+      acmeRoot = null;
+      enableACME = true;
+      addSSL = true;
+      locations."/".proxyPass = "http://127.0.0.1:5006/";
+    };
   };
 
   services.openssh.enable = true;
