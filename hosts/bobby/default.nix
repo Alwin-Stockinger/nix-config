@@ -14,7 +14,7 @@
 
   system.stateVersion = "23.11";
 
-  networking.networkmanager.enable = true;
+  #networking.networkmanager.enable = true;
 
   environment.systemPackages = [pkgs.pulseaudio];
 
