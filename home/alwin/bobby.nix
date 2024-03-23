@@ -6,10 +6,11 @@
 }: {
   home.packages = with pkgs; [
     firefox
-    vesktop
+    unstable.vesktop #stable is broken atm https://github.com/NixOS/nixpkgs/issues/293083
     wl-clipboard
     makemkv
     unstable.vlc
+    handbrake
   ];
 
   imports = [
