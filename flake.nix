@@ -116,10 +116,10 @@
     };
 
     #Work Laptop
-    homeConfigurations."alwin" = home-manager.lib.homeManagerConfiguration {
-      system = "x86_64-linux";
+    homeConfigurations."work" = inputs.home-manager.lib.homeManagerConfiguration {
 
-      home-manager.useUserPackages = true;
+      pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+
       extraSpecialArgs = {inherit inputs outputs;};
 
       modules = [./home/alwin/work.nix];
