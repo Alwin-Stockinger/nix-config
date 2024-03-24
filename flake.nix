@@ -115,7 +115,14 @@
       ];
     };
 
-    # Expose the package set, including overlays, for convenience.
-    #darwinPackages = self.darwinConfigurations."Chrisjen".pkgs;
+    #Work Laptop
+    homeConfigurations."alwin" = home-manager.lib.homeManagerConfiguration {
+      system = "x86_64-linux";
+
+      home-manager.useUserPackages = true;
+      extraSpecialArgs = {inherit inputs outputs;};
+
+      modules = [./home/alwin/work.nix];
+    };
   };
 }
