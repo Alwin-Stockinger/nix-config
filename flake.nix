@@ -41,8 +41,21 @@
     };
   };
 
-  outputs = {self, ...} @ inputs: let
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    ...
+  } @ inputs: let
     inherit (self) outputs;
+
+    lib = nixpkgs.lib // home-manager.lib;
+    systems = ["x86_64-linux"];
+    pkgsFor = lib.genAttrs systems (system:
+      import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      });
   in {
     overlays = import ./overlays {inherit inputs;};
 
@@ -117,12 +130,11 @@
 
     #Work Laptop
     homeConfigurations."work" = inputs.home-manager.lib.homeManagerConfiguration {
-
-      pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
 
       extraSpecialArgs = {inherit inputs outputs;};
 
-      modules = [./home/alwin/work.nix];
+      modules = [./home/alwin/work];
     };
   };
 }

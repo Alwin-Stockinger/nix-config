@@ -106,12 +106,16 @@ if [[ $terminal == \"kitty\" ]]; then
   echo \"kitten detected\"
   alias ssh=\"kitten ssh\"
 fi
+if [[ $WORK == \"true\" ]]; then
+  echo \"work detected\"
+fi
     ";
 
     oh-my-zsh = {
       enable = true;
       plugins = [
         "git"
+        "kube-ps1"
       ];
       theme = "aussiegeek"; # TODO make custom theme https://nix-community.github.io/home-manager/options.xhtml#opt-programs.zsh.oh-my-zsh.custom
     };
