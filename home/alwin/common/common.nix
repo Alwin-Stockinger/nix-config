@@ -33,7 +33,7 @@
     pkgs.bat
     pkgs.sops
     pkgs.dig
-    pkgs.yq
+    pkgs.yq-go
     pkgs.jq
   ];
 
