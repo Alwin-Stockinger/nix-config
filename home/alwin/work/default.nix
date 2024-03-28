@@ -60,6 +60,6 @@
 
   imports = [
     ../common/desktop.nix
-    #./features/vscode.nix
+    ../features/vscode.nix
   ];
 }
