@@ -17,7 +17,7 @@
     package = pkgs.unstable.vscode;
     userSettings = {
       "window.titleBarStyle" = "custom";
-      "window.zoomLevel" = 0.5;
+      "window.zoomLevel" = 0.4;
       "workbench.colorTheme" = "Default Dark Modern";
       "editor.minimap.enabled" = false;
       "editor.formatOnSave" = true;
@@ -35,6 +35,17 @@
 
       "vs-kubernetes"."vs-kubernetes.crd-code-completion" = "enabled";
       "files.exclude"."**/.git" = false;
+      "files.associations" = {
+        "*.hujson" = "jsonc";
+      };
+      "json.schemas" = [
+        {
+          "fileMatch" = ["*.hujson"];
+          "schema" = {
+            "allowTrailingCommas" = true;
+          };
+        }
+      ];
     };
     extensions = with pkgs.vscode-marketplace; [
       kamadorueda.alejandra
