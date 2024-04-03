@@ -35,6 +35,7 @@
     pkgs.dig
     pkgs.yq-go
     pkgs.jq
+    pkgs.grpcurl
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
