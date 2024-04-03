@@ -51,6 +51,7 @@
       cat = "bat";
       pods = "kubectl get pods -o wide";
       switch = "git switch";
+      ts = "tailscale";
     };
 
     localVariables = {
