@@ -13,8 +13,8 @@
   };
 
   home.packages = with pkgs; [
-    #inputs.alejandra.defaultPackage.${system}
-    #pkgs.zoxide
+    pkgs.grpcurl
+    pkgs.iperf3
   ];
 
   programs.home-manager.enable = true;
@@ -52,6 +52,8 @@
       pods = "kubectl get pods -o wide";
       switch = "git switch";
       ts = "tailscale";
+      code-nix = "code ~/nix-config";
+      code-flux = "code ~/powerbot/flux-powerbot";
     };
 
     localVariables = {
