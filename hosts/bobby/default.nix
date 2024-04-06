@@ -18,13 +18,16 @@
 
   environment.systemPackages = [pkgs.pulseaudio];
 
-  #for blue ray
+  # for blue ray
   boot.kernelModules = ["sg"];
 
   imports = [
     ../common/nixos.nix
     ../common/features/pipewire.nix
     ../common/features/hyprland.nix
+    ../common/features/virtualisation.nix
     ./hardware
   ];
+
+  virtualisation.enable = true;
 }

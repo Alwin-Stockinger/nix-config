@@ -12,6 +12,11 @@
     ];
   };
 
+  home.packages = with pkgs; [
+    nil
+  ];
+
+
   programs.vscode = {
     enable = true;
     package = pkgs.unstable.vscode;
@@ -46,6 +51,9 @@
           };
         }
       ];
+
+      "nix.enableLanguageServer" = true;  # Enable LSP.
+      "nix.serverPath" = "nil"; # The path to the LSP server executable.
     };
     extensions = with pkgs.vscode-marketplace; [
       kamadorueda.alejandra
