@@ -6,9 +6,9 @@
   pkgs,
   ...
 }: {
-  imports = [
-    ./common.nix
-  ];
+  # imports = [
+  #   ./common.nix
+  # ];
 
   time.timeZone = "Europe/Vienna";
 

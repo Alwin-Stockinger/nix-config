@@ -5,10 +5,13 @@
   ...
 }: {
   options = {
-    virtualisation.enable = lib.mkEnableOption "enables virtualisation (docker, podman)";
+    virt.enable = lib.mkEnableOption "enables container services (docker, podman)";
+
+    # podman = true;
+    # docker = true;
   };
 
-  config = lib.mkIf config.virtualisation.enable {
+  config = lib.mkIf config.virt.enable {
     virtualisation = {
       podman = {
         enable = true;
@@ -20,8 +23,5 @@
         defaultNetwork.settings.dns_enabled = true;
       };
     };
-
-    # podman = true;
-    # docker = true;
   };
 }

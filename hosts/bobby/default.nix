@@ -22,12 +22,12 @@
   boot.kernelModules = ["sg"];
 
   imports = [
-    ../common/nixos.nix
-    ../common/features/pipewire.nix
-    ../common/features/hyprland.nix
-    ../common/features/virtualisation.nix
+    ../common
     ./hardware
+    ../common/systems/nixos.nix
   ];
 
-  virtualisation.enable = true;
+  virt.enable = true;
+  pipewire.enable = true;
+  desktop.enable = true;
 }
