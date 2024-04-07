@@ -16,7 +16,6 @@
     nil
   ];
 
-
   programs.vscode = {
     enable = true;
     package = pkgs.unstable.vscode;
@@ -52,8 +51,13 @@
         }
       ];
 
-      "nix.enableLanguageServer" = true;  # Enable LSP.
+      "nix.enableLanguageServer" = true; # Enable LSP.
       "nix.serverPath" = "nil"; # The path to the LSP server executable.
+
+      "go.lintTool" = "golangci-lint";
+      "go.lintFlags" = [
+        "--fast"
+      ];
     };
     extensions = with pkgs.vscode-marketplace; [
       kamadorueda.alejandra

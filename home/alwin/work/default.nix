@@ -15,6 +15,7 @@
   home.packages = with pkgs; [
     pkgs.grpcurl
     pkgs.iperf3
+    golangci-lint
   ];
 
   programs.home-manager.enable = true;
