@@ -13,9 +13,10 @@
   };
 
   home.packages = with pkgs; [
-    pkgs.grpcurl
-    pkgs.iperf3
+    grpcurl
+    iperf3
     golangci-lint
+    texlive.combined.scheme-full
   ];
 
   programs.home-manager.enable = true;
@@ -65,5 +66,6 @@
   imports = [
     ../common/desktop.nix
     ../features/vscode.nix
+    ../features/hyprland.nix
   ];
 }
