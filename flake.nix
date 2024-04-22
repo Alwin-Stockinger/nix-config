@@ -40,6 +40,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixgl.url = "github:nix-community/nixGL";
+
     hyprlock.url = "github:hyprwm/hyprlock";
   };
 
@@ -47,19 +49,17 @@
     self,
     nixpkgs,
     home-manager,
+    nixgl,
     ...
   } @ inputs: let
     inherit (self) outputs;
-
-    lib = nixpkgs.lib // home-manager.lib;
-    systems = ["x86_64-linux"];
-    pkgsFor = lib.genAttrs systems (system:
-      import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      });
   in {
     overlays = import ./overlays {inherit inputs;};
+
+    nix.settings = {
+      substituters = ["https://hyprland.cachix.org"];
+      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+    };
 
     #Raspberry Pi
     nixosConfigurations."alex" = inputs.nixpkgs.lib.nixosSystem rec {

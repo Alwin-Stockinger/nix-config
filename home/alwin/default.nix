@@ -97,8 +97,15 @@ in {
     alias ssh=\"kitten ssh\"
   fi
   if [[ $WORK == \"true\" ]]; then
+    export PATH=\"\${KREW_ROOT:-$HOME/.krew}/bin:$PATH\"
     echo \"work detected\"
+    . <(flux completion zsh)
+    source <(kubectl completion zsh)
+    complete -C '/usr/bin/aws_completer' aws
+    source <(pulumi completion zsh)
+    source <(helm completion zsh)
   fi
+  hash hyprlock=/usr/local/bin/hyprlock
       ";
 
       shellAliases = {
