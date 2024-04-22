@@ -3,10 +3,17 @@
   config,
   pkgs,
   lib,
+  types,
   ...
 }: {
-  options = {
-    desktop.enable = lib.mkEnableOption "enables a desktop enviroment via hyprland";
+  options.desktop = {
+    enable = lib.mkEnableOption "enables a desktop enviroment via hyprland";
+    waybarMonitor = lib.mkOption {
+      default = "DP-1";
+      example = "DP-1";
+      type = types.string;
+      descirption = "Waybar monitor";
+    };
   };
 
   config = lib.mkIf config.desktop.enable {
@@ -14,12 +21,7 @@
       mako
       xdg-desktop-portal-hyprland
       polkit-kde-agent
-      firefox
       unstable.vesktop #stable is broken atm https://github.com/NixOS/nixpkgs/issues/293083
-      wl-clipboard
-      makemkv
-      unstable.vlc
-      handbrake
     ];
 
     programs.kitty = {
@@ -42,10 +44,14 @@
           spacing = 4; #// Gaps between modules (4px)
           #// Choose the order of the modules
           modules-center = ["clock"];
+          modules-right = ["battery"];
           clock = {
             # "timezone": "America/New_York",
             #tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
             format-alt = "{:%Y-%m-%d}";
+          };
+          battery = {
+            format = "{capacity}%";
           };
         };
       };
@@ -55,6 +61,11 @@
          background: transparent;
         }
         #clock {
+         background: transparent;
+         color: white;
+         padding: 10px 0 0 0;
+        }
+        #battery {
          background: transparent;
          color: white;
          padding: 10px 0 0 0;
@@ -72,21 +83,10 @@
         workspace = 1, monitor:DVI-D-1
         workspace = 2, monitor:DP-1
 
+        exec-once = mako & polkit-kde-agent & waybar
 
-
-        # See https://wiki.hyprland.org/Configuring/Keywords/ for more
-
-        # Execute your favorite apps at launch
-        # exec-once = waybar & hyprpaper & firefox
-          exec-once = mako & polkit-kde-agent & waybar
-
-        # Source a file (multi-file configs)
-        # source = ~/.config/hypr/myColors.conf
-
-        # Set programs that you use
         $terminal = kitty
 
-        # Some default env vars.
         env = XCURSOR_SIZE,24
         env = QT_QPA_PLATFORMTHEME,qt5ct # change to qt6ct if you have that
 
@@ -200,6 +200,8 @@
         bind = $mainMod, B, exec, firefox
         bind = $mainMod, D, exec, vesktop
         bind = $mainMod, C, exec, code
+        bind = $mainMod, L, exec, /usr/local/bin/hyprlock
+        bind = $mainMod, O, exec, open-lens
 
         # Move focus with mainMod + arrow keys
         bind = $mainMod, left, movefocus, l
@@ -250,5 +252,35 @@
 
       '';
     };
+  };
+
+  programs.hyprlock = {
+    enable = true;
+    input-fields = [
+      {
+        monitor = "eDP-1";
+      }
+      {
+        monitor = "DP-3";
+      }
+    ];
+
+    backgrounds = [
+      {
+        monitor = "eDP-1";
+        path = "${config.home.homeDirectory}/lock.png";
+        color = "rgba(25, 20, 20, 1.0)";
+      }
+      {
+        monitor = "DP-3";
+        path = "${config.home.homeDirectory}/lock.png";
+        color = "rgba(25, 20, 20, 1.0)";
+      }
+      {
+        monitor = "DP-5";
+        path = "${config.home.homeDirectory}/lock.png";
+        color = "rgba(25, 20, 20, 1.0)";
+      }
+    ];
   };
 }
