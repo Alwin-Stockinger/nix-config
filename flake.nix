@@ -99,6 +99,7 @@
       specialArgs = {inherit inputs system;};
 
       system = "aarch64-darwin";
+      nixpkgs.hostPlatform = "aarch64-darwin";
 
       modules = [
         ./hosts/holden
@@ -118,7 +119,7 @@
       system = "x86_64-darwin";
 
       modules = [
-        ./hosts/chrisjen
+        ./darwin
         inputs.home-manager.darwinModules.home-manager
         {
           home-manager.useUserPackages = true;

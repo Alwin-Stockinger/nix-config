@@ -29,13 +29,13 @@
 
   services.tailscale.enable = true;
 
-  imports = [
-    ./features/sound.nix
-    ./features/desktop.nix
-    ./features/containers.nix
-  ];
+  # pipewire.enable = lib.mkDefault false;
+  #desktop.enable = lib.mkDefault false;
+  #virt.enable = lib.mkDefault false;
 
-  pipewire.enable = lib.mkDefault false;
-  desktop.enable = lib.mkDefault false;
-  virt.enable = lib.mkDefault false;
+  imports = [
+    #./features/sound.nix
+    #./features/desktop.nix
+    #./features/containers.nix
+  ];
 }

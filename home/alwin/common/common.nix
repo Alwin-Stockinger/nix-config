@@ -35,6 +35,7 @@
     pkgs.dig
     pkgs.yq-go
     pkgs.jq
+    direnv
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -152,4 +153,8 @@ fi
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  imports = [
+    ../features/hyprland.nix
+  ];
 }
