@@ -14,6 +14,12 @@
       mako
       xdg-desktop-portal-hyprland
       polkit-kde-agent
+      firefox
+      unstable.vesktop #stable is broken atm https://github.com/NixOS/nixpkgs/issues/293083
+      wl-clipboard
+      makemkv
+      unstable.vlc
+      handbrake
     ];
 
     programs.kitty = {

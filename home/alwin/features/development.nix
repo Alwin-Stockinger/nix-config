@@ -13,7 +13,22 @@
   };
 
   home.packages = with pkgs; [
+    inputs.alejandra.defaultPackage.${system}
+    fzf
+    unstable.zoxide
+    neofetch
+    unstable.tldr
+    bat
+    sops
+    yq-go
+    jq
+    direnv
     nil
+    nixops_unstable
+    grpcurl
+    iperf3
+    golangci-lint
+    texlive.combined.scheme-full
   ];
 
   programs.vscode = {
