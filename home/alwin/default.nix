@@ -5,16 +5,11 @@
   outputs,
   lib,
   ...
-}: 
-
-let cfg = config.custom;
-in {
-  options = {
-    custom.work = lib.mkDefault false;
-    custom.zsh-theme =
-      lib.mkDefault
-      builtins
-      .toFile "work.zsh-theme" "
+}: let
+  cfg = config.custom;
+  zsh-theme =
+    builtins
+    .toFile "work.zsh-theme" "
         PROMPT=\"%{$fg_bold[cyan]%}%c%{$reset_color%}\"
         PROMPT+=' $(kube_ps1) '
         #PROMPT+=' $(git_prompt_info)'
@@ -33,6 +28,12 @@ in {
         KUBE_PS1_DIVIDER=''
         KUBE_PS1_SEPARATOR=''
         KUBE_PS1_NS_ENABLE=false";
+in {
+  options = {
+    custom.work = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+    };
   };
 
   config = {
@@ -132,8 +133,11 @@ in {
           "git"
           "kube-ps1"
         ];
-        theme = if cfg.work then "work" else "aussiegeek";
-        custom
+        theme =
+          if cfg.work
+          then "work"
+          else "aussiegeek";
+        custom = zsh-theme;
       };
     };
 
@@ -168,12 +172,11 @@ in {
 
     # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;
-
-    imports = [
-      ./features/hyprland.nix
-      ./features/development.nix
-      ./features/gpg
-    ];
   };
-}
+
+  imports = [
+    ./features/desktop.nix
+    ./features/development.nix
+    ./features/gpg
+  ];
 }

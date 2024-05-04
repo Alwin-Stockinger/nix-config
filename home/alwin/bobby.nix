@@ -5,9 +5,8 @@
   ...
 }: {
   imports = [
-    ./common/desktop.nix
-    ./features/hyprland.nix
-    ./features/vscode.nix
-    ./features/gpg
+    ./default.nix
   ];
+
+  desktop.enable = true;
 }

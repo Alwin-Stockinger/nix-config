@@ -4,12 +4,9 @@
   lib,
   config,
   pkgs,
+  system,
   ...
 }: {
-  # imports = [
-  #   ./common.nix
-  # ];
-
   time.timeZone = "Europe/Vienna";
 
   i18n.defaultLocale = "en_US.UTF-8";
@@ -36,7 +33,35 @@
     };
   };
 
-  environment.systemPackages = [pkgs.parted];
+  environment.systemPackages = [pkgs.parted pkgs.vim];
 
   system.stateVersion = "23.11";
+
+  nixpkgs.config.allowUnfree = true;
+
+  nix.gc = {
+    automatic = true;
+    options = "--delete-older-than 1w";
+  };
+
+  nix.settings = {
+    # Enable flakes and new 'nix' command
+    experimental-features = "nix-command flakes";
+    # Deduplicate and optimize nix store
+    auto-optimise-store = true;
+  };
+
+  programs.zsh.enable = true;
+
+  services.tailscale.enable = true;
+
+  pipewire.enable = lib.mkDefault false;
+  desktop.enable = lib.mkDefault false;
+  virt.enable = lib.mkDefault false;
+
+  imports = [
+    ./features/sound.nix
+    ./features/desktop.nix
+    ./features/containers.nix
+  ];
 }

@@ -86,7 +86,7 @@
 
       modules = [
         inputs.sops-nix.nixosModules.sops
-        ./hosts/bobby
+        ./nixos/bobby
         inputs.home-manager.nixosModules.home-manager
         {
           home-manager.useUserPackages = true;

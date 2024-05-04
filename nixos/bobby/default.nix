@@ -24,7 +24,6 @@
   imports = [
     ../common
     ./hardware
-    ../common/systems/nixos.nix
   ];
 
   virt.enable = true;
