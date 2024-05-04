@@ -13,6 +13,7 @@
   };
 
   home.packages = with pkgs; [
+    kubectl
     inputs.alejandra.defaultPackage.${system}
     fzf
     unstable.zoxide
