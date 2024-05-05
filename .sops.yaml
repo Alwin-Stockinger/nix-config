@@ -4,14 +4,7 @@ keys:
   - &hosts:
     - &alex age1n0lqflctwvj2krxq3u06pzajqx3qx72vdnpca8dq6f4dlzm4pdxqqr6tza
 creation_rules:
-  - path_regex: nixos/alex/secrets.yaml
-    key_groups:
-      - pgp:
-          - *alwin
-        age:
-          - *alex
-  - path_regex: hosts/alex/docker-compose.*.yaml
-    encrypted_regex: environment
+  - path_regex: ".*.yaml"
     key_groups:
       - pgp:
           - *alwin

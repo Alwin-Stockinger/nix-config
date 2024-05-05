@@ -15,18 +15,18 @@
   sops = {
     age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
     secrets.wireless = {
-      sopsFile = ./secrets.yaml;
+      sopsFile = ../../secrets.yaml;
     };
     secrets.password = {
-      sopsFile = ./secrets.yaml;
+      sopsFile = ../../secrets.yaml;
       neededForUsers = true;
     };
     secrets.cloudflare_token = {
-      sopsFile = ./secrets.yaml;
+      sopsFile = ../../secrets.yaml;
       neededForUsers = true;
     };
     secrets.cloudflare_email = {
-      sopsFile = ./secrets.yaml;
+      sopsFile = ../../secrets.yaml;
       neededForUsers = true;
     };
   };
@@ -133,7 +133,7 @@
 
   virtualisation.oci-containers.containers.actual = {
     image = "actualbudget/actual-server:latest-alpine";
-    ports = ["127.0.0.1:5006:5006"];
+    ports = ["0.0.0.0:5006:5006"];
     volumes = [
       "/data/actual/data:/data"
     ];
