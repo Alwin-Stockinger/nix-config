@@ -66,10 +66,10 @@
       enable = true;
       extraConfig = ''
 
-        monitor = DVI-D-2, 1680x1050, 0x0, 1
+        monitor = DVI-D-1, 1680x1050, 0x0, 1
         monitor = DP-1, 2560x1440, 1680x0, 1
 
-        workspace = 1, monitor:DVI-D-2
+        workspace = 1, monitor:DVI-D-1
         workspace = 2, monitor:DP-1
 
 
