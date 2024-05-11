@@ -60,7 +60,7 @@
     environment = {
       SERVER_NAME = "Valengbach";
       WORLD_NAME = "Valengbach";
-      SERVER_PUBLIC = "false";
+      #SERVER_PUBLIC = "false";
     };
   };
 
