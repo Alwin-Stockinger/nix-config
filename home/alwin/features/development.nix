@@ -30,6 +30,7 @@
     iperf3
     golangci-lint
     texlive.combined.scheme-full
+    taskwarrior
   ];
 
   programs.vscode = {
@@ -74,6 +75,17 @@
       "go.lintFlags" = [
         "--fast"
       ];
+
+      "[yaml]"."editor.defaultFormatter" = "redhat.vscode-yaml";
+
+      "workbench.tree.indent" = 12;
+      "workbench.tree.renderIndentGuides" = "always";
+      "workbench.colorCustomizations" = {
+        "tree.indentGuidesStroke" = "#ffffff";
+        "sideBar.foreground" = "#ffffff";
+      };
+      "window.restoreFullscreen" = true;
+      "window.newWindowDimensions" = "maximized";
     };
     extensions = with pkgs.vscode-marketplace; [
       kamadorueda.alejandra
@@ -96,6 +108,7 @@
       redhat.vscode-yaml
       hilleer.yaml-plus-json
       tailscale.vscode-tailscale
+      kennylong.kubernetes-yaml-formatter
     ];
   };
 }
