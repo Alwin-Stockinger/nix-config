@@ -1,9 +1,7 @@
 {
-  inputs,
   config,
   pkgs,
   lib,
-  types,
   ...
 }: {
   options.desktop = {
@@ -11,8 +9,14 @@
     waybarMonitor = lib.mkOption {
       default = "DP-1";
       example = "DP-1";
-      type = types.string;
-      descirption = "Waybar monitor";
+      type = lib.types.str;
+      description = "Waybar monitor";
+    };
+    monitors = lib.mkOption {
+      default = ["DVI-D-1, 1680x1050, 0x0, 1" "DP-1, 2560x1440, 1680x0, 1"];
+      example = ["DVI-D-1, 1680x1050, 0x0, 1" "DP-1, 2560x1440, 1680x0, 1"];
+      type = lib.types.listOf lib.types.str;
+      description = "Hyprland monitors";
     };
   };
 
@@ -36,7 +40,7 @@
       enable = true;
       settings = {
         mainBar = {
-          output = "DP-1";
+          output = config.desktop.waybarMonitor;
           # "layer": "top", // Waybar at top layer
           #// "position": "bottom", // Waybar position (top|bottom|left|right)
           #        height = 15; #// Waybar height (to be removed for auto height)
@@ -75,13 +79,12 @@
 
     wayland.windowManager.hyprland = {
       enable = true;
+      settings = {
+        monitor = config.desktop.monitors;
+
+        workspace = ["1, monitor:DVI-D-1" "2, monitor:DP-1"];
+      };
       extraConfig = ''
-
-        monitor = DVI-D-1, 1680x1050, 0x0, 1
-        monitor = DP-1, 2560x1440, 1680x0, 1
-
-        workspace = 1, monitor:DVI-D-1
-        workspace = 2, monitor:DP-1
 
         exec-once = mako & polkit-kde-agent & waybar
 
@@ -174,19 +177,6 @@
             # See https://wiki.hyprland.org/Configuring/Variables/ for more
             force_default_wallpaper = 0 # Set to 0 or 1 to disable the anime mascot wallpapers
         }
-        # Example per-device config
-        # See https://wiki.hyprland.org/Configuring/Keywords/#executing for more
-        device:epic-mouse-v1 {
-            sensitivity = -0.5
-        }
-
-        # Example windowrule v1
-        # windowrule = float, ^(kitty)$
-        # Example windowrule v2
-        # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
-        # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
-        windowrulev2 = nomaximizerequest, class:.* # You'll probably like this.
-
 
         # See https://wiki.hyprland.org/Configuring/Keywords/ for more
         $mainMod = SUPER
@@ -199,7 +189,7 @@
         bind = $mainMod, F, fullscreen, 1
         bind = $mainMod, B, exec, firefox
         bind = $mainMod, D, exec, vesktop
-        bind = $mainMod, C, exec, code
+        bind = $mainMod, C, exec, code --enable-features=UseOzonePlatform --ozone-platform=wayland
         bind = $mainMod, L, exec, /usr/local/bin/hyprlock
         bind = $mainMod, O, exec, open-lens
 
@@ -252,35 +242,37 @@
 
       '';
     };
-  };
 
-  programs.hyprlock = {
-    enable = true;
-    input-fields = [
-      {
-        monitor = "eDP-1";
-      }
-      {
-        monitor = "DP-3";
-      }
-    ];
+    programs.hyprlock = {
+      enable = true;
+      settings = {
+        backgrounds = [
+          {
+            monitor = "eDP-1";
+            path = "${config.home.homeDirectory}/lock.png";
+            color = "rgba(25, 20, 20, 1.0)";
+          }
+          {
+            monitor = "DP-3";
+            path = "${config.home.homeDirectory}/lock.png";
+            color = "rgba(25, 20, 20, 1.0)";
+          }
+          {
+            monitor = "DP-5";
+            path = "${config.home.homeDirectory}/lock.png";
+            color = "rgba(25, 20, 20, 1.0)";
+          }
+        ];
 
-    backgrounds = [
-      {
-        monitor = "eDP-1";
-        path = "${config.home.homeDirectory}/lock.png";
-        color = "rgba(25, 20, 20, 1.0)";
-      }
-      {
-        monitor = "DP-3";
-        path = "${config.home.homeDirectory}/lock.png";
-        color = "rgba(25, 20, 20, 1.0)";
-      }
-      {
-        monitor = "DP-5";
-        path = "${config.home.homeDirectory}/lock.png";
-        color = "rgba(25, 20, 20, 1.0)";
-      }
-    ];
+        input-field = [
+          {
+            monitor = "eDP-1";
+          }
+          {
+            monitor = "DP-3";
+          }
+        ];
+      };
+    };
   };
 }

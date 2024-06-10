@@ -19,12 +19,9 @@
     golangci-lint
     texlive.combined.scheme-full
     nixgl.nixGLIntel
+    jc
   ];
 
-  programs.home-manager.enable = true;
-
-  home.username = "alwin";
-  home.stateVersion = "23.11";
   home.homeDirectory = "/var/home/alwin";
 
   programs.git = {
@@ -72,8 +69,11 @@
   programs.k9s.enable = true;
 
   imports = [
-    ../common/desktop.nix
-    ../features/vscode.nix
-    ../features/hyprland.nix
+    ../default.nix
   ];
+
+  desktop.enable = true;
+  desktop.waybarMonitor = "eDP-1";
+  desktop.monitors = ["eDP-1, 1920x1200, 0x0, 1"];
+  custom.work = true;
 }

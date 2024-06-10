@@ -25,7 +25,6 @@
     jq
     direnv
     nil
-    nixops_unstable
     grpcurl
     iperf3
     golangci-lint

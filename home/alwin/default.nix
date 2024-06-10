@@ -47,7 +47,7 @@ in {
     };
 
     home.username = "alwin";
-    home.stateVersion = "23.11";
+    home.stateVersion = "24.05";
 
     home.packages = with pkgs; [
       htop
@@ -73,14 +73,14 @@ in {
     };
 
     programs.gh = {
-      enable = true;
+      enable = ! config.custom.work;
     };
 
     programs.zsh = {
       enable = true;
-      enableAutosuggestions = true;
       enableCompletion = true;
       autocd = true;
+      autosuggestion.enable = true;
 
       initExtra = "
   path+=('/run/current-system/sw/bin/')
@@ -107,32 +107,6 @@ in {
   fi
   hash hyprlock=/usr/local/bin/hyprlock
       ";
-
-      shellAliases = {
-        ll = "ls -l";
-        k = "kubectl";
-        kustomize = "kubectl kustomize";
-        ctx = "kubectx";
-        ex-machina = "kubectx ex-machina";
-        dev = "kubectx dev";
-        b64 = "base64";
-        rec-git = "flux reconcile source git flux-system";
-        pus = "pulumi up --suppress-outputs --stack";
-        pcg = "pulumi config get --stack";
-        pcs = "pulumi config set --stack";
-
-        pr = "gh pr create -a @me -r samox73,SoMuchForSubtlety";
-        pr-sam = "gh pr create -a @me -r samox73";
-        pr-pasha = "gh pr create -a @me -r pmikh";
-
-        git-link = "gh browse $(git rev-parse HEAD) -n";
-        cat = "bat";
-        pods = "kubectl get pods -o wide";
-        switch = "git switch";
-        ts = "tailscale";
-        code-nix = "code ~/nix-config";
-        code-flux = "code ~/powerbot/flux-powerbot";
-      };
 
       oh-my-zsh = {
         enable = true;
