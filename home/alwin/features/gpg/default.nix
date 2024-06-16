@@ -2,28 +2,35 @@
   config,
   pkgs,
   inputs,
+  lib,
   ...
 }: {
-  home.packages = with pkgs; [
-    pinentry-curses # for gpg
-  ];
-
-  services.gpg-agent = {
-    enable = true;
-    enableSshSupport = true;
-    pinentryPackage = pkgs.pinentry-curses;
+  options.gpg = {
+    enable = lib.mkEnableOption "enables gpg and friends";
   };
 
-  programs.gpg = {
-    enable = true;
-
-    mutableTrust = false;
-
-    publicKeys = [
-      {
-        source = ./bobby.pub;
-        trust = 5;
-      }
+  config = lib.mkIf config.gpg.enable {
+    home.packages = with pkgs; [
+      pinentry-curses # for gpg
     ];
+
+    services.gpg-agent = {
+      enable = true;
+      enableSshSupport = true;
+      pinentryPackage = pkgs.pinentry-curses;
+    };
+
+    programs.gpg = {
+      enable = true;
+
+      mutableTrust = false;
+
+      publicKeys = [
+        {
+          source = ./bobby.pub;
+          trust = 5;
+        }
+      ];
+    };
   };
 }
