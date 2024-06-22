@@ -5,8 +5,8 @@
   ...
 }: {
   imports = [
-    ./common/common.nix
-    ./features/vscode.nix
-    ./features/gpg
+    ./default.nix
   ];
+
+  gpg.enable = true;
 }
