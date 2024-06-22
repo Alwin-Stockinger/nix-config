@@ -7,7 +7,7 @@
 }: {
   imports = [
     inputs.sops-nix.nixosModules.sops
-    ../common/nixos.nix
+    ../default.nix
     "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/jellyfin.nix"
   ];
   disabledModules = ["services/misc/jellyfin.nix"];
