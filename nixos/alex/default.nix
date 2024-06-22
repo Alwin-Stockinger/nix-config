@@ -79,9 +79,9 @@
     acceptTerms = true;
     defaults = {
       email = "alwin@stockinger.tech";
-      dnsPropagationCheck = false;
+      dnsPropagationCheck = true;
       dnsProvider = "cloudflare";
-      server = "https://acme-staging-v02.api.letsencrypt.org/directory";
+#      server = "https://acme-staging-v02.api.letsencrypt.org/directory";
       credentialFiles = {
         "CLOUDFLARE_EMAIL_FILE" = config.sops.secrets.cloudflare_email.path;
         "CLOUDFLARE_API_KEY_FILE" = config.sops.secrets.cloudflare_token.path;
