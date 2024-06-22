@@ -30,6 +30,8 @@
     golangci-lint
     texlive.combined.scheme-full
     taskwarrior
+    dig
+    jc
   ];
 
   programs.vscode = {

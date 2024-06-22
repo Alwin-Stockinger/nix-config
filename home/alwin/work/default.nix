@@ -14,12 +14,7 @@
   };
 
   home.packages = with pkgs; [
-    grpcurl
-    iperf3
-    golangci-lint
-    texlive.combined.scheme-full
     nixgl.nixGLIntel
-    jc
   ];
 
   home.homeDirectory = "/var/home/alwin";
