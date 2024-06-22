@@ -68,7 +68,7 @@
       specialArgs = {inherit inputs;};
 
       modules = [
-        ./hosts/alex
+        ./nixos/alex
         inputs.home-manager.nixosModules.home-manager
         {
           home-manager.useUserPackages = true;

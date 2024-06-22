@@ -17,4 +17,5 @@
   ];
 
   desktop.enable = true;
+  gpg.enable = true;
 }
