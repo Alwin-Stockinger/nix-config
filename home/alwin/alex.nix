@@ -9,4 +9,5 @@
   ];
 
   gpg.enable = true;
+  development.enable = false;
 }

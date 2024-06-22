@@ -37,6 +37,18 @@ in {
   };
 
   config = {
+    home.packages = with pkgs; [
+      inputs.alejandra.defaultPackage.${system}
+      unstable.zoxide
+      neofetch
+      unstable.tldr
+      bat
+      sops
+      yq-go
+      dig
+      htop
+    ];
+
     nixpkgs = {
       config = {
         allowUnfree = true;
@@ -48,10 +60,6 @@ in {
 
     home.username = "alwin";
     home.stateVersion = "24.05";
-
-    home.packages = with pkgs; [
-      htop
-    ];
 
     home.sessionVariables = {
       EDITOR = "hx";
