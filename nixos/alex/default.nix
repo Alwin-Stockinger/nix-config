@@ -11,6 +11,7 @@
     "${inputs.nixpkgs-unstable}/nixos/modules/services/misc/jellyfin.nix"
   ];
   disabledModules = ["services/misc/jellyfin.nix"];
+  virt.enable = true;
 
   sops = {
     age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
