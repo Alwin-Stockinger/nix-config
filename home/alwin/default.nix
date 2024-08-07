@@ -1,15 +1,14 @@
-{
-  config,
-  pkgs,
-  inputs,
-  outputs,
-  lib,
-  ...
-}: let
+{ config
+, pkgs
+, inputs
+, outputs
+, lib
+, ...
+}:
+let
   cfg = config.custom;
   zsh-theme =
-    builtins
-    .toFile "work.zsh-theme" "
+    builtins.toFile "work.zsh-theme" "
         PROMPT=\"%{$fg_bold[cyan]%}%c%{$reset_color%}\"
         PROMPT+=' $(kube_ps1) '
         #PROMPT+=' $(git_prompt_info)'
@@ -28,7 +27,8 @@
         KUBE_PS1_DIVIDER=''
         KUBE_PS1_SEPARATOR=''
         KUBE_PS1_NS_ENABLE=false";
-in {
+in
+{
   options = {
     custom.work = lib.mkOption {
       type = lib.types.bool;
@@ -39,15 +39,21 @@ in {
   config = {
     home.packages = with pkgs; [
       inputs.alejandra.defaultPackage.${system}
-      unstable.zoxide
+#      unstable.zoxide
       neofetch
       unstable.tldr
       bat
-      sops
-      yq-go
-      dig
-      htop
+      #      sops
+#      yq-go
+#      dig
+#      htop
     ];
+
+    programs.zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
 
     nixpkgs = {
       config = {
@@ -60,10 +66,6 @@ in {
 
     home.username = "alwin";
     home.stateVersion = "24.05";
-
-    home.sessionVariables = {
-      EDITOR = "hx";
-    };
 
     programs.git = {
       enable = true;
@@ -94,6 +96,7 @@ in {
   path+=('/run/current-system/sw/bin/')
   path+=('/Applications/Visual Studio Code.app/Contents/Resources/app/bin')
   path+=('/etc/profiles/per-user/alwin/bin')
+  path+=('/var/home/alwin/.cargo/bin')
   eval \"$(zoxide init zsh)\"
   if [ -n \"\${commands[fzf-share]}\" ]; then
     source \"$(fzf-share)/key-bindings.zsh\"
@@ -132,7 +135,7 @@ in {
 
     programs.helix = {
       enable = true;
-      defaultEditor = true;
+      defaultEditor = false;
       languages = {
         language = [
           {
@@ -157,6 +160,7 @@ in {
 
     programs.tmux = {
       enable = true;
+      keyMode = "vi";
     };
 
     # Let Home Manager install and manage itself.
@@ -164,6 +168,7 @@ in {
   };
 
   imports = [
+    inputs.nixvim.homeManagerModules.nixvim
     ./features/desktop.nix
     ./features/development.nix
     ./features/gpg
