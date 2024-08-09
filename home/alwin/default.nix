@@ -7,8 +7,7 @@
 }:
 let
   cfg = config.custom;
-  zsh-theme =
-    builtins.toFile "work.zsh-theme" "
+  zsh-theme = builtins.toFile "work.zsh-theme" "
         PROMPT=\"%{$fg_bold[cyan]%}%c%{$reset_color%}\"
         PROMPT+=' $(kube_ps1) '
         #PROMPT+=' $(git_prompt_info)'
@@ -39,21 +38,20 @@ in
   config = {
     home.packages = with pkgs; [
       inputs.alejandra.defaultPackage.${system}
-#      unstable.zoxide
+      #      unstable.zoxide
       neofetch
       unstable.tldr
       bat
       #      sops
-#      yq-go
-#      dig
-#      htop
+      #      yq-go
+      #      dig
+      #      htop
     ];
 
     programs.zoxide = {
       enable = true;
       enableZshIntegration = true;
     };
-
 
     nixpkgs = {
       config = {
@@ -169,6 +167,7 @@ in
 
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
+    inputs.catppuccin.homeManagerModules.catppuccin
     ./features/desktop.nix
     ./features/development.nix
     ./features/gpg

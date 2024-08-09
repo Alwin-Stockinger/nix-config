@@ -13,8 +13,8 @@
   };
 
   home.packages = with pkgs; [
-    nixgl.nixGLIntel
     trivy
+    git-extras
   ];
 
   programs.atuin = {
@@ -24,14 +24,39 @@
   programs.nixvim = {
     enable = true;
     defaultEditor = true;
+
+    keymaps = [
+      {
+        mode = "n";
+        key = "<leader>ff";
+        action = "<cmd>Telescope find_files<CR>";
+      }
+      {
+        mode = "n";
+        key = "<leader>fg";
+        action = "<cmd>Telescope live_grep<CR>";
+      }
+      {
+        mode = "n";
+        key = "<leader>fb";
+        action = "<cmd>Telescope buffers<CR>";
+      }
+      {
+        mode = "n";
+        key = "<leader>fh";
+        action = "<cmd>Telescope help_tags<CR>";
+      }
+    ];
+
     opts = {
       number = true;
       shiftwidth = 2;
       tabstop = 2;
       expandtab = true;
+      relativenumber = true;
     };
 
-    colorschemes.gruvbox.enable = true;
+    colorschemes.catppuccin.enable = true;
 
     plugins = {
       lualine.enable = true;
@@ -111,7 +136,6 @@
           };
           completion = {
             spell.enable = true;
-
           };
           diagnostics = {
             actionlint.enable = true;
@@ -155,13 +179,19 @@
     oh-my-zsh.theme = lib.mkForce "work";
     shellAliases = {
       ll = "ls -l";
+
       k = "kubectl";
       kustomize = "kubectl kustomize";
+      pods = "kubectl get pods -o wide";
+
       ctx = "kubectx";
       ex-machina = "kubectx ex-machina";
       dev = "kubectx dev";
+
       b64 = "base64";
+
       rec-git = "flux reconcile source git flux-system";
+
       pus = "pulumi up --suppress-outputs --stack";
       pcg = "pulumi config get --stack";
       pcs = "pulumi config set --stack";
@@ -171,11 +201,15 @@
       pr-pasha = "gh pr create -a @me -r pmikh";
       pr-jakob = "gh pr create -a @me -r SoMuchForSubtlety";
 
-      git-link = "gh browse $(git rev-parse HEAD) -n";
       cat = "bat";
-      pods = "kubectl get pods -o wide";
+      cd = "z";
+
       switch = "git switch";
+      pull = "git pull";
+      git-link = "gh browse $(git rev-parse HEAD) -n";
+
       ts = "tailscale";
+
       code-nix = "code ~/nix-config";
       code-flux = "code ~/powerbot/flux-powerbot";
       tardis = "code ~/powerbot/tardis";
@@ -188,15 +222,7 @@
 
   programs.k9s = {
     enable = true;
-    views = {
-      "v1/jobs" = {
-        columns = [
-          "NAME"
-          "AGE"
-          "STATUS"
-        ];
-      };
-    };
+    catppuccin.enable = true;
   };
 
   imports = [
