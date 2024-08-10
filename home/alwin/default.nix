@@ -218,6 +218,7 @@ in
         shiftwidth = 2;
         tabstop = 2;
         expandtab = true;
+        relativenumber = true;
       };
 
       colorschemes.catppuccin.enable = true;
