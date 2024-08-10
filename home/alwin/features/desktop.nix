@@ -203,10 +203,10 @@
         bind = $mainMod, O, exec, open-lens
 
         # Move focus with mainMod + arrow keys
-        bind = $mainMod, left, movefocus, l
-        bind = $mainMod, right, movefocus, r
-        bind = $mainMod, up, movefocus, u
-        bind = $mainMod, down, movefocus, d
+        bind = $mainMod, h, movefocus, l
+        bind = $mainMod, l, movefocus, r
+        bind = $mainMod, k, movefocus, u
+        bind = $mainMod, j, movefocus, d
 
         # Switch workspaces with mainMod + [0-9]
         bind = $mainMod, 1, workspace, 1
@@ -242,7 +242,12 @@
 
         # Move/resize windows with mainMod + LMB/RMB and dragging
         bindm = $mainMod, mouse:272, movewindow
+
         bindm = $mainMod, mouse:273, resizewindow
+        bind = $mainMod SHIFT, h, resizeactive, 10 0
+        bind = $mainMod SHIFT, j, resizeactive, 0 10
+        bind = $mainMod SHIFT, k, resizeactive, 0 -10
+        bind = $mainMod SHIFT, l, resizeactive, -10 0
 
         #sound
         bindel=, XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
