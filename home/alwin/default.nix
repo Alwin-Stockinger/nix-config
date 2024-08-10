@@ -90,6 +90,12 @@ in
         enable = true;
         catppuccin.enable = true;
       };
+      zellij = {
+        enable = true;
+        enableZshIntegration = true;
+
+        catppuccin.enable = true;
+      };
     };
 
     nixpkgs = {
