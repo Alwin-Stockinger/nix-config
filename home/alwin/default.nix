@@ -32,7 +32,7 @@ let
   ];
   standard-packages = with pkgs; [
     neofetch
-    unstable.tldr
+    tldr
     bat
     sops
     yq-go
@@ -96,9 +96,9 @@ in
       config = {
         allowUnfree = true;
       };
-      overlays = [
-        outputs.overlays.unstable-packages
-      ];
+      #      overlays = [
+      #        outputs.overlays.unstable-packages
+      #      ];
     };
 
     home.username = "alwin";

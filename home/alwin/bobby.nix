@@ -1,14 +1,13 @@
-{
-  config,
-  pkgs,
-  inputs,
-  ...
+{ config
+, pkgs
+, inputs
+, ...
 }: {
   home.packages = with pkgs; [
     firefox
     wl-clipboard
     makemkv
-    unstable.vlc
+    vlc
     handbrake
   ];
 

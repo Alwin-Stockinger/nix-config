@@ -24,7 +24,7 @@
       mako
       xdg-desktop-portal-hyprland
       polkit-kde-agent
-      unstable.vesktop #stable is broken atm https://github.com/NixOS/nixpkgs/issues/293083
+      vesktop
     ];
 
     programs.kitty = {
