@@ -6,10 +6,10 @@
 , ...
 }: {
   nixpkgs = {
-    overlays = [
-      outputs.overlays.unstable-packages
-      inputs.nixgl.overlay
-    ];
+    #    overlays = [
+    #      outputs.overlays.unstable-packages
+    #      inputs.nixgl.overlay
+    #    ];
   };
 
   home.packages = with pkgs; [
