@@ -46,23 +46,23 @@
   boot.kernelModules = ["sg"];
 
   #valheim server
-  virtualisation.oci-containers.containers.valheim = {
-    image = "lloesche/valheim-server";
-    ports = ["2456-2457:2456-2457/udp"];
-
-    extraOptions = ["--cap-add=sys_nice"];
-
-    volumes = [
-      "/home/alwin/valheim-server/config:/config"
-      "/home/alwin/valheim-server/data:/data"
-    ];
-    environmentFiles = [config.sops.secrets.valheim_env.path];
-    environment = {
-      SERVER_NAME = "Valengbach";
-      WORLD_NAME = "Valengbach";
-      #SERVER_PUBLIC = "false";
-    };
-  };
+  #qvirtualisation.oci-containers.containers.valheim = {
+  #  image = "lloesche/valheim-server";
+  #   ports = ["2456-2457:2456-2457/udp"];
+  #
+  #   extraOptions = ["--cap-add=sys_nice"];
+  #
+  #  volumes = [
+  #     "/home/alwin/valheim-server/config:/config"
+  #     "/home/alwin/valheim-server/data:/data"
+  #   ];
+  #   environmentFiles = [config.sops.secrets.valheim_env.path];
+  #   environment = {
+  #     SERVER_NAME = "Valengbach";
+  #     WORLD_NAME = "Valengbach";
+  #SERVER_PUBLIC = "false";
+  #   };
+  # };
 
   systemd.services.podman-valheim = {
     requires = ["run-secrets.d.mount"];

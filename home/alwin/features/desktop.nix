@@ -1,8 +1,7 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
+{ config
+, pkgs
+, lib
+, ...
 }: {
   options.desktop = {
     enable = lib.mkEnableOption "enables a desktop enviroment via hyprland";
@@ -13,8 +12,8 @@
       description = "Waybar monitor";
     };
     monitors = lib.mkOption {
-      default = ["DVI-D-1, 1680x1050, 0x0, 1" "DP-1, 2560x1440, 1680x0, 1"];
-      example = ["DVI-D-1, 1680x1050, 0x0, 1" "DP-1, 2560x1440, 1680x0, 1"];
+      default = [ "DVI-D-1, 1680x1050, 0x0, 1" "DP-1, 2560x1440, 1680x0, 1" ];
+      example = [ "DVI-D-1, 1680x1050, 0x0, 1" "DP-1, 2560x1440, 1680x0, 1" ];
       type = lib.types.listOf lib.types.str;
       description = "Hyprland monitors";
     };
@@ -39,32 +38,9 @@
     services.hyprpaper = {
       enable = true;
       settings = {
-        preload = ["~/wallpaper.webp"];
+        preload = [ "~/wallpaper.webp" ];
         wallpaper = [
           ",wallpaper.webp"
-        ];
-      };
-    };
-
-    services.hypridle = {
-      enable = true;
-      settings = {
-        general = {
-          after_sleep_cmd = "hyprctl dispatch dpms on";
-          ignore_dbus_inhibit = false;
-          lock_cmd = "/usr/local/bin/hyprlock";
-        };
-
-        listener = [
-          {
-            timeout = 900;
-            on-timeout = "/usr/local/bin/hyprlock";
-          }
-          {
-            timeout = 1200;
-            on-timeout = "hyprctl dispatch dpms off";
-            on-resume = "hyprctl dispatch dpms on";
-          }
         ];
       };
     };
@@ -80,8 +56,8 @@
           #// "width": 1280, // Waybar width
           spacing = 4; #// Gaps between modules (4px)
           #// Choose the order of the modules
-          modules-center = ["clock"];
-          modules-right = ["battery"];
+          modules-center = [ "clock" ];
+          modules-right = [ "battery" ];
           clock = {
             # "timezone": "America/New_York",
             #tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
@@ -115,13 +91,13 @@
       settings = {
         monitor = config.desktop.monitors;
 
-        workspace = ["1, monitor:DVI-D-1" "2, monitor:DP-1"];
+        workspace = [ "1, monitor:DVI-D-1" "2, monitor:DP-1" ];
       };
       extraConfig = ''
 
         exec-once = mako & polkit-kde-agent & waybar
 
-        $terminal = kitty
+        $terminal = alacritty
 
         env = XCURSOR_SIZE,24
         env = QT_QPA_PLATFORMTHEME,qt5ct # change to qt6ct if you have that
@@ -198,7 +174,7 @@
 
         master {
             # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
-            new_is_master = true
+            new_status = master
         }
 
         gestures {
