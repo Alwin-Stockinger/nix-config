@@ -1,9 +1,10 @@
-{ config
-, pkgs
-, inputs
-, lib
-, outputs
-, ...
+{
+  config,
+  pkgs,
+  inputs,
+  lib,
+  outputs,
+  ...
 }: {
   nixpkgs = {
     overlays = [
@@ -68,4 +69,5 @@
 
   desktop.enable = false;
   custom.work = true;
+  development.enable = true;
 }

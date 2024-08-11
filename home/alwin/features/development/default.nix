@@ -6,6 +6,10 @@
   lib,
   ...
 }: {
+  imports = [
+    ./nvim.nix
+  ];
+
   options.development = {
     enable = lib.mkEnableOption "enables development stuff";
   };
@@ -14,7 +18,6 @@
     nixpkgs = {
       overlays = [
         inputs.nix-vscode-extensions.overlays.default
-        outputs.overlays.unstable-packages
       ];
     };
 
@@ -35,7 +38,6 @@
 
     programs.vscode = {
       enable = true;
-      package = pkgs.unstable.vscode;
       userSettings = {
         "window.titleBarStyle" = "custom";
         "window.zoomLevel" = 0.4;

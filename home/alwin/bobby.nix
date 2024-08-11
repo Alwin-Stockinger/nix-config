@@ -1,7 +1,8 @@
-{ config
-, pkgs
-, inputs
-, ...
+{
+  config,
+  pkgs,
+  inputs,
+  ...
 }: {
   home.packages = with pkgs; [
     firefox
@@ -17,4 +18,5 @@
 
   desktop.enable = true;
   gpg.enable = true;
+  development.enable = true;
 }
