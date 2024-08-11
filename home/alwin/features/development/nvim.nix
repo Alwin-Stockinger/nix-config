@@ -33,7 +33,7 @@
         }
         {
           mode = "n";
-          key = "<C-l>";
+          key = "<C-k>";
           action = "<C-W>k";
           options.silent = true;
         }
@@ -63,10 +63,42 @@
 
       opts = {
         number = true;
-        shiftwidth = 2;
-        tabstop = 2;
-        expandtab = true;
         relativenumber = true;
+
+        tabstop = 2;
+        showtabline = 2;
+        expandtab = true;
+
+        smartindent = true;
+        shiftwidth = 2;
+
+        breakindent = true; # https://stackoverflow.com/questions/1204149/smart-wrap-in-vim
+
+        ignorecase = true;
+        smartcase = true;
+        grepprg = "rg --vimgrep";
+        grepformat = "%f:%l:%c:%m";
+
+        # Set completeopt to have a better completion experience
+        completeopt = [
+          "menuone"
+          "noselect"
+          "noinsert"
+        ]; # mostly just for cmp
+
+        # Enable persistent undo history
+        swapfile = false;
+        backup = false;
+        undofile = true;
+
+        # Enable 24-bit colors
+        termguicolors = true;
+
+        scrolloff = 8; # Always keep 8 lines above/below cursor unless at start/end of file
+
+        # Set encoding type
+        encoding = "utf-8";
+        fileencoding = "utf-8";
       };
 
       colorschemes.catppuccin.enable = true;
@@ -76,6 +108,58 @@
 
         lsp = {
           enable = true;
+
+          keymaps = {
+            silent = true;
+            lspBuf = {
+              gd = {
+                action = "definition";
+                desc = "Goto Definition";
+              };
+              gr = {
+                action = "references";
+                desc = "Goto References";
+              };
+              gD = {
+                action = "declaration";
+                desc = "Goto Declaration";
+              };
+              gI = {
+                action = "implementation";
+                desc = "Goto Implementation";
+              };
+              gT = {
+                action = "type_definition";
+                desc = "Type Definition";
+              };
+              K = {
+                action = "hover";
+                desc = "Hover";
+              };
+              "<leader>cw" = {
+                action = "workspace_symbol";
+                desc = "Workspace Symbol";
+              };
+              "<leader>cr" = {
+                action = "rename";
+                desc = "Rename";
+              };
+            };
+            diagnostic = {
+              "<leader>cd" = {
+                action = "open_float";
+                desc = "Line Diagnostics";
+              };
+              "[d" = {
+                action = "goto_next";
+                desc = "Next Diagnostic";
+              };
+              "]d" = {
+                action = "goto_prev";
+                desc = "Previous Diagnostic";
+              };
+            };
+          };
 
           servers = {
             yamlls.enable = true;

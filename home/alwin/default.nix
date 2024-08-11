@@ -100,9 +100,9 @@ in
           keybinds = {
             normal = {
               "unbind \"Ctrl h\"" = [ ];
-              "bind \"Alt m\"" = {
-                SwitchToMode = "move";
-              };
+              #"bind \"Alt m\"" = {
+              #  SwitchToMode = "move";
+              #};
             };
           };
         };

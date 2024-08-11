@@ -1,10 +1,9 @@
-{
-  config,
-  pkgs,
-  inputs,
-  outputs,
-  lib,
-  ...
+{ config
+, pkgs
+, inputs
+, outputs
+, lib
+, ...
 }: {
   imports = [
     ./nvim.nix
@@ -63,7 +62,7 @@
         };
         "json.schemas" = [
           {
-            "fileMatch" = ["*.hujson"];
+            "fileMatch" = [ "*.hujson" ];
             "schema" = {
               "allowTrailingCommas" = true;
             };
