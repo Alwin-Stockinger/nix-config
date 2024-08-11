@@ -36,7 +36,7 @@
     ];
 
     programs.vscode = {
-      enable = true;
+      enable = !config.custom.work;
       userSettings = {
         "window.titleBarStyle" = "custom";
         "window.zoomLevel" = 0.4;
