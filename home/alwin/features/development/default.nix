@@ -31,9 +31,52 @@
       iperf3
       golangci-lint
       texlive.combined.scheme-full
-      taskwarrior
+      taskwarrior3
       jc
+      ripgrep # for neovim telescope
     ];
+
+    programs = {
+      gh = {
+        enable = ! config.custom.work;
+      };
+
+      alacritty = {
+        enable = true;
+        catppuccin.enable = true;
+      };
+      zellij = {
+        enable = true;
+        enableZshIntegration = true;
+
+        catppuccin.enable = true;
+
+        settings = {
+          keybinds = {
+            normal = {
+              "unbind \"Ctrl h\"" = [ ];
+              #"bind \"Alt m\"" = {
+              #  SwitchToMode = "move";
+              #};
+            };
+          };
+        };
+      };
+      atuin = {
+        enable = true;
+      };
+      zoxide = {
+        enable = true;
+        enableZshIntegration = true;
+      };
+      kitty = {
+        enable = true;
+        theme = "Catppuccin-Mocha";
+        settings = {
+          enable_audio_bell = false;
+        };
+      };
+    };
 
     programs.vscode = {
       enable = !config.custom.work;

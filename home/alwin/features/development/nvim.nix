@@ -248,6 +248,19 @@
           };
 
           servers = {
+            jdt-language-server.enable = true;
+
+            gopls = {
+              enable = true;
+              extraOptions = {
+                settings = {
+                  gopls = {
+                    gofumpt = true;
+                  };
+                };
+              };
+            };
+
             yamlls.enable = true;
             tsserver.enable = true;
             rust-analyzer = {
@@ -255,6 +268,7 @@
               installCargo = false;
               installRustc = false;
             };
+            bashls.enable = true;
           };
         };
         cmp = {
@@ -337,6 +351,8 @@
               };
               stylua.enable = true;
               alejandra.enable = true;
+              #gofmt.enable = true;
+              goimports.enable = true;
             };
           };
         };

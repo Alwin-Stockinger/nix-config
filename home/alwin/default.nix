@@ -27,8 +27,6 @@ let
         KUBE_PS1_SEPARATOR=''
         KUBE_PS1_NS_ENABLE=false";
   min-packages = with pkgs; [
-    inputs.alejandra.defaultPackage.${system}
-    git-extras
   ];
   standard-packages = with pkgs; [
     neofetch
@@ -38,7 +36,6 @@ let
     yq-go
     dig
     htop
-    ripgrep # for neovim telescope
   ];
 in
 {
@@ -60,13 +57,6 @@ in
         );
     };
     programs = {
-      atuin = {
-        enable = true;
-      };
-      zoxide = {
-        enable = true;
-        enableZshIntegration = true;
-      };
       git = {
         enable = true;
         userName = "Alwin";
@@ -84,28 +74,6 @@ in
 
       gh = {
         enable = ! config.custom.work;
-      };
-
-      alacritty = {
-        enable = true;
-        catppuccin.enable = true;
-      };
-      zellij = {
-        enable = true;
-        enableZshIntegration = true;
-
-        catppuccin.enable = true;
-
-        settings = {
-          keybinds = {
-            normal = {
-              "unbind \"Ctrl h\"" = [ ];
-              #"bind \"Alt m\"" = {
-              #  SwitchToMode = "move";
-              #};
-            };
-          };
-        };
       };
     };
 
@@ -132,6 +100,7 @@ in
   path+=('/Applications/Visual Studio Code.app/Contents/Resources/app/bin')
   path+=('/etc/profiles/per-user/alwin/bin')
   path+=('/var/home/alwin/.cargo/bin')
+  path+=('/var/home/alwin/go/bin')
   eval \"$(zoxide init zsh)\"
   if [ -n \"\${commands[fzf-share]}\" ]; then
     source \"$(fzf-share)/key-bindings.zsh\"
@@ -150,6 +119,7 @@ in
     complete -C '/usr/bin/aws_completer' aws
     source <(pulumi completion zsh)
     source <(helm completion zsh)
+    source <(kaf completion zsh)
   fi
   hash hyprlock=/usr/local/bin/hyprlock
       ";

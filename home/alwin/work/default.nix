@@ -1,10 +1,9 @@
-{
-  config,
-  pkgs,
-  inputs,
-  lib,
-  outputs,
-  ...
+{ config
+, pkgs
+, inputs
+, lib
+, outputs
+, ...
 }: {
   nixpkgs = {
     overlays = [
@@ -60,6 +59,21 @@
     k9s = {
       enable = true;
       catppuccin.enable = true;
+      views = {
+        views = {
+          "v1/pods" = {
+            columns = [
+              "NAME"
+              "STATUS"
+              "AGE"
+              "NAMESPACE"
+              "NODE"
+              "CPU"
+              "MEM"
+            ];
+          };
+        };
+      };
     };
   };
 
