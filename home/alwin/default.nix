@@ -36,6 +36,7 @@ let
     yq-go
     dig
     htop
+    zoxide
   ];
 in
 {

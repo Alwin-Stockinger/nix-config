@@ -144,14 +144,24 @@
     home-assistant = {
       enable = true;
       extraComponents = [
+      "esphome"
+      "met"
+      "radio_browser"
         "denonavr"
+
       ];
+	customComponents = with pkgs.home-assistant-custom-components; [
+epex_spot
+];
       config = {
         default_config = { };
 
-        server_host = "::1";
-        trusted_proxies = [ "::1" "127.0.0.1" ];
+	http = {
+        server_host = "127.0.0.1";
+        trusted_proxies = [ "127.0.0.1" ];
         use_x_forwarded_for = true;
+};
+
       };
     };
   };
