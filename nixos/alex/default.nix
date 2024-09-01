@@ -143,6 +143,9 @@
 
     home-assistant = {
       enable = true;
+      extraComponents = [
+        "denonavr"
+      ];
       config = {
         default_config = { };
 
