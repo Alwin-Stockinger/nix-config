@@ -9,7 +9,7 @@
     ../common/default.nix
     #"${inputs.nixpkgs-unstable}/nixos/modules/services/misc/jellyfin.nix"
   ];
-  disabledModules = [ "services/misc/jellyfin.nix" ];
+#  disabledModules = [ "services/misc/jellyfin.nix" ];
   virt.enable = true;
 
   sops = {
