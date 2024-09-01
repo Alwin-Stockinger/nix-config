@@ -114,7 +114,7 @@
           addSSL = true;
           locations."/".proxyPass = "http://127.0.0.1:5006/";
         };
-        "home-assistant.stockinger.tech" = {
+        "home.stockinger.tech" = {
           acmeRoot = null;
           enableACME = true;
           addSSL = true;
