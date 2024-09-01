@@ -4,7 +4,7 @@
 , ...
 }: {
   options.desktop = {
-    enable = lib.mkEnableOption "enables a desktop enviroment via hyprland";
+    enable = lib.mkEnableOption "enables a desktop environment via hyprland";
     waybarMonitor = lib.mkOption {
       default = "DP-1";
       example = "DP-1";
@@ -26,14 +26,6 @@
       polkit-kde-agent
       vesktop
     ];
-
-    programs.kitty = {
-      enable = true;
-      theme = "Catppuccin-Mocha";
-      settings = {
-        enable_audio_bell = false;
-      };
-    };
 
     services.hyprpaper = {
       enable = true;
@@ -88,6 +80,8 @@
 
     wayland.windowManager.hyprland = {
       enable = true;
+
+      catppuccin.enable = true;
       settings = {
         monitor = config.desktop.monitors;
 
