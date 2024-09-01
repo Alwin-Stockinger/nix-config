@@ -118,7 +118,13 @@
           acmeRoot = null;
           enableACME = true;
           addSSL = true;
-          locations."/".proxyPass = "http://127.0.0.1:8123/";
+          extraConfig = ''
+            proxy_buffering off;
+          '';
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:8123/";
+            proxyWebsockets = true;
+          };
         };
       };
     };
@@ -139,6 +145,10 @@
       enable = true;
       config = {
         default_config = { };
+
+        server_host = "::1";
+        trusted_proxies = [ "::1" "127.0.0.1" ];
+        use_x_forwarded_for = true;
       };
     };
   };
