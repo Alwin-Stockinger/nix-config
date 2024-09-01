@@ -9,7 +9,7 @@
     ../common/default.nix
     #"${inputs.nixpkgs-unstable}/nixos/modules/services/misc/jellyfin.nix"
   ];
-#  disabledModules = [ "services/misc/jellyfin.nix" ];
+  #  disabledModules = [ "services/misc/jellyfin.nix" ];
   virt.enable = true;
 
   sops = {
@@ -114,6 +114,12 @@
           addSSL = true;
           locations."/".proxyPass = "http://127.0.0.1:5006/";
         };
+        "home-assistant.stockinger.tech" = {
+          acmeRoot = null;
+          enableACME = true;
+          addSSL = true;
+          locations."/".proxyPass = "http://127.0.0.1:8123/";
+        };
       };
     };
 
@@ -127,6 +133,13 @@
       cacheDir = "/data/jellyfin/cache";
       dataDir = "/data/media";
       configDir = "/data/jellyfin/config";
+    };
+
+    home-assistant = {
+      enable = true;
+      config = {
+        default_config = { };
+      };
     };
   };
 
