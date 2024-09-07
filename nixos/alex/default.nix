@@ -126,6 +126,14 @@
             proxyWebsockets = true;
           };
         };
+        "sonarr.stockinger.tech" = {
+          acmeRoot = null;
+          enableACME = true;
+          addSSL = true;
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:8989/";
+          };
+        };
       };
     };
 
@@ -141,28 +149,36 @@
       configDir = "/data/jellyfin/config";
     };
 
+    sonarr = {
+      enable = true;
+      user = "alwin";
+      dataDir = "/data/sonarr/data";
+    };
+
     home-assistant = {
       enable = true;
       extraComponents = [
-      "esphome"
-      "met"
-      "radio_browser"
-        "denonavr"
-"hue"
-
+        " esphome "
+        "
+        met "
+        "
+        radio_browser "
+        "
+        denonavr "
+        "
+        hue "
       ];
-	customComponents = with pkgs.home-assistant-custom-components; [
-epex_spot
-];
+      customComponents = with pkgs.home-assistant-custom-components; [
+        epex_spot
+      ];
       config = {
         default_config = { };
 
-	http = {
-        server_host = "127.0.0.1";
-        trusted_proxies = [ "127.0.0.1" ];
-        use_x_forwarded_for = true;
-};
-
+        http = {
+          server_host = " 127.0 .0 .1 ";
+          trusted_proxies = [ " 127.0 .0 .1 " ];
+          use_x_forwarded_for = true;
+        };
       };
     };
   };
@@ -173,7 +189,7 @@ epex_spot
   ];
 
   virtualisation.oci-containers.containers.actual = {
-    image = "ghcr.io/actualbudget/actual-server:24.8.0-alpine";
+    image = " ghcr.io/actualbudget/actual-server:24.8.0-alpine";
     ports = [ "0.0.0.0:5006:5006" ];
     volumes = [
       "/data/actual/data:/data"
