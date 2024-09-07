@@ -148,6 +148,7 @@
       "met"
       "radio_browser"
         "denonavr"
+"hue"
 
       ];
 	customComponents = with pkgs.home-assistant-custom-components; [
@@ -172,7 +173,7 @@ epex_spot
   ];
 
   virtualisation.oci-containers.containers.actual = {
-    image = "actualbudget/actual-server:latest-alpine";
+    image = "ghcr.io/actualbudget/actual-server:24.8.0-alpine";
     ports = [ "0.0.0.0:5006:5006" ];
     volumes = [
       "/data/actual/data:/data"
