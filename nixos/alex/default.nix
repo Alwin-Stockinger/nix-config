@@ -141,7 +141,6 @@
 
     jellyfin = {
       enable = true;
-      package = pkgs.jellyfin;
       openFirewall = true;
       user = "alwin";
       cacheDir = "/data/jellyfin/cache";
@@ -153,20 +152,22 @@
       enable = true;
       user = "alwin";
       dataDir = "/data/sonarr/data";
+      openFirewall = true;
     };
+
+    transmission = {
+	enable = true;
+	user = "alwin";
+};
 
     home-assistant = {
       enable = true;
       extraComponents = [
-        " esphome "
-        "
-        met "
-        "
-        radio_browser "
-        "
-        denonavr "
-        "
-        hue "
+        "esphome"
+        "met"
+        "radio_browser"
+        "denonavr"
+        "hue"
       ];
       customComponents = with pkgs.home-assistant-custom-components; [
         epex_spot
@@ -175,8 +176,8 @@
         default_config = { };
 
         http = {
-          server_host = " 127.0 .0 .1 ";
-          trusted_proxies = [ " 127.0 .0 .1 " ];
+          server_host = "127.0 .0 .1";
+          trusted_proxies = [ "127.0 .0 .1" ];
           use_x_forwarded_for = true;
         };
       };
