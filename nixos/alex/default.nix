@@ -176,7 +176,7 @@
         default_config = { };
 
         http = {
-          server_host = "127.0 .0 .1";
+          server_host = "127.0.0.1";
           trusted_proxies = [ "127.0 .0 .1" ];
           use_x_forwarded_for = true;
         };
