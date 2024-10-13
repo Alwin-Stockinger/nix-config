@@ -1,11 +1,10 @@
-{
-  inputs,
-  outputs,
-  lib,
-  config,
-  pkgs,
-  system,
-  ...
+{ inputs
+, outputs
+, lib
+, config
+, pkgs
+, system
+, ...
 }: {
   time.timeZone = "Europe/Vienna";
 
@@ -22,18 +21,18 @@
     LC_TIME = "de_AT.UTF-8";
   };
 
-  console.keyMap = "de";
+  #  console.keyMap = "de";
 
   users.users = {
     alwin = {
       isNormalUser = true;
       description = "Alwin Stockinger";
-      extraGroups = ["networkmanager" "wheel"];
+      extraGroups = [ "networkmanager" "wheel" ];
       shell = pkgs.zsh;
     };
   };
 
-  environment.systemPackages = [pkgs.parted pkgs.vim];
+  environment.systemPackages = [ pkgs.parted pkgs.vim ];
 
   system.stateVersion = "23.11";
 

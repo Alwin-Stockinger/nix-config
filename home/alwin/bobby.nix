@@ -1,8 +1,7 @@
-{
-  config,
-  pkgs,
-  inputs,
-  ...
+{ config
+, pkgs
+, inputs
+, ...
 }: {
   home.packages = with pkgs; [
     firefox
@@ -10,6 +9,7 @@
     makemkv
     vlc
     handbrake
+    python3
   ];
 
   imports = [

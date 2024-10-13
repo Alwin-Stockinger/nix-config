@@ -49,4 +49,7 @@
   };
 
   services.xserver.videoDrivers = [ "amdgpu" ];
+
+  hardware.keyboard.qmk.enable = true;
+  environment.systemPackages = [ pkgs.qmk pkgs.gnumake ];
 }

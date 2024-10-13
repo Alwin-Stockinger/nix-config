@@ -37,6 +37,7 @@ let
     dig
     htop
     zoxide
+    usbutils
   ];
 in
 {
