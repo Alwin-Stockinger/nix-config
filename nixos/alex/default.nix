@@ -126,14 +126,12 @@
             proxyWebsockets = true;
           };
         };
-        "sonarr.stockinger.tech" = {
+	"immich.stockinger.tech" = {
           acmeRoot = null;
           enableACME = true;
           addSSL = true;
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:8989/";
-          };
-        };
+          locations."/".proxyPass = "http://127.0.0.1:3001/";
+	};
       };
     };
 
@@ -146,18 +144,6 @@
       cacheDir = "/data/jellyfin/cache";
       dataDir = "/data/media";
       configDir = "/data/jellyfin/config";
-    };
-
-    sonarr = {
-      enable = true;
-      user = "alwin";
-      dataDir = "/data/sonarr/data";
-      openFirewall = true;
-    };
-
-    transmission = {
-      enable = true;
-      user = "alwin";
     };
 
     home-assistant = {
@@ -181,8 +167,17 @@
           trusted_proxies = [ "127.0.0.1" ];
           use_x_forwarded_for = true;
         };
+
+	"automation ui" = "!include automations.yaml";
       };
     };
+
+	
+immich = {
+#enable = true;
+openFirewall = true;
+mediaLocation = "/data/immich";
+}; 
   };
 
   environment.systemPackages = [
