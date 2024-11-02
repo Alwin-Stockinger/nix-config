@@ -156,9 +156,9 @@
     };
 
     transmission = {
-	enable = true;
-	user = "alwin";
-};
+      enable = true;
+      user = "alwin";
+    };
 
     home-assistant = {
       enable = true;
@@ -168,16 +168,17 @@
         "radio_browser"
         "denonavr"
         "hue"
+        "google"
       ];
       customComponents = with pkgs.home-assistant-custom-components; [
         epex_spot
       ];
       config = {
         default_config = { };
-"automation ui" = "!include automations.yaml";
+        "automation ui" = "!include automations.yaml";
         http = {
           server_host = "127.0.0.1";
-	  trusted_proxies = [ "127.0.0.1" ];
+          trusted_proxies = [ "127.0.0.1" ];
           use_x_forwarded_for = true;
         };
       };
