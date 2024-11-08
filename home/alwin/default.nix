@@ -103,13 +103,15 @@ in
   path+=('/etc/profiles/per-user/alwin/bin')
   path+=('/var/home/alwin/.cargo/bin')
   path+=('/var/home/alwin/go/bin')
+  path+=('/var/home/alwin/.local/bin')
+
   eval \"$(zoxide init zsh)\"
   if [ -n \"\${commands[fzf-share]}\" ]; then
     source \"$(fzf-share)/key-bindings.zsh\"
     source \"$(fzf-share)/completion.zsh\"
   fi
   terminal=$(basename \"/\"$(ps -o cmd -f -p $(cat /proc/$(echo $$)/stat | cut -d \\  -f 4) | tail -1 | sed 's/ .*$//'))
-  if [[ $terminal == \"kitty\" ]]; then
+  if [[ $terminal == \"kitty\" || $terminal == \"zellij\" ]]; then
     echo \"kitten detected\"
     alias ssh=\"kitten ssh\"
   fi
@@ -122,6 +124,7 @@ in
     source <(pulumi completion zsh)
     source <(helm completion zsh)
     source <(kaf completion zsh)
+    source <(zoxide init zsh)
   fi
   hash hyprlock=/usr/local/bin/hyprlock
       ";

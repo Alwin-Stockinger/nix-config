@@ -15,6 +15,7 @@
   home.packages = with pkgs; [
     trivy
     nixgl.nixGLIntel
+    duckdb
   ];
 
   home.homeDirectory = "/var/home/alwin";

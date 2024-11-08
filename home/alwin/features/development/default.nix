@@ -50,17 +50,6 @@
         enableZshIntegration = true;
 
         catppuccin.enable = true;
-
-        settings = {
-          keybinds = {
-            normal = {
-              "unbind \"Ctrl h\"" = [ ];
-              #"bind \"Alt m\"" = {
-              #  SwitchToMode = "move";
-              #};
-            };
-          };
-        };
       };
       atuin = {
         enable = true;
@@ -71,7 +60,7 @@
       };
       kitty = {
         enable = true;
-        theme = "Catppuccin-Mocha";
+        themeFile = "Catppuccin-Mocha";
         settings = {
           enable_audio_bell = false;
         };

@@ -6,13 +6,34 @@
 , ...
 }: {
   config = lib.mkIf config.development.enable {
+    home.packages = with pkgs; [
+      delve # go debugger
+    ];
+
     programs.nixvim = {
       enable = true;
       defaultEditor = true;
 
       keymaps = [
-        # switch splits
+        # Disable arrow keys
+        {
+          key = "<Up>";
+          action = "<nop>";
+        }
+        {
+          key = "<Down>";
+          action = "<nop>";
+        }
+        {
+          key = "<Left>";
+          action = "<nop>";
+        }
+        {
+          key = "<Right>";
+          action = "<nop>";
+        }
 
+        # switch splits
         {
           mode = "n";
           key = "<C-l>";
@@ -109,6 +130,18 @@
             desc = "Stage Buffer";
           };
         }
+
+        # DAP debugger
+        {
+          mode = "n";
+          key = "<leader>db";
+          action = ":DapToggleBreakpoint<CR>";
+        }
+        {
+          mode = "n";
+          key = "<leader>dc";
+          action = ":DapContinue<CR>";
+        }
       ];
 
       opts = {
@@ -159,10 +192,36 @@
         trouble.enable = true;
         bufferline.enable = true;
         telescope.enable = true;
-        oil.enable = true;
         treesitter.enable = true;
+        treesitter-context.enable = true;
+        web-devicons.enable = true;
+        octo.enable = true;
+
         luasnip.enable = true;
         lsp-format.enable = true;
+
+        oil = {
+          enable = true;
+          settings = {
+            view_options = {
+              show_hidden = true;
+            };
+          };
+        };
+
+        dap = {
+          enable = true;
+          extensions = {
+            dap-ui.enable = true;
+            dap-virtual-text.enable = true;
+            dap-go = {
+              enable = true;
+              delve = {
+                path = "${pkgs.delve}/bin/dlv";
+              };
+            };
+          };
+        };
 
         gitsigns = {
           enable = true;
@@ -248,7 +307,7 @@
           };
 
           servers = {
-            jdt-language-server.enable = true;
+            jdtls.enable = true;
 
             gopls = {
               enable = true;
@@ -262,8 +321,8 @@
             };
 
             yamlls.enable = true;
-            tsserver.enable = true;
-            rust-analyzer = {
+            ts_ls.enable = true;
+            rust_analyzer = {
               enable = true;
               installCargo = false;
               installRustc = false;
