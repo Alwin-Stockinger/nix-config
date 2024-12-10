@@ -196,6 +196,7 @@
         treesitter-context.enable = true;
         web-devicons.enable = true;
         octo.enable = true;
+        diffview.enable = true;
 
         luasnip.enable = true;
         lsp-format.enable = true;
@@ -307,6 +308,7 @@
           };
 
           servers = {
+            pyright.enable = true;
             jdtls.enable = true;
 
             gopls = {
@@ -395,9 +397,16 @@
               statix.enable = true;
               codespell.enable = true;
               staticcheck.enable = true;
-              markdownlint.enable = true;
               sqlfluff.enable = true;
               zsh.enable = true;
+              markdownlint = {
+                enable = true;
+                settings = {
+                  no-duplicate-heading = {
+                    siblings_only = true;
+                  };
+                };
+              };
             };
             formatting = {
               nixpkgs_fmt.enable = true;
