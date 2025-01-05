@@ -154,7 +154,7 @@
         "radio_browser"
         "denonavr"
         "hue"
-        "google"
+        "workday"
       ];
       customComponents = with pkgs.home-assistant-custom-components; [
         epex_spot
@@ -162,13 +162,13 @@
       config = {
         default_config = { };
         "automation ui" = "!include automations.yaml";
+        "script ui" = "!include scripts.yaml";
         http = {
           server_host = "127.0.0.1";
           trusted_proxies = [ "127.0.0.1" ];
           use_x_forwarded_for = true;
         };
 
-	"automation ui" = "!include automations.yaml";
       };
     };
 
