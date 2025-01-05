@@ -126,12 +126,12 @@
             proxyWebsockets = true;
           };
         };
-	"immich.stockinger.tech" = {
+        "immich.stockinger.tech" = {
           acmeRoot = null;
           enableACME = true;
           addSSL = true;
           locations."/".proxyPass = "http://127.0.0.1:3001/";
-	};
+        };
       };
     };
 
@@ -159,6 +159,7 @@
       customComponents = with pkgs.home-assistant-custom-components; [
         epex_spot
       ];
+      configDir = "/data/hass-config";
       config = {
         default_config = { };
         "automation ui" = "!include automations.yaml";
@@ -168,16 +169,14 @@
           trusted_proxies = [ "127.0.0.1" ];
           use_x_forwarded_for = true;
         };
-
       };
     };
 
-	
-immich = {
-#enable = true;
-openFirewall = true;
-mediaLocation = "/data/immich";
-}; 
+    immich = {
+      enable = true;
+      openFirewall = true;
+      mediaLocation = "/data/immich";
+    };
   };
 
   environment.systemPackages = [
