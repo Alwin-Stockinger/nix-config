@@ -130,7 +130,7 @@
           acmeRoot = null;
           enableACME = true;
           addSSL = true;
-          locations."/".proxyPass = "http://127.0.0.1:3001/";
+          locations."/".proxyPass = "http://127.0.0.1:2283/";
         };
       };
     };
@@ -172,10 +172,17 @@
       };
     };
 
+    postgresql = {
+dataDir = "/data/postgresql";
+};
+	
+
     immich = {
       enable = true;
       openFirewall = true;
       mediaLocation = "/data/immich";
+      host = "127.0.0.1";
+      port = 2283;
     };
   };
 
