@@ -173,9 +173,8 @@
     };
 
     postgresql = {
-dataDir = "/data/postgresql";
-};
-	
+      dataDir = "/data/postgresql";
+    };
 
     immich = {
       enable = true;
