@@ -68,7 +68,7 @@
     after = [ "run-secrets.d.mount" ];
   };
 
-  services.sonarr.enable = true;
+  #services.sonarr.enable = true;
 
   virt.enable = true;
   pipewire.enable = true;
