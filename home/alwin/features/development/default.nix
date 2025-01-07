@@ -40,16 +40,13 @@
       gh = {
         enable = ! config.custom.work;
       };
-
-      alacritty = {
-        enable = true;
-        catppuccin.enable = true;
+      catppuccin = {
+        zellij.enable = true;
+        k9s.enable = true;
       };
       zellij = {
         enable = true;
         enableZshIntegration = true;
-
-        catppuccin.enable = true;
       };
       atuin = {
         enable = true;

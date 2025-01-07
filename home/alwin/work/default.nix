@@ -59,7 +59,6 @@
 
     k9s = {
       enable = true;
-      catppuccin.enable = true;
       views = {
         views = {
           "v1/pods" = {
