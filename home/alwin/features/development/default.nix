@@ -36,13 +36,14 @@
       ripgrep # for neovim telescope
     ];
 
+    catppuccin = {
+      zellij.enable = true;
+      k9s.enable = true;
+    };
+
     programs = {
       gh = {
         enable = ! config.custom.work;
-      };
-      catppuccin = {
-        zellij.enable = true;
-        k9s.enable = true;
       };
       zellij = {
         enable = true;
