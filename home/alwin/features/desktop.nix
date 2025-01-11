@@ -12,8 +12,8 @@
       description = "Waybar monitor";
     };
     monitors = lib.mkOption {
-      default = [ "DVI-D-1, 1680x1050, 0x0, 1" "DP-1, 2560x1440, 1680x0, 1" ];
-      example = [ "DVI-D-1, 1680x1050, 0x0, 1" "DP-1, 2560x1440, 1680x0, 1" ];
+      default = [ "HDMI-A-1, 2560x1440, 0x0, 1, transform, 1" "DP-1, 3440x1440, 1440x1200, 1" ];
+      example = [ "DVI-D-1, 1680x1050, 0x0, 1" "DP-1, 3440x1440, 1680x0, 1" ];
       type = lib.types.listOf lib.types.str;
       description = "Hyprland monitors";
     };
@@ -80,20 +80,21 @@
       '';
     };
 
+    catppuccin.hyprland.enable = true;
+
     wayland.windowManager.hyprland = {
       enable = true;
 
-      catppuccin.enable = true;
       settings = {
         monitor = config.desktop.monitors;
 
-        workspace = [ "1, monitor:DVI-D-1" "2, monitor:DP-1" ];
+        workspace = [ "1, monitor:HDMI-A-1" "2, monitor:DP-1" ];
       };
       extraConfig = ''
 
                 exec-once = mako & polkit-kde-agent & waybar
 
-                $terminal = alacritty
+                $terminal = kitty
 
                 env = XCURSOR_SIZE,24
                 env = QT_QPA_PLATFORMTHEME,qt5ct # change to qt6ct if you have that
@@ -141,10 +142,6 @@
                         passes = 1
                     }
 
-                    drop_shadow = yes
-                    shadow_range = 4
-                    shadow_render_power = 3
-                    col.shadow = rgba(1a1a1aee)
                 }
 
                 animations {
