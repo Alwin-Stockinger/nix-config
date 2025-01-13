@@ -126,7 +126,6 @@ in
     source <(kaf completion zsh)
     source <(zoxide init zsh)
   fi
-  hash hyprlock=/usr/local/bin/hyprlock
       ";
 
       oh-my-zsh = {

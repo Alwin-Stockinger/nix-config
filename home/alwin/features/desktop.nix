@@ -27,17 +27,18 @@
       vesktop
     ];
 
-    services.hyprpaper = {
-      enable = true;
-      settings = {
-        preload = [ "~/wallpaper.webp" ];
-        wallpaper = [
-          ",wallpaper.webp"
-        ];
+    services = {
+      hyprpaper = {
+        enable = true;
+        settings = {
+          preload = [ "~/wallpaper.webp" ];
+          wallpaper = [
+            ",wallpaper.webp"
+          ];
+        };
       };
+      hypridle.enable = true;
     };
-
-    programs.yazi.enable = true;
 
     programs.waybar = {
       enable = true;
@@ -191,6 +192,8 @@
                 bind = $mainMod, F, fullscreen, 1
                 bind = $mainMod, B, exec, firefox
                 bind = $mainMod, D, exec, vesktop
+                bind = $mainMod, P, exec, steam
+                bind = $mainMod, L, exec, hyprlock
 
                 # Move focus with mainMod + arrow keys
                 bind = $mainMod, h, movefocus, l
@@ -250,30 +253,36 @@
     programs.hyprlock = {
       enable = true;
       settings = {
-        backgrounds = [
+        general = {
+          disable_loading_bar = true;
+          grace = 1;
+          hide_cursor = true;
+          no_fade_in = false;
+        };
+
+        background = [
           {
-            monitor = "eDP-1";
-            path = "${config.home.homeDirectory}/lock.png";
-            color = "rgba(25, 20, 20, 1.0)";
-          }
-          {
-            monitor = "DP-3";
-            path = "${config.home.homeDirectory}/lock.png";
-            color = "rgba(25, 20, 20, 1.0)";
-          }
-          {
-            monitor = "DP-5";
-            path = "${config.home.homeDirectory}/lock.png";
-            color = "rgba(25, 20, 20, 1.0)";
+            path = "screenshot";
+            blur_passes = 3;
+            blur_size = 8;
           }
         ];
+        authentication = {
+          "pam:module" = "login";
+        };
 
         input-field = [
           {
-            monitor = "eDP-1";
-          }
-          {
-            monitor = "DP-3";
+            size = "200, 50";
+            position = "0, -80";
+            monitor = "";
+            dots_center = true;
+            fade_on_empty = false;
+            font_color = "rgb(202, 211, 245)";
+            inner_color = "rgb(91, 96, 120)";
+            outer_color = "rgb(24, 25, 38)";
+            outline_thickness = 5;
+            shadow_passes = 2;
           }
         ];
       };

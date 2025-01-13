@@ -63,6 +63,7 @@
           enable_audio_bell = false;
         };
       };
+      yazi.enable = true;
     };
 
     programs.vscode = {
