@@ -34,6 +34,7 @@
       taskwarrior3
       jc
       ripgrep # for neovim telescope
+      blueman
     ];
 
     catppuccin = {
