@@ -35,6 +35,7 @@
       jc
       ripgrep # for neovim telescope
       blueman
+      spotify
     ];
 
     catppuccin = {
