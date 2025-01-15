@@ -421,6 +421,7 @@
               alejandra.enable = true;
               #gofmt.enable = true;
               goimports.enable = true;
+              pg_format.enable = true;
             };
           };
         };
