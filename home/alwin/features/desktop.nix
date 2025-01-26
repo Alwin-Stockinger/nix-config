@@ -25,15 +25,19 @@
       xdg-desktop-portal-hyprland
       polkit-kde-agent
       vesktop
+      font-awesome
     ];
 
     services = {
       hyprpaper = {
         enable = true;
         settings = {
-          preload = [ "~/wallpaper.webp" ];
+          ipc = "on";
+
+          preload = [ "/home/alwin/wallpaper.webp" ];
+
           wallpaper = [
-            ",wallpaper.webp"
+            "DP-1,/home/alwin/wallpaper.webp"
           ];
         };
       };
@@ -49,18 +53,31 @@
           #// "position": "bottom", // Waybar position (top|bottom|left|right)
           #        height = 15; #// Waybar height (to be removed for auto height)
           #// "width": 1280, // Waybar width
-          spacing = 4; #// Gaps between modules (4px)
+          spacing = 100; #// Gaps between modules (4px)
           #// Choose the order of the modules
           modules-center = [ "clock" ];
-          modules-right = [ "battery" ];
+          modules-right = [ "bluetooth" "battery" ];
           clock = {
             # "timezone": "America/New_York",
             #tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-            format-alt = "{:%Y-%m-%d}";
+            format-alt = "{:%d-%m-%Y}";
           };
           battery = {
             format = "{capacity}%";
           };
+          bluetooth = {
+            format = " {status}";
+            format-disabled = ""; # an empty format will hide the module
+            format-connected = "{num_connections}  ";
+            tooltip-format = "{controller_alias}\t{controller_address}";
+            tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{device_enumerate}";
+            tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
+          };
+          #wireplumber = {
+          #  format = "{volume}%";
+          #  format-muted = "";
+          #  format-icons = [ "" "" "" ];
+          #};
         };
       };
       style = ''
@@ -78,6 +95,16 @@
          color: white;
          padding: 10px 0 0 0;
         }
+        #bluetooth {
+         background: transparent;
+         color: white;
+         padding: 10px 0 0 0;
+        }
+        #wireplumber {
+         background: transparent;
+         color: white;
+         padding: 10px 0 0 0;
+        }
       '';
     };
 
@@ -89,7 +116,7 @@
       settings = {
         monitor = config.desktop.monitors;
 
-        workspace = [ "1, monitor:HDMI-A-1" "2, monitor:DP-1" ];
+        workspace = [ " 1, monitor:HDMI-A-1" "2, monitor:DP-1" ];
       };
       extraConfig = ''
 

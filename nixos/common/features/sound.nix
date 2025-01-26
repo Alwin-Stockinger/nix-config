@@ -1,9 +1,8 @@
-{
-  inputs,
-  lib,
-  config,
-  pkgs,
-  ...
+{ inputs
+, lib
+, config
+, pkgs
+, ...
 }: {
   options = {
     pipewire.enable = lib.mkEnableOption "enables sound with pipewire";
@@ -17,6 +16,7 @@
       alsa.support32Bit = true;
       jack.enable = true;
       pulse.enable = true;
+      wireplumber.enable = true;
     };
   };
 }
