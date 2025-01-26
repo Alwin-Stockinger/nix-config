@@ -39,8 +39,7 @@
     ];
 
     catppuccin = {
-      zellij.enable = true;
-      k9s.enable = true;
+      enable = true;
     };
 
     programs = {
