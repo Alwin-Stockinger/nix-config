@@ -14,6 +14,12 @@
       enable = true;
       defaultEditor = true;
 
+      filetype = {
+        extension = {
+          hujson = "json";
+        };
+      };
+
       keymaps = [
         # Disable arrow keys
         {
@@ -309,7 +315,7 @@
 
           servers = {
             pyright.enable = true;
-            jdtls.enable = true;
+            #jdtls.enable = true;
 
             gopls = {
               enable = true;
