@@ -334,6 +334,11 @@
               enable = true;
               installCargo = false;
               installRustc = false;
+              settings = {
+                check = {
+                  command = "clippy";
+                };
+              };
             };
             bashls.enable = true;
           };
