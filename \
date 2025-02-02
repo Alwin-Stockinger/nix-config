@@ -52,11 +52,11 @@
 
           listener = [
             {
-              timeout = 120;
+              timeout = 900;
               on-timeout = "hyprlock";
             }
             {
-              timeout = 300;
+              timeout = 1200;
               on-timeout = "hyprctl dispatch dpms off";
               on-resume = "hyprctl dispatch dpms on";
             }
@@ -64,87 +64,88 @@
         };
       };
     };
+  };
 
-    programs = {
-      rofi = {
-        enable = true;
-      };
-      waybar = {
-        enable = true;
-        settings = {
-          mainBar = {
-            output = config.desktop.waybarMonitor;
-            # "layer": "top", // Waybar at top layer
-            #// "position": "bottom", // Waybar position (top|bottom|left|right)
-            #        height = 15; #// Waybar height (to be removed for auto height)
-            #// "width": 1280, // Waybar width
-            spacing = 100; #// Gaps between modules (4px)
-            #// Choose the order of the modules
-            modules-center = [ "clock" ];
-            modules-right = [ "bluetooth" "battery" ];
-            clock = {
-              # "timezone": "America/New_York",
-              #tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-              format-alt = "{:%d-%m-%Y}";
-            };
-            battery = {
-              format = "{capacity}%";
-            };
-            bluetooth = {
-              format = " {status}";
-              format-disabled = ""; # an empty format will hide the module
-              format-connected = "{num_connections}  ";
-              tooltip-format = "{controller_alias}\t{controller_address}";
-              tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{device_enumerate}";
-              tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
-            };
-            #wireplumber = {
-            #  format = "{volume}%";
-            #  format-muted = "";
-            #  format-icons = [ "" "" "" ];
-            #};
-          };
-        };
-        style = ''
-          * { font-size: 15px; }
-          window#waybar {
-           background: transparent;
-          }
-          #clock {
-           background: transparent;
-           color: white;
-           padding: 10px 0 0 0;
-          }
-          #battery {
-           background: transparent;
-           color: white;
-           padding: 10px 0 0 0;
-          }
-          #bluetooth {
-           background: transparent;
-           color: white;
-           padding: 10px 0 0 0;
-          }
-          #wireplumber {
-           background: transparent;
-           color: white;
-           padding: 10px 0 0 0;
-          }
-        '';
-      };
-    };
-
-    catppuccin.hyprland.enable = true;
-
-    wayland.windowManager.hyprland = {
+  programs = {
+    rofi = {
       enable = true;
-
+    };
+    waybar = {
+      enable = true;
       settings = {
-        monitor = config.desktop.monitors;
-
-        workspace = [ " 1, monitor:HDMI-A-1" "2, monitor:DP-1" ];
+        mainBar = {
+          output = config.desktop.waybarMonitor;
+          # "layer": "top", // Waybar at top layer
+          #// "position": "bottom", // Waybar position (top|bottom|left|right)
+          #        height = 15; #// Waybar height (to be removed for auto height)
+          #// "width": 1280, // Waybar width
+          spacing = 100; #// Gaps between modules (4px)
+          #// Choose the order of the modules
+          modules-center = [ "clock" ];
+          modules-right = [ "bluetooth" "battery" ];
+          clock = {
+            # "timezone": "America/New_York",
+            #tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+            format-alt = "{:%d-%m-%Y}";
+          };
+          battery = {
+            format = "{capacity}%";
+          };
+          bluetooth = {
+            format = " {status}";
+            format-disabled = ""; # an empty format will hide the module
+            format-connected = "{num_connections}  ";
+            tooltip-format = "{controller_alias}\t{controller_address}";
+            tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{device_enumerate}";
+            tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
+          };
+          #wireplumber = {
+          #  format = "{volume}%";
+          #  format-muted = "";
+          #  format-icons = [ "" "" "" ];
+          #};
+        };
       };
-      extraConfig = ''
+      style = ''
+        * { font-size: 15px; }
+        window#waybar {
+         background: transparent;
+        }
+        #clock {
+         background: transparent;
+         color: white;
+         padding: 10px 0 0 0;
+        }
+        #battery {
+         background: transparent;
+         color: white;
+         padding: 10px 0 0 0;
+        }
+        #bluetooth {
+         background: transparent;
+         color: white;
+         padding: 10px 0 0 0;
+        }
+        #wireplumber {
+         background: transparent;
+         color: white;
+         padding: 10px 0 0 0;
+        }
+      '';
+    };
+  };
+
+  catppuccin.hyprland.enable = true;
+
+  wayland.windowManager.hyprland = {
+    enable = true;
+
+    settings = {
+      monitor = config.desktop.monitors;
+
+      workspace = [ " 1, monitor:HDMI-A-1" "2, monitor:DP-1" ];
+    };
+    extraConfig = ''
 
                 exec-once = mako & polkit-kde-agent & waybar
 
@@ -302,44 +303,44 @@
                 bindl=, XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 
       '';
-    };
+  };
 
-    programs.hyprlock = {
-      enable = true;
-      settings = {
-        general = {
-          disable_loading_bar = true;
-          grace = 1;
-          hide_cursor = true;
-          no_fade_in = false;
-        };
-
-        background = [
-          {
-            path = "screenshot";
-            blur_passes = 3;
-            blur_size = 8;
-          }
-        ];
-        authentication = {
-          "pam:module" = "login";
-        };
-
-        input-field = [
-          {
-            size = "200, 50";
-            position = "0, -80";
-            monitor = "";
-            dots_center = true;
-            fade_on_empty = false;
-            font_color = "rgb(202, 211, 245)";
-            inner_color = "rgb(91, 96, 120)";
-            outer_color = "rgb(24, 25, 38)";
-            outline_thickness = 5;
-            shadow_passes = 2;
-          }
-        ];
+  programs.hyprlock = {
+    enable = true;
+    settings = {
+      general = {
+        disable_loading_bar = true;
+        grace = 1;
+        hide_cursor = true;
+        no_fade_in = false;
       };
+
+      background = [
+        {
+          path = "screenshot";
+          blur_passes = 3;
+          blur_size = 8;
+        }
+      ];
+      authentication = {
+        "pam:module" = "login";
+      };
+
+      input-field = [
+        {
+          size = "200, 50";
+          position = "0, -80";
+          monitor = "";
+          dots_center = true;
+          fade_on_empty = false;
+          font_color = "rgb(202, 211, 245)";
+          inner_color = "rgb(91, 96, 120)";
+          outer_color = "rgb(24, 25, 38)";
+          outline_thickness = 5;
+          shadow_passes = 2;
+        }
+      ];
     };
   };
+};
 }
