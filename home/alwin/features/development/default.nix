@@ -30,7 +30,7 @@
       grpcurl
       iperf3
       golangci-lint
-      texlive.combined.scheme-full
+      #texlive.combined.scheme-full
       taskwarrior3
       jc
       ripgrep # for neovim telescope

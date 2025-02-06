@@ -216,18 +216,19 @@
           };
         };
 
-        dap = {
+        dap-virtual-text.enable = true;
+        dap-ui.enable = true;
+        dap-go = {
           enable = true;
-          extensions = {
-            dap-ui.enable = true;
-            dap-virtual-text.enable = true;
-            dap-go = {
-              enable = true;
-              delve = {
-                path = "${pkgs.delve}/bin/dlv";
-              };
+          settings = {
+            delve = {
+              path = "${pkgs.delve}/bin/dlv";
             };
           };
+        };
+
+        dap = {
+          enable = true;
         };
 
         gitsigns = {
@@ -322,7 +323,7 @@
               extraOptions = {
                 settings = {
                   gopls = {
-                    gofumpt = true;
+                    #        gofumpt = true;
                   };
                 };
               };
@@ -389,6 +390,7 @@
         none-ls = {
           enable = true;
           enableLspFormat = true;
+          autoLoad = true;
           sources = {
             code_actions = {
               gitrebase.enable = true;
