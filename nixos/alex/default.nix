@@ -132,6 +132,11 @@
           addSSL = true;
           locations."/".proxyPass = "http://127.0.0.1:2283/";
         };
+        "rss.stockinger.tech" = {
+          acmeRoot = null;
+          enableACME = true;
+          addSSL = true;
+        };
       };
     };
 
@@ -183,6 +188,14 @@
       host = "127.0.0.1";
       port = 2283;
     };
+
+	tt-rss = {
+  enable = true;
+  # to configure a nginx virtual host directly:
+  selfUrlPath = "https://rss.stockinger.tech";
+  virtualHost = "rss.stockinger.tech";
+	registration.enable = true;
+};
   };
 
   environment.systemPackages = [
