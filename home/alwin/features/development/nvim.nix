@@ -323,7 +323,7 @@
               extraOptions = {
                 settings = {
                   gopls = {
-                    #        gofumpt = true;
+                    gofumpt = true;
                   };
                 };
               };
