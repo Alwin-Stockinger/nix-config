@@ -52,6 +52,11 @@
       };
       atuin = {
         enable = true;
+        settings = {
+          # Dont clear screen
+          style = "full";
+          inline_height = 0;
+        };
       };
       zoxide = {
         enable = true;
