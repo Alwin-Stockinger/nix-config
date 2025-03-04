@@ -1,9 +1,10 @@
-{ config
-, pkgs
-, inputs
-, outputs
-, lib
-, ...
+{
+  config,
+  pkgs,
+  inputs,
+  outputs,
+  lib,
+  ...
 }: {
   imports = [
     ./nvim.nix
@@ -34,8 +35,8 @@
       taskwarrior3
       jc
       ripgrep # for neovim telescope
-      blueman
-      spotify
+      eza
+      cargo
     ];
 
     catppuccin = {
@@ -99,7 +100,7 @@
         };
         "json.schemas" = [
           {
-            "fileMatch" = [ "*.hujson" ];
+            "fileMatch" = ["*.hujson"];
             "schema" = {
               "allowTrailingCommas" = true;
             };

@@ -1,12 +1,12 @@
-{
-  pkgs,
-  lib,
-  inputs,
-  outputs,
-  system,
-  ...
+{ pkgs
+, lib
+, inputs
+, outputs
+, system
+, ...
 }: {
   nixpkgs.hostPlatform = system;
+  #  nixpkgs.hostPlatform = "aarch64-darwin";
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
@@ -29,16 +29,17 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  nix.gc = {
-    automatic = true;
-    options = "--delete-older-than 1w";
-  };
+  nix = {
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 1w";
+    };
+    settings = {
+      # Enable flakes and new 'nix' command
+      experimental-features = "nix-command flakes";
+    };
 
-  nix.settings = {
-    # Enable flakes and new 'nix' command
-    experimental-features = "nix-command flakes";
-    # Deduplicate and optimize nix store
-    auto-optimise-store = true;
+    optimise.automatic = true;
   };
 
   environment.systemPackages = [
@@ -48,4 +49,11 @@
   programs.zsh.enable = true;
 
   services.tailscale.enable = true;
+
+  homebrew = {
+    enable = true;
+    casks = [
+      "firefox"
+    ];
+  };
 }

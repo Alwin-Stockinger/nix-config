@@ -37,7 +37,6 @@ let
     dig
     htop
     zoxide
-    usbutils
   ];
 in
 {
@@ -110,11 +109,7 @@ in
     source \"$(fzf-share)/key-bindings.zsh\"
     source \"$(fzf-share)/completion.zsh\"
   fi
-  terminal=$(basename \"/\"$(ps -o cmd -f -p $(cat /proc/$(echo $$)/stat | cut -d \\  -f 4) | tail -1 | sed 's/ .*$//'))
-  if [[ $terminal == \"kitty\" ]]; then
-    echo \"kitten detected\"
     alias ssh=\"kitten ssh\"
-  fi
   if [[ $WORK == \"true\" ]]; then
     export PATH=\"\${KREW_ROOT:-$HOME/.krew}/bin:$PATH\"
     echo \"work detected\"
@@ -124,8 +119,8 @@ in
     source <(pulumi completion zsh)
     source <(helm completion zsh)
     source <(kaf completion zsh)
-    source <(zoxide init zsh)
   fi
+  eval \"$(/opt/homebrew/bin/brew shellenv)\"
       ";
 
       oh-my-zsh = {
@@ -144,6 +139,7 @@ in
       shellAliases = {
         cat = "bat";
         cd = "z";
+        ls = "eza";
 
         switch = "git switch";
         pull = "git pull";

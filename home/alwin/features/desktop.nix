@@ -26,6 +26,9 @@
       polkit-kde-agent
       vesktop
       font-awesome
+      usbutils
+      blueman
+      spotify
     ];
 
     services = {

@@ -5,7 +5,8 @@
   ...
 }: {
   imports = [
-    ./common/desktop.nix
-    ./features/vscode.nix
+    ./default.nix
   ];
+  development.enable = true;
+  
 }

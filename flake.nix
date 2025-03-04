@@ -60,7 +60,7 @@
       inherit (self) outputs;
     in
     {
-      overlays = import ./overlays { inherit inputs; };
+ #     overlays = import ./overlays { inherit inputs; };
 
       nix.settings = {
         substituters = [ "https://hyprland.cachix.org" ];
@@ -104,13 +104,13 @@
 
       #M2 Macbook Pro
       darwinConfigurations."holden" = inputs.darwin.lib.darwinSystem rec {
-        specialArgs = { inherit inputs system; };
+        specialArgs = { inherit nixpkgs inputs system; };
 
         system = "aarch64-darwin";
-        nixpkgs.hostPlatform = "aarch64-darwin";
+
 
         modules = [
-          ./hosts/holden
+          ./darwin
           inputs.home-manager.darwinModules.home-manager
           {
             home-manager.useUserPackages = true;
@@ -120,22 +120,6 @@
         ];
       };
 
-      #2019 Macbook Pro
-      darwinConfigurations."chrisjen" = inputs.darwin.lib.darwinSystem rec {
-        specialArgs = { inherit inputs system; };
-
-        system = "x86_64-darwin";
-
-        modules = [
-          ./darwin
-          inputs.home-manager.darwinModules.home-manager
-          {
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit inputs outputs; };
-            home-manager.users.alwin = import ./home/alwin/chrisjen.nix;
-          }
-        ];
-      };
 
       #Work Laptop
       homeConfigurations."work" = inputs.home-manager.lib.homeManagerConfiguration {

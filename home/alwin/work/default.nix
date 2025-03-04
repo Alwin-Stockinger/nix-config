@@ -16,7 +16,6 @@
     trivy
     nixgl.nixGLIntel
     mongosh
-
   ];
 
   home.homeDirectory = "/var/home/alwin";
@@ -40,8 +39,6 @@
         dev = "kubectx dev";
 
         b64 = "base64";
-
-        rec-git = "flux reconcile source git flux-system";
 
         pus = "pulumi up --suppress-outputs --stack";
         pcg = "pulumi config get --stack";
