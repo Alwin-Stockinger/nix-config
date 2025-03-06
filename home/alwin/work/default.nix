@@ -8,17 +8,33 @@
   nixpkgs = {
     overlays = [
       #      outputs.overlays.unstable-packages
-      inputs.nixgl.overlay
+      #inputs.nixgl.overlay
     ];
   };
 
-  home.packages = with pkgs; [
-    trivy
-    nixgl.nixGLIntel
-    mongosh
-  ];
+  home = {
+    packages = with pkgs; [
+      trivy
+      #nixgl.nixGLIntel
+      nodejs
+      nodePackages.cdk8s-cli
+      mongosh
+      fluxcd
+      kubernetes-helm
+      kaf
+      kubectx
+      (pkgs.python3.withPackages (ppkgs: [
+        ppkgs.requests
+        ppkgs.pytz
+      ]))
+      parallel
+      podman
+      docker
+    ];
 
-  home.homeDirectory = "/var/home/alwin";
+    homeDirectory = "/Users/alwin-stockinger";
+    username = lib.mkFore "alwin-stockinger";
+  };
 
   programs = {
     git = {
@@ -54,6 +70,8 @@
         WORK = "true";
       };
     };
+
+    awscli.enable = true;
 
     k9s = {
       enable = true;

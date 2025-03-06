@@ -37,6 +37,9 @@ let
     dig
     htop
     zoxide
+    wget
+    difftastic
+    diff-so-fancy
   ];
 in
 {
@@ -51,17 +54,14 @@ in
     home = {
       packages =
         min-packages
-        ++ (
-          if cfg.work
-          then [ ]
-          else standard-packages
-        );
+        ++ standard-packages;
     };
     programs = {
       git = {
         enable = true;
         userName = "Alwin";
         userEmail = "alwin@stockinger.tech";
+        ignores = [ "*.DS_Store" ];
         extraConfig = {
           rebase.autostash = true;
           pull = {
@@ -71,10 +71,11 @@ in
             autoSetupRemote = true;
           };
         };
+        diff-so-fancy.enable = true;
       };
 
       gh = {
-        enable = ! config.custom.work;
+        enable = true;
       };
     };
 
@@ -87,7 +88,7 @@ in
       #      ];
     };
 
-    home.username = "alwin";
+    home.username = "alwin-stockinger";
     home.stateVersion = "24.05";
 
     programs.zsh = {
@@ -116,7 +117,7 @@ in
     . <(flux completion zsh)
     source <(kubectl completion zsh)
     complete -C '/usr/bin/aws_completer' aws
-    source <(pulumi completion zsh)
+    #source <(pulumi completion zsh)
     source <(helm completion zsh)
     source <(kaf completion zsh)
   fi
@@ -140,6 +141,7 @@ in
         cat = "bat";
         cd = "z";
         ls = "eza";
+        diff = "difftastic";
 
         switch = "git switch";
         pull = "git pull";

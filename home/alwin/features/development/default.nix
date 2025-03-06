@@ -1,10 +1,9 @@
-{
-  config,
-  pkgs,
-  inputs,
-  outputs,
-  lib,
-  ...
+{ config
+, pkgs
+, inputs
+, outputs
+, lib
+, ...
 }: {
   imports = [
     ./nvim.nix
@@ -41,12 +40,10 @@
 
     catppuccin = {
       enable = true;
+      ghostty.enable = true;
     };
 
     programs = {
-      gh = {
-        enable = ! config.custom.work;
-      };
       zellij = {
         enable = true;
         enableZshIntegration = true;
@@ -63,6 +60,11 @@
         enable = true;
         enableZshIntegration = true;
       };
+      ghostty = {
+        # enable = true; currently marked as broken
+        enableZshIntegration = true;
+        installVimSyntax = true;
+      };
       kitty = {
         enable = true;
         themeFile = "Catppuccin-Mocha";
@@ -75,7 +77,7 @@
 
     programs.vscode = {
       enable = !config.custom.work;
-      userSettings = {
+      profiles.default.userSettings = {
         "window.titleBarStyle" = "custom";
         "window.zoomLevel" = 0.4;
         "workbench.colorTheme" = "Default Dark Modern";
@@ -100,7 +102,7 @@
         };
         "json.schemas" = [
           {
-            "fileMatch" = ["*.hujson"];
+            "fileMatch" = [ "*.hujson" ];
             "schema" = {
               "allowTrailingCommas" = true;
             };
@@ -124,7 +126,7 @@
         "window.restoreFullscreen" = true;
         "window.newWindowDimensions" = "maximized";
       };
-      extensions = with pkgs.vscode-marketplace; [
+      profiles.default.extensions = with pkgs.vscode-marketplace; [
         kamadorueda.alejandra
         ms-python.black-formatter
         fabiospampinato.vscode-diff

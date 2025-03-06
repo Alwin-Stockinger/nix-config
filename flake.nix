@@ -60,7 +60,7 @@
       inherit (self) outputs;
     in
     {
- #     overlays = import ./overlays { inherit inputs; };
+      #     overlays = import ./overlays { inherit inputs; };
 
       nix.settings = {
         substituters = [ "https://hyprland.cachix.org" ];
@@ -77,59 +77,77 @@
           ./nixos/alex
           inputs.home-manager.nixosModules.home-manager
           {
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit inputs outputs; };
-            home-manager.users.alwin = import ./home/alwin/alex.nix;
+            home-manager = {
+              useUserPackages = true;
+              extraSpecialArgs = { inherit inputs outputs; };
+              users.alwin = import ./home/alwin/alex.nix;
+            };
           }
         ];
       };
 
       #x86 Tower
-      nixosConfigurations."bobby" = inputs.nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
+      nixosConfigurations."bobby" =
+        inputs.nixpkgs.lib.nixosSystem
+          rec {
+            system = "x86_64-linux";
 
-        specialArgs = { inherit inputs system; };
+            specialArgs = { inherit inputs system; };
 
-        modules = [
-          inputs.sops-nix.nixosModules.sops
-          ./nixos/bobby
-          inputs.home-manager.nixosModules.home-manager
-          {
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit inputs outputs; };
-            home-manager.users.alwin = import ./home/alwin/bobby.nix;
-          }
-        ];
-      };
+            modules = [
+              inputs.sops-nix.nixosModules.sops
+              ./nixos/bobby
+              inputs.home-manager.nixosModules.home-manager
+              {
+                home-manager = {
+                  useUserPackages = true;
+                  extraSpecialArgs = { inherit inputs outputs; };
+                  users.alwin = import ./home/alwin/bobby.nix;
+                };
+              }
+            ];
+          };
 
       #M2 Macbook Pro
-      darwinConfigurations."holden" = inputs.darwin.lib.darwinSystem rec {
-        specialArgs = { inherit nixpkgs inputs system; };
+      darwinConfigurations."holden" =
+        inputs.darwin.lib.darwinSystem
+          rec {
+            specialArgs = { inherit nixpkgs inputs system; };
 
-        system = "aarch64-darwin";
+            system = "aarch64-darwin";
 
+            modules = [
+              ./darwin
+              inputs.home-manager.darwinModules.home-manager
+              {
+                home-manager = {
+                  useUserPackages = true;
+                  extraSpecialArgs = { inherit inputs outputs; };
+                  users.alwin = import ./home/alwin/holden.nix;
+                };
+              }
+            ];
+          };
 
-        modules = [
-          ./darwin
-          inputs.home-manager.darwinModules.home-manager
-          {
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit inputs outputs; };
-            home-manager.users.alwin = import ./home/alwin/holden.nix;
-          }
-        ];
-      };
+      #M4 Macbook Work
+      darwinConfigurations."Alwins-MacBook-Pro" =
+        inputs.darwin.lib.darwinSystem
+          rec {
+            specialArgs = { inherit nixpkgs inputs system; };
 
+            system = "aarch64-darwin";
 
-      #Work Laptop
-      homeConfigurations."work" = inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-
-        extraSpecialArgs = { inherit inputs outputs; };
-
-        modules = [
-          ./home/alwin/work
-        ];
-      };
+            modules = [
+              ./darwin/work.nix
+              inputs.home-manager.darwinModules.home-manager
+              {
+                home-manager = {
+                  useUserPackages = true;
+                  extraSpecialArgs = { inherit inputs outputs; };
+                  users.alwin-stockinger = import ./home/alwin/work/default.nix;
+                };
+              }
+            ];
+          };
     };
 }

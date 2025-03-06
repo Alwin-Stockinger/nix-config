@@ -20,6 +20,10 @@
         };
       };
 
+      clipboard.providers.wl-copy.enable = true;
+
+      globals.mapleader = " ";
+
       keymaps = [
         # Disable arrow keys
         {

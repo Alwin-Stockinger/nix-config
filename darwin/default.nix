@@ -9,9 +9,9 @@
   #  nixpkgs.hostPlatform = "aarch64-darwin";
 
   # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
+  nix.enable = true;
 
-  users.users.alwin.home = "/Users/alwin";
+  users.users.alwin-stockinger.home = "/Users/alwin";
 
   system = {
     # activationScripts.postUserActivation.text = ''
@@ -20,7 +20,14 @@
     #   /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
     # '';
 
-    defaults.dock.wvous-tr-corner = 2;
+    #defaults.CustomUserPreferences."com.apple.mouse.scaling" = -1;
+
+    defaults = {
+      dock.wvous-tr-corner = 2;
+      dock.autohide = true;
+
+      screencapture.target = "clipboard";
+    };
   };
 
   # Used for backwards compatibility, please read the changelog before changing.
@@ -42,9 +49,7 @@
     optimise.automatic = true;
   };
 
-  environment.systemPackages = [
-    pkgs.vim
-  ];
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   programs.zsh.enable = true;
 
@@ -54,6 +59,16 @@
     enable = true;
     casks = [
       "firefox"
+      "amethyst"
+      "signal"
+      "visual-studio-code"
+      "ghostty"
+      "kitty"
     ];
+    onActivation = {
+      autoUpdate = true;
+      cleanup = "zap";
+      upgrade = true;
+    };
   };
 }
