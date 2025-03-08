@@ -33,7 +33,7 @@
     ];
 
     homeDirectory = "/Users/alwin-stockinger";
-    username = lib.mkFore "alwin-stockinger";
+    username = lib.mkForce "alwin-stockinger";
   };
 
   programs = {

@@ -23,10 +23,37 @@
     #defaults.CustomUserPreferences."com.apple.mouse.scaling" = -1;
 
     defaults = {
-      dock.wvous-tr-corner = 2;
-      dock.autohide = true;
+      controlcenter = {
+        BatteryShowPercentage = true;
+      };
+
+      dock = {
+        wvous-tr-corner = 2;
+        autohide = true;
+        tilesize = 200;
+        static-only = true;
+      };
 
       screencapture.target = "clipboard";
+
+      finder = {
+        ShowStatusBar = true;
+        QuitMenuItem = true;
+        FXRemoveOldTrashItems = false;
+        FXPreferredViewStyle = "Nlsv";
+        AppleShowAllFiles = true;
+        AppleShowAllExtensions = true;
+      };
+
+      NSGlobalDomain = {
+        KeyRepeat = 1;
+      };
+    };
+
+    keyboard = {
+      enableKeyMapping = true;
+      remapCapsLockToEscape = true;
+      nonUS.remapTilde = true;
     };
   };
 
@@ -53,13 +80,17 @@
 
   programs.zsh.enable = true;
 
-  services.tailscale.enable = true;
+  services = {
+    tailscale.enable = true;
+    aerospace.enable = true;
+    #  spacebar.enable = true;
+    #   spacebar.package = pkgs.spacebar;
+  };
 
   homebrew = {
     enable = true;
     casks = [
       "firefox"
-      "amethyst"
       "signal"
       "visual-studio-code"
       "ghostty"
