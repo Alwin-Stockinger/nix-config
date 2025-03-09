@@ -121,6 +121,7 @@
               inputs.home-manager.darwinModules.home-manager
               {
                 home-manager = {
+                  backupFileExtension = "backup";
                   useUserPackages = true;
                   extraSpecialArgs = { inherit inputs outputs; };
                   users.alwin = import ./home/alwin/holden.nix;

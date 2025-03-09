@@ -88,7 +88,7 @@ in
       #      ];
     };
 
-    home.username = "alwin-stockinger";
+    home.username = "alwin";
     home.stateVersion = "24.05";
 
     programs.zsh = {
@@ -110,7 +110,7 @@ in
     source \"$(fzf-share)/key-bindings.zsh\"
     source \"$(fzf-share)/completion.zsh\"
   fi
-    alias ssh=\"kitten ssh\"
+    #alias ssh=\"kitten ssh\"
   if [[ $WORK == \"true\" ]]; then
     export PATH=\"\${KREW_ROOT:-$HOME/.krew}/bin:$PATH\"
     echo \"work detected\"

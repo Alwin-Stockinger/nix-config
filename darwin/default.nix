@@ -11,7 +11,7 @@
   # Auto upgrade nix package and the daemon service.
   nix.enable = true;
 
-  users.users.alwin-stockinger.home = "/Users/alwin";
+  users.users.alwin.home = "/Users/alwin";
 
   system = {
     # activationScripts.postUserActivation.text = ''
@@ -82,7 +82,30 @@
 
   services = {
     tailscale.enable = true;
-    aerospace.enable = true;
+    aerospace = {
+      enable = true;
+      settings = {
+        gaps = {
+          outer = {
+            left = 0;
+            bottom = 0;
+            top = 0;
+            right = 0;
+          };
+        };
+        mode.main.binding = {
+          alt-h = "focus left";
+          alt-j = "focus down";
+          alt-k = "focus up";
+          alt-l = "focus right";
+          alt-shift-h = "move left";
+          alt-shift-j = "move down";
+          alt-shift-k = "move up";
+          alt-shift-l = "move right";
+        };
+      };
+    };
+
     #  spacebar.enable = true;
     #   spacebar.package = pkgs.spacebar;
   };
