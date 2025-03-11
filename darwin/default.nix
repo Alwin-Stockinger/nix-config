@@ -47,6 +47,7 @@
 
       NSGlobalDomain = {
         KeyRepeat = 1;
+        _HIHideMenuBar = true;
       };
     };
 
@@ -136,6 +137,13 @@
           }
         ];
       };
+    };
+
+    sketchybar = {
+      enable = true;
+      extraPackages = [
+        pkgs.aerospace
+      ];
     };
 
     #  spacebar.enable = true;
