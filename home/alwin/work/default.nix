@@ -60,10 +60,11 @@
         pcg = "pulumi config get --stack";
         pcs = "pulumi config set --stack";
 
-        pr = "gh pr create -a @me -r samox73,SoMuchForSubtlety";
-        pr-sam = "gh pr create -a @me -r samox73";
-        pr-pasha = "gh pr create -a @me -r pmikh";
-        pr-jakob = "gh pr create -a @me -r SoMuchForSubtlety";
+        pr = "gh pr create -a @me --fill -r samox73,SoMuchForSubtlety";
+        pr-sam = "gh pr create -a @me --fill -r samox73";
+        pr-pasha = "gh pr create -a @me --fill -r pmikh";
+        pr-jakob = "gh pr create -a @me --fill -r SoMuchForSubtlety";
+        pr-wu = "gh pr create -a @me --fill -r TwoFingerProgrammer";
       };
 
       localVariables = {
