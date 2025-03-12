@@ -78,14 +78,15 @@
       views = {
         views = {
           "v1/pods" = {
+            sortColumn = "AGE:asc";
             columns = [
-              "NAME"
-              "STATUS"
-              "AGE"
               "NAMESPACE"
+              "NAME"
+              "AGE"
+              "STATUS"
               "NODE"
-              "CPU"
-              "MEM"
+              "'%CPU/R|'"
+              "'%MEM/R|'"
             ];
           };
         };
