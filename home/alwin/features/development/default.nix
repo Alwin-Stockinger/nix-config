@@ -36,6 +36,7 @@
       ripgrep # for neovim telescope
       eza
       cargo
+      go
     ];
 
     catppuccin = {
