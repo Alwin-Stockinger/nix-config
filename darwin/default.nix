@@ -149,6 +149,103 @@
       extraPackages = [
         pkgs.aerospace
       ];
+      config = ''
+        ############## BAR ##############
+            sketchybar -m --bar \
+              height=32 \
+              position=top \
+              padding_left=5 \
+              padding_right=5 \
+              color=0xff2e3440 \
+              shadow=off \
+              sticky=on \
+              topmost=off
+
+          ############## GLOBAL DEFAULTS ##############
+            sketchybar -m --default \
+              updates=when_shown \
+              drawing=on \
+              cache_scripts=on \
+              icon.font="JetBrainsMono Nerd Font Mono:Bold:18.0" \
+              icon.color=0xffffffff \
+              label.font="JetBrainsMono Nerd Font Mono:Bold:12.0" \
+              label.color=0xffeceff4 \
+              label.highlight_color=0xff8CABC8
+
+          ############## SPACE DEFAULTS ##############
+            sketchybar -m --default \
+              label.padding_left=5 \
+              label.padding_right=2 \
+              icon.padding_left=8 \
+              label.padding_right=8
+
+          ############## PRIMARY DISPLAY SPACES ##############
+            # APPLE ICON
+            sketchybar -m --add item apple left \
+              --set apple icon= \
+              --set apple label.padding_right=0 \
+
+            # SPACE 1: WEB ICON
+            sketchybar -m --add space web left \
+              --set web icon= \
+              --set web icon.highlight_color=0xff8CABC8 \
+              --set web associated_space=1 \
+              --set web icon.padding_left=5 \
+              --set web icon.padding_right=5 \
+              --set web label.padding_right=0 \
+              --set web label.padding_left=0 \
+              --set web label.color=0xffeceff4 \
+              --set web background.color=0xff57627A  \
+              --set web background.height=21 \
+              --set web background.padding_left=12 \
+              --set web click_script="open -a Firefox.app" \
+
+            # SPACE 2: CODE ICON
+            sketchybar -m --add space code left \
+              --set code icon= \
+              --set code associated_space=2 \
+              --set code icon.padding_left=5 \
+              --set code icon.padding_right=5 \
+              --set code label.padding_right=0 \
+              --set code label.padding_left=0 \
+              --set code label.color=0xffeceff4 \
+              --set code background.color=0xff57627A  \
+              --set code background.height=21 \
+              --set code background.padding_left=7 \
+              --set code click_script="$HOME/.nix-profile/bin/wezterm" \
+
+            # SPACE 3: MUSIC ICON
+            #sketchybar -m --add space music left \
+            #  --set music icon= \
+            #  --set music icon.highlight_color=0xff8CABC8 \
+            #  --set music associated_display=1 \
+            #  --set music associated_space=5 \
+            #  --set music icon.padding_left=5 \
+            #  --set music icon.padding_right=5 \
+            #  --set music label.padding_right=0 \
+            #  --set music label.padding_left=0 \
+            #  --set music label.color=0xffeceff4 \
+            #  --set music background.color=0xff57627A  \
+            #  --set music background.height=21 \
+            #  --set music background.padding_left=7 \
+            #  --set music click_script="open -a Spotify.app" \
+
+          ############## ITEM DEFAULTS ###############
+            sketchybar -m --default \
+              label.padding_left=2 \
+              icon.padding_right=2 \
+              icon.padding_left=6 \
+              label.padding_right=6
+
+
+          ###################### CENTER ITEMS ###################
+
+
+          ############## FINALIZING THE SETUP ##############
+          sketchybar -m --update
+
+          echo "sketchybar configuration loaded.."
+      '';
     };
   };
 

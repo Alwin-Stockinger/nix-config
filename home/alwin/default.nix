@@ -112,15 +112,15 @@ in
   fi
     #alias ssh=\"kitten ssh\"
   if [[ $WORK == \"true\" ]]; then
-    export PATH=\"\${KREW_ROOT:-$HOME/.krew}/bin:$PATH\"
     echo \"work detected\"
+    export PATH=\"\${KREW_ROOT:-$HOME/.krew}/bin:$PATH\"
     source <(kubectl completion zsh)
     complete -C '/usr/bin/aws_completer' aws
     #source <(pulumi completion zsh)
     source <(helm completion zsh)
     source <(kaf completion zsh)
+    eval \"$(/opt/homebrew/bin/brew shellenv)\"
   fi
-  eval \"$(/opt/homebrew/bin/brew shellenv)\"
       ";
 
       oh-my-zsh = {

@@ -23,6 +23,8 @@
       kubernetes-helm
       kaf
       kubectx
+      krew
+      kubectl-cnpg
       (pkgs.python3.withPackages (ppkgs: [
         ppkgs.requests
         ppkgs.pytz
@@ -30,6 +32,11 @@
       parallel
       podman
       docker
+      bitwarden-cli
+      diceware
+      postgresql
+      dyff
+      hwatch
     ];
 
     homeDirectory = "/Users/alwin-stockinger";

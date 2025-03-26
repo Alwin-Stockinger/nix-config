@@ -44,6 +44,10 @@
       ghostty.enable = true;
     };
 
+    home = {
+      shell.enableNushellIntegration = true;
+    };
+
     programs = {
       zellij = {
         enable = true;
@@ -62,9 +66,12 @@
         enableZshIntegration = true;
       };
       ghostty = {
-        # enable = true; currently marked as broken
+        enable = true;
+        package = null; #currently marked as broken
         enableZshIntegration = true;
-        installVimSyntax = true;
+        settings = {
+          theme = "catppuccin-mocha";
+        };
       };
       kitty = {
         enable = true;
@@ -74,6 +81,23 @@
         };
       };
       yazi.enable = true;
+
+      nushell.enable = true;
+
+      starship = {
+        enable = true;
+        settings = {
+          format = "$directory\\([$kubernetes](red)\\): ";
+          kubernetes = {
+            disabled = false;
+            format = "$context";
+          };
+        };
+      };
+
+      carapace = {
+        enable = true;
+      };
     };
 
     programs.vscode = {

@@ -26,6 +26,7 @@
       "slack"
       "microsoft-teams"
       "microsoft-outlook"
+      "gitify"
     ];
   };
 }

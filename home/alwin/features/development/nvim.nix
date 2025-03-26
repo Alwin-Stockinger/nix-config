@@ -414,7 +414,7 @@
               statix.enable = true;
               codespell.enable = true;
               staticcheck.enable = true;
-              sqlfluff.enable = true;
+              #sqruff.enable = true;
               zsh.enable = true;
               markdownlint = {
                 enable = true;
@@ -438,7 +438,7 @@
               alejandra.enable = true;
               #gofmt.enable = true;
               goimports.enable = true;
-              pg_format.enable = true;
+              #pg_format.enable = true;
             };
           };
         };
