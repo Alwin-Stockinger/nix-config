@@ -27,6 +27,7 @@
       "microsoft-teams"
       "microsoft-outlook"
       "gitify"
+      "1password"
     ];
   };
 }

@@ -37,6 +37,8 @@
       postgresql
       dyff
       hwatch
+      rainfrog
+      kubeconform
     ];
 
     homeDirectory = "/Users/alwin-stockinger";
