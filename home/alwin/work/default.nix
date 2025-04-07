@@ -36,7 +36,6 @@
       kubelogin
       nufmt # this is broken af
       gum
-      nodePackages.prettier
     ];
 
     homeDirectory = "/Users/alwin-stockinger";
@@ -99,23 +98,49 @@
 
     helix = {
       enable = true;
-      languages.language = [
-        {
-          name = "prettier";
-          file-types = [ "ts" "yaml" ];
-          formatter.command = "${pkgs.nodePackages.prettier}/bin/prettier";
-          auto-format = true;
-          scope = "source.ts";
-        }
-        {
-          name = "nix";
-          auto-format = true;
-          formatter.command = "${pkgs.nixfmt}/bin/nixfmt";
-          scope = "source.nix";
-        }
-
-      ];
-
+      languages = {
+        language-server = {
+          typescript-language-server = with pkgs.nodePackages; {
+            command =
+              "${typescript-language-server}/bin/typescript-language-server";
+            args = [
+              "--stdio"
+              "--tsserver-path=${typescript}/lib/node_modules/typescript/lib"
+            ];
+          };
+          efm-lsp-prettier = with pkgs; {
+            command = "${efm-langserver}/bin/efm-langserver";
+            config = {
+              documentFormatting = true;
+              languages = {
+                typescript = [{
+                  formatCommand =
+                    "${nodePackages.prettier}/bin/prettier --stdin-filepath \${INPUT}";
+                  formatStdin = true;
+                }];
+              };
+            };
+          };
+        };
+        language = [
+          {
+            name = "typescript";
+            auto-format = true;
+            language-servers = [
+              {
+                name = "typescript-language-server";
+                except-features = [ "format" ];
+              }
+              { name = "efm-lsp-prettier"; }
+            ];
+          }
+          {
+            name = "nix";
+            formatter.command = "${pkgs.nixfmt}/bin/nixfmt";
+            scope = "source.nix";
+          }
+        ];
+      };
     };
   };
 
