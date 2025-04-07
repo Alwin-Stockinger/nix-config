@@ -156,7 +156,7 @@ in
 
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
-    inputs.catppuccin.homeManagerModules.catppuccin
+    inputs.catppuccin.homeModules.catppuccin
     ./features/desktop.nix
     ./features/development
     ./features/gpg

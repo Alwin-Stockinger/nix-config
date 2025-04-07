@@ -1,10 +1,4 @@
-{ config
-, pkgs
-, inputs
-, lib
-, outputs
-, ...
-}: {
+{ config, pkgs, inputs, lib, outputs, ... }: {
   nixpkgs = {
     overlays = [
       #      outputs.overlays.unstable-packages
@@ -18,6 +12,7 @@
       #nixgl.nixGLIntel
       nodejs
       nodePackages.cdk8s-cli
+      #nodePackages.cryptgeon
       mongosh
       fluxcd
       kubernetes-helm
@@ -25,20 +20,23 @@
       kubectx
       krew
       kubectl-cnpg
-      (pkgs.python3.withPackages (ppkgs: [
-        ppkgs.requests
-        ppkgs.pytz
-      ]))
+      (pkgs.python3.withPackages (ppkgs: [ ppkgs.requests ppkgs.pytz ]))
       parallel
       podman
       docker
-      bitwarden-cli
+      #bitwarden-cli
+      _1password-cli
       diceware
       postgresql
       dyff
       hwatch
       rainfrog
       kubeconform
+      azure-cli
+      kubelogin
+      nufmt # this is broken af
+      gum
+      nodePackages.prettier
     ];
 
     homeDirectory = "/Users/alwin-stockinger";
@@ -46,9 +44,7 @@
   };
 
   programs = {
-    git = {
-      userEmail = lib.mkForce "alwin.stockinger@powerbot-trading.com";
-    };
+    git = { userEmail = lib.mkForce "alwin.stockinger@powerbot-trading.com"; };
     zsh = {
       oh-my-zsh.custom = lib.mkForce "$HOME/nix-config/home/alwin/work/zsh";
       oh-my-zsh.theme = lib.mkForce "work";
@@ -76,9 +72,7 @@
         pr-wu = "gh pr create -a @me --fill -r TwoFingerProgrammer";
       };
 
-      localVariables = {
-        WORK = "true";
-      };
+      localVariables = { WORK = "true"; };
     };
 
     awscli.enable = true;
@@ -102,11 +96,30 @@
         };
       };
     };
+
+    helix = {
+      enable = true;
+      languages.language = [
+        {
+          name = "prettier";
+          file-types = [ "ts" "yaml" ];
+          formatter.command = "${pkgs.nodePackages.prettier}/bin/prettier";
+          auto-format = true;
+          scope = "source.ts";
+        }
+        {
+          name = "nix";
+          auto-format = true;
+          formatter.command = "${pkgs.nixfmt}/bin/nixfmt";
+          scope = "source.nix";
+        }
+
+      ];
+
+    };
   };
 
-  imports = [
-    ../default.nix
-  ];
+  imports = [ ../default.nix ];
 
   desktop.enable = false;
   custom.work = true;

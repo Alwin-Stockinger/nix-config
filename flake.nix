@@ -47,6 +47,10 @@
     nixgl.url = "github:nix-community/nixGL";
 
     hyprlock.url = "github:hyprwm/hyprlock";
+
+    mac-app-util.url = "github:hraban/mac-app-util";
+
+    helix.url = "github:helix-editor/helix";
   };
 
   outputs =
@@ -54,6 +58,7 @@
     , nixpkgs
     , home-manager
     , nixgl
+    , mac-app-util
     , ...
     } @ inputs:
     let
@@ -139,6 +144,7 @@
             system = "aarch64-darwin";
 
             modules = [
+              mac-app-util.darwinModules.default
               ./darwin/work.nix
               inputs.home-manager.darwinModules.home-manager
               {
@@ -146,6 +152,9 @@
                   useUserPackages = true;
                   extraSpecialArgs = { inherit inputs outputs; };
                   users.alwin-stockinger = import ./home/alwin/work/default.nix;
+                  sharedModules = [
+                    mac-app-util.homeManagerModules.default
+                  ];
                 };
               }
             ];
