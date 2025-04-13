@@ -105,7 +105,6 @@
       profiles.default.userSettings = {
         "window.titleBarStyle" = "custom";
         "window.zoomLevel" = 0.4;
-        "workbench.colorTheme" = "Default Dark Modern";
         "editor.minimap.enabled" = false;
         "editor.formatOnSave" = true;
         "editor.defaultFormatter" = "esbenp.prettier-vscode";
