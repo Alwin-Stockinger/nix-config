@@ -36,6 +36,8 @@
       kubelogin
       nufmt # this is broken af
       gum
+      maven
+      talosctl
     ];
 
     homeDirectory = "/Users/alwin-stockinger";
@@ -98,15 +100,19 @@
 
     helix = {
       enable = true;
+      defaultEditor = true;
+      package = inputs.helix.packages.aarch64-darwin.default;
+      extraPackages = with pkgs; [
+        typescript
+        gopls
+        rust-analyzer
+        typescript-language-server
+      ];
       languages = {
         language-server = {
-          typescript-language-server = with pkgs.nodePackages; {
-            command =
-              "${typescript-language-server}/bin/typescript-language-server";
-            args = [
-              "--stdio"
-              "--tsserver-path=${typescript}/lib/node_modules/typescript/lib"
-            ];
+          typescript-language-server.config.tsserver = {
+            path =
+              "${pkgs.typescript}/lib/node_modules/typescript/lib/tsserver.js";
           };
           efm-lsp-prettier = with pkgs; {
             command = "${efm-langserver}/bin/efm-langserver";
@@ -135,7 +141,13 @@
             ];
           }
           {
+            name = "yaml";
+            auto-format = true;
+            language-servers = [{ name = "efm-lsp-prettier"; }];
+          }
+          {
             name = "nix";
+            auto-format = true;
             formatter.command = "${pkgs.nixfmt}/bin/nixfmt";
             scope = "source.nix";
           }

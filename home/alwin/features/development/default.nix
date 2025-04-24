@@ -69,8 +69,11 @@
         enable = true;
         package = null; #currently marked as broken
         enableZshIntegration = true;
+        clearDefaultKeybinds = true;
         settings = {
-          theme = "catppuccin-mocha";
+          theme = "Catppuccin-Mocha";
+          macos-option-as-alt = "left";
+          paste_from_clipbaord = true;
         };
       };
       kitty = {
@@ -78,6 +81,7 @@
         themeFile = "Catppuccin-Mocha";
         settings = {
           enable_audio_bell = false;
+          macos_option_as_alt = "left";
         };
       };
       yazi.enable = true;

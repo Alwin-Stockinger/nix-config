@@ -124,6 +124,7 @@
           cmd-shift-9 = [ "move-node-to-workspace 9" "workspace 9" ];
 
           cmd-comma = "layout accordion horizontal vertical";
+          cmd-period = "layout tiles horizontal vertical";
 
           cmd-minus = "resize smart -50";
           cmd-equal = "resize smart +50";

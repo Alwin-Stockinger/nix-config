@@ -12,7 +12,7 @@
 
     programs.nixvim = {
       enable = true;
-      defaultEditor = true;
+      defaultEditor = false;
 
       filetype = {
         extension = {
