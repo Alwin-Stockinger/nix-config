@@ -21,7 +21,7 @@
     LC_TIME = "de_AT.UTF-8";
   };
 
-  #  console.keyMap = "de";
+    console.keyMap = "de";
 
   users.users = {
     alwin = {
