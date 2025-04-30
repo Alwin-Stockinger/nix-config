@@ -49,9 +49,18 @@
     helix.url = "github:helix-editor/helix";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixgl, mac-app-util, ... }@inputs:
-    let inherit (self) outputs;
-    in {
+  outputs =
+    { self
+    , nixpkgs
+    , home-manager
+    , nixgl
+    , mac-app-util
+    , ...
+    } @ inputs:
+    let
+      inherit (self) outputs;
+    in
+    {
       #     overlays = import ./overlays { inherit inputs; };
 
       nix.settings = {
@@ -93,7 +102,7 @@
           {
             home-manager = {
               useUserPackages = true;
-              extraSpecialArgs = { inherit inputs outputs; };
+              extraSpecialArgs = { inherit inputs outputs system; };
               users.alwin = import ./home/alwin/bobby.nix;
             };
           }
@@ -121,25 +130,24 @@
       };
 
       #M4 Macbook Work
-      darwinConfigurations."Alwins-MacBook-Pro" =
-        inputs.darwin.lib.darwinSystem rec {
-          specialArgs = { inherit nixpkgs inputs system; };
+      darwinConfigurations."Alwins-MacBook-Pro" = inputs.darwin.lib.darwinSystem rec {
+        specialArgs = { inherit nixpkgs inputs system; };
 
-          system = "aarch64-darwin";
+        system = "aarch64-darwin";
 
-          modules = [
-            mac-app-util.darwinModules.default
-            ./darwin/work.nix
-            inputs.home-manager.darwinModules.home-manager
-            {
-              home-manager = {
-                useUserPackages = true;
-                extraSpecialArgs = { inherit inputs outputs; };
-                users.alwin-stockinger = import ./home/alwin/work/default.nix;
-                sharedModules = [ mac-app-util.homeManagerModules.default ];
-              };
-            }
-          ];
-        };
+        modules = [
+          mac-app-util.darwinModules.default
+          ./darwin/work.nix
+          inputs.home-manager.darwinModules.home-manager
+          {
+            home-manager = {
+              useUserPackages = true;
+              extraSpecialArgs = { inherit inputs outputs; };
+              users.alwin-stockinger = import ./home/alwin/work/default.nix;
+              sharedModules = [ mac-app-util.homeManagerModules.default ];
+            };
+          }
+        ];
+      };
     };
 }

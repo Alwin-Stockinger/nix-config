@@ -3,10 +3,12 @@
 , inputs
 , outputs
 , lib
+, system
 , ...
 }: {
   imports = [
     ./nvim.nix
+    ./helix.nix
   ];
 
   options.development = {
