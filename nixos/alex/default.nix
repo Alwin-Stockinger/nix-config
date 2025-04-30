@@ -1,9 +1,4 @@
-{ config
-, pkgs
-, lib
-, inputs
-, ...
-}: {
+{ config, pkgs, lib, inputs, ... }: {
   imports = [
     inputs.sops-nix.nixosModules.sops
     ../common/default.nix
@@ -15,9 +10,7 @@
   sops = {
     age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
     secrets = {
-      wireless = {
-        sopsFile = ../../secrets.yaml;
-      };
+      wireless = { sopsFile = ../../secrets.yaml; };
       password = {
         sopsFile = ../../secrets.yaml;
         neededForUsers = true;
@@ -63,17 +56,13 @@
     #      networks."TCL-25KR".psk = "@TCL25KR@";
     #      interfaces = ["wlan0"];
     #   };
-    interfaces.end0.ipv4.addresses = [
-      {
-        address = "192.168.1.30";
-        prefixLength = 24;
-      }
-    ];
+    interfaces.end0.ipv4.addresses = [{
+      address = "192.168.1.30";
+      prefixLength = 24;
+    }];
     defaultGateway = "192.168.1.1";
     nameservers = [ "192.168.1.1" ];
-    firewall = {
-      allowedTCPPorts = [ 80 443 ];
-    };
+    firewall = { allowedTCPPorts = [ 80 443 ]; };
   };
 
   security.acme = {
@@ -153,17 +142,10 @@
 
     home-assistant = {
       enable = true;
-      extraComponents = [
-        "esphome"
-        "met"
-        "radio_browser"
-        "denonavr"
-        "hue"
-        "workday"
-      ];
-      customComponents = with pkgs.home-assistant-custom-components; [
-        epex_spot
-      ];
+      extraComponents =
+        [ "esphome" "met" "radio_browser" "denonavr" "hue" "workday" ];
+      customComponents = with pkgs.home-assistant-custom-components;
+        [ epex_spot ];
       configDir = "/data/hass-config";
       config = {
         default_config = { };
@@ -177,9 +159,7 @@
       };
     };
 
-    postgresql = {
-      dataDir = "/data/postgresql";
-    };
+    postgresql = { dataDir = "/data/postgresql"; };
 
     immich = {
       enable = true;
@@ -189,26 +169,31 @@
       port = 2283;
     };
 
-	tt-rss = {
-  enable = true;
-  # to configure a nginx virtual host directly:
-  selfUrlPath = "https://rss.stockinger.tech";
-  virtualHost = "rss.stockinger.tech";
-	registration.enable = true;
-};
+    tt-rss = {
+      enable = true;
+      # to configure a nginx virtual host directly:
+      selfUrlPath = "https://rss.stockinger.tech";
+      virtualHost = "rss.stockinger.tech";
+      registration.enable = true;
+    };
   };
 
-  environment.systemPackages = [
-    pkgs.jellyfin-web
-    pkgs.jellyfin-ffmpeg
-  ];
+  nixarr = {
+    enable = true;
+    mediaDir = "/data/media";
+    stateDir = "/data/media/.state/nixarr";
+
+    sonarr = { enable = true; };
+    prowlarr = { enable = true; };
+    sabnzbd = { enable = true; };
+  };
+
+  environment.systemPackages = [ pkgs.jellyfin-web pkgs.jellyfin-ffmpeg ];
 
   virtualisation.oci-containers.containers.actual = {
-    image = " ghcr.io/actualbudget/actual-server:24.8.0-alpine";
+    image = " ghcr.io/actualbudget/actual-server:25.4.0-alpine";
     ports = [ "0.0.0.0:5006:5006" ];
-    volumes = [
-      "/data/actual/data:/data"
-    ];
+    volumes = [ "/data/actual/data:/data" ];
   };
 
   # virtualisation = {

@@ -1,11 +1,4 @@
-{ inputs
-, outputs
-, lib
-, config
-, pkgs
-, system
-, ...
-}: {
+{ inputs, outputs, lib, config, pkgs, system, ... }: {
   time.timeZone = "Europe/Vienna";
 
   i18n.defaultLocale = "en_US.UTF-8";
@@ -21,7 +14,7 @@
     LC_TIME = "de_AT.UTF-8";
   };
 
-    console.keyMap = "de";
+  console.keyMap = "de";
 
   users.users = {
     alwin = {
@@ -52,7 +45,10 @@
 
   programs.zsh.enable = true;
 
-  services.tailscale.enable = true;
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "client";
+  };
 
   pipewire.enable = lib.mkDefault false;
   desktop.enable = lib.mkDefault false;
