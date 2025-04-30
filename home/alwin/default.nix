@@ -1,33 +1,9 @@
-{ config
-, pkgs
-, inputs
-, outputs
-, lib
-, ...
-}:
+{ config, pkgs, inputs, outputs, lib, ... }:
 let
   cfg = config.custom;
-  zsh-theme = builtins.toFile "work.zsh-theme" "
-        PROMPT=\"%{$fg_bold[cyan]%}%c%{$reset_color%}\"
-        PROMPT+=' $(kube_ps1) '
-        #PROMPT+=' $(git_prompt_info)'
-
-
-        ZSH_THEME_GIT_PROMPT_PREFIX=\"%{$fg_bold[blue]%}git:(%{$fg[red]%}\"
-        ZSH_THEME_GIT_PROMPT_SUFFIX=\"%{$reset_color%} \"
-        ZSH_THEME_GIT_PROMPT_DIRTY=\"%{$fg[blue]%}) %{$fg[yellow]%}%1{✗%}\"
-        ZSH_THEME_GIT_PROMPT_CLEAN=\"%{$fg[blue]%})\"
-        KUBE_PS1_PREFIX=\"(\"
-        KUBE_PS1_SUFFIX=\")\"
-        KUBE_PS1_SYMBOL_DEFAULT=\"\"
-        KUBE_PS1_CTX_COLOR=\"red\"
-        KUBE_PS1_NS_COLOR=\"red\"
-        KUBE_PS1_BG_COLOR=\"\"
-        KUBE_PS1_DIVIDER=''
-        KUBE_PS1_SEPARATOR=''
-        KUBE_PS1_NS_ENABLE=false";
-  min-packages = with pkgs; [
-  ];
+  zsh-theme = builtins.toFile "work.zsh-theme"
+    "\n        PROMPT=\"%{$fg_bold[cyan]%}%c%{$reset_color%}\"\n        PROMPT+=' $(kube_ps1) '\n        #PROMPT+=' $(git_prompt_info)'\n\n\n        ZSH_THEME_GIT_PROMPT_PREFIX=\"%{$fg_bold[blue]%}git:(%{$fg[red]%}\"\n        ZSH_THEME_GIT_PROMPT_SUFFIX=\"%{$reset_color%} \"\n        ZSH_THEME_GIT_PROMPT_DIRTY=\"%{$fg[blue]%}) %{$fg[yellow]%}%1{✗%}\"\n        ZSH_THEME_GIT_PROMPT_CLEAN=\"%{$fg[blue]%})\"\n        KUBE_PS1_PREFIX=\"(\"\n        KUBE_PS1_SUFFIX=\")\"\n        KUBE_PS1_SYMBOL_DEFAULT=\"\"\n        KUBE_PS1_CTX_COLOR=\"red\"\n        KUBE_PS1_NS_COLOR=\"red\"\n        KUBE_PS1_BG_COLOR=\"\"\n        KUBE_PS1_DIVIDER=''\n        KUBE_PS1_SEPARATOR=''\n        KUBE_PS1_NS_ENABLE=false";
+  min-packages = with pkgs; [ ];
   standard-packages = with pkgs; [
     neofetch
     tldr
@@ -40,9 +16,9 @@ let
     wget
     difftastic
     diff-so-fancy
+    eza
   ];
-in
-{
+in {
   options = {
     custom.work = lib.mkOption {
       type = lib.types.bool;
@@ -51,11 +27,7 @@ in
   };
 
   config = {
-    home = {
-      packages =
-        min-packages
-        ++ standard-packages;
-    };
+    home = { packages = min-packages ++ standard-packages; };
     programs = {
       git = {
         enable = true;
@@ -64,25 +36,17 @@ in
         ignores = [ "*.DS_Store" ];
         extraConfig = {
           rebase.autostash = true;
-          pull = {
-            rebase = true;
-          };
-          push = {
-            autoSetupRemote = true;
-          };
+          pull = { rebase = true; };
+          push = { autoSetupRemote = true; };
         };
         diff-so-fancy.enable = true;
       };
 
-      gh = {
-        enable = true;
-      };
+      gh = { enable = true; };
     };
 
     nixpkgs = {
-      config = {
-        allowUnfree = true;
-      };
+      config = { allowUnfree = true; };
       #      overlays = [
       #        outputs.overlays.unstable-packages
       #      ];
@@ -97,42 +61,13 @@ in
       autocd = true;
       autosuggestion.enable = true;
 
-      initExtra = "
-  path+=('/run/current-system/sw/bin/')
-  path+=('/Applications/Visual Studio Code.app/Contents/Resources/app/bin')
-  path+=('/etc/profiles/per-user/alwin/bin')
-  path+=('/var/home/alwin/.cargo/bin')
-  path+=('/var/home/alwin/go/bin')
-  path+=('/var/home/alwin/.local/bin')
-
-  eval \"$(zoxide init zsh)\"
-  if [ -n \"\${commands[fzf-share]}\" ]; then
-    source \"$(fzf-share)/key-bindings.zsh\"
-    source \"$(fzf-share)/completion.zsh\"
-  fi
-    #alias ssh=\"kitten ssh\"
-  if [[ $WORK == \"true\" ]]; then
-    echo \"work detected\"
-    export PATH=\"\${KREW_ROOT:-$HOME/.krew}/bin:$PATH\"
-    source <(kubectl completion zsh)
-    complete -C '/usr/bin/aws_completer' aws
-    #source <(pulumi completion zsh)
-    source <(helm completion zsh)
-    source <(kaf completion zsh)
-    eval \"$(/opt/homebrew/bin/brew shellenv)\"
-  fi
-      ";
+      initExtra =
+        "\n  path+=('/run/current-system/sw/bin/')\n  path+=('/Applications/Visual Studio Code.app/Contents/Resources/app/bin')\n  path+=('/etc/profiles/per-user/alwin/bin')\n  path+=('/var/home/alwin/.cargo/bin')\n  path+=('/var/home/alwin/go/bin')\n  path+=('/var/home/alwin/.local/bin')\n\n  eval \"$(zoxide init zsh)\"\n  if [ -n \"\${commands[fzf-share]}\" ]; then\n    source \"$(fzf-share)/key-bindings.zsh\"\n    source \"$(fzf-share)/completion.zsh\"\n  fi\n    #alias ssh=\"kitten ssh\"\n  if [[ $WORK == \"true\" ]]; then\n    echo \"work detected\"\n    export PATH=\"\${KREW_ROOT:-$HOME/.krew}/bin:$PATH\"\n    source <(kubectl completion zsh)\n    complete -C '/usr/bin/aws_completer' aws\n    #source <(pulumi completion zsh)\n    source <(helm completion zsh)\n    source <(kaf completion zsh)\n    eval \"$(/opt/homebrew/bin/brew shellenv)\"\n  fi\n      ";
 
       oh-my-zsh = {
         enable = true;
-        plugins = [
-          "git"
-          "kube-ps1"
-        ];
-        theme =
-          if cfg.work
-          then "work"
-          else "aussiegeek";
+        plugins = [ "git" "kube-ps1" ];
+        theme = if cfg.work then "work" else "aussiegeek";
         custom = zsh-theme;
       };
 
