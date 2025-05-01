@@ -132,16 +132,19 @@
           acmeRoot = null;
           enableACME = true;
           addSSL = true;
+          locations."/".proxyPass = "http://127.0.0.1:8080/";
         };
         "sonarr.stockinger.tech" = {
           acmeRoot = null;
           enableACME = true;
           addSSL = true;
+          locations."/".proxyPass = "http://127.0.0.1:8989/";
         };
         "prowlarr.stockinger.tech" = {
           acmeRoot = null;
           enableACME = true;
           addSSL = true;
+          locations."/".proxyPass = "http://127.0.0.1:9696/";
         };
       };
     };
