@@ -7,6 +7,8 @@
   #  disabledModules = [ "services/misc/jellyfin.nix" ];
   virt.enable = true;
 
+  nix.settings.trusted-users = [ "sudo" "alwin" ];
+
   sops = {
     age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
     secrets = {
@@ -126,6 +128,21 @@
           enableACME = true;
           addSSL = true;
         };
+        "sabnzbd.stockinger.tech" = {
+          acmeRoot = null;
+          enableACME = true;
+          addSSL = true;
+        };
+        "sonarr.stockinger.tech" = {
+          acmeRoot = null;
+          enableACME = true;
+          addSSL = true;
+        };
+        "prowlarr.stockinger.tech" = {
+          acmeRoot = null;
+          enableACME = true;
+          addSSL = true;
+        };
       };
     };
 
@@ -183,9 +200,18 @@
     mediaDir = "/data/media";
     stateDir = "/data/nixarr/.state/nixarr";
 
-    sonarr = { enable = true; openFirewall= true; };
-    prowlarr = { enable = true; openFirewall = true;};
-    sabnzbd = { enable = true; openFirewall = true; };
+    sonarr = {
+      enable = true;
+      openFirewall = true;
+    };
+    prowlarr = {
+      enable = true;
+      openFirewall = true;
+    };
+    sabnzbd = {
+      enable = true;
+      openFirewall = true;
+    };
   };
 
   environment.systemPackages = [ pkgs.jellyfin-web pkgs.jellyfin-ffmpeg ];

@@ -1,26 +1,12 @@
-{ config
-, pkgs
-, inputs
-, outputs
-, lib
-, system
-, ...
-}: {
-  imports = [
-    ./nvim.nix
-    ./helix.nix
-  ];
+{ config, pkgs, inputs, outputs, lib, system, ... }: {
+  imports = [ ./nvim.nix ./helix.nix ];
 
   options.development = {
     enable = lib.mkEnableOption "enables development stuff";
   };
 
   config = lib.mkIf config.development.enable {
-    nixpkgs = {
-      overlays = [
-        inputs.nix-vscode-extensions.overlays.default
-      ];
-    };
+    nixpkgs = { overlays = [ inputs.nix-vscode-extensions.overlays.default ]; };
 
     home.packages = with pkgs; [
       kubectl
@@ -36,7 +22,6 @@
       taskwarrior3
       jc
       ripgrep # for neovim telescope
-      eza
       cargo
       go
     ];
@@ -46,9 +31,7 @@
       ghostty.enable = true;
     };
 
-    home = {
-      shell.enableNushellIntegration = true;
-    };
+    home = { shell.enableNushellIntegration = true; };
 
     programs = {
       zellij = {
@@ -69,7 +52,7 @@
       };
       ghostty = {
         enable = true;
-        package = null; #currently marked as broken
+        package = null; # currently marked as broken
         enableZshIntegration = true;
         clearDefaultKeybinds = true;
         settings = {
@@ -101,9 +84,7 @@
         };
       };
 
-      carapace = {
-        enable = true;
-      };
+      carapace = { enable = true; };
     };
 
     programs.vscode = {
@@ -127,24 +108,16 @@
 
         "vs-kubernetes"."vs-kubernetes.crd-code-completion" = "enabled";
         "files.exclude"."**/.git" = false;
-        "files.associations" = {
-          "*.hujson" = "jsonc";
-        };
-        "json.schemas" = [
-          {
-            "fileMatch" = [ "*.hujson" ];
-            "schema" = {
-              "allowTrailingCommas" = true;
-            };
-          }
-        ];
+        "files.associations" = { "*.hujson" = "jsonc"; };
+        "json.schemas" = [{
+          "fileMatch" = [ "*.hujson" ];
+          "schema" = { "allowTrailingCommas" = true; };
+        }];
         "nix.enableLanguageServer" = true; # Enable LSP.
         "nix.serverPath" = "nil"; # The path to the LSP server executable.
 
         "go.lintTool" = "golangci-lint";
-        "go.lintFlags" = [
-          "--fast"
-        ];
+        "go.lintFlags" = [ "--fast" ];
 
         "[yaml]"."editor.defaultFormatter" = "redhat.vscode-yaml";
         "workbench.tree.indent" = 12;

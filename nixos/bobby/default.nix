@@ -24,6 +24,7 @@
 
   # for blue ray
   boot.kernelModules = [ "sg" ];
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   #valheim server
   #qvirtualisation.oci-containers.containers.valheim = {
