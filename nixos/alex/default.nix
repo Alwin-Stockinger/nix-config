@@ -214,6 +214,7 @@
     sabnzbd = {
       enable = true;
       openFirewall = true;
+      whitelistHostnames = [ "alex" "sabnzbd.stockinger.tech" ];
     };
   };
 
