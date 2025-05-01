@@ -181,11 +181,11 @@
   nixarr = {
     enable = true;
     mediaDir = "/data/media";
-    stateDir = "/data/media/.state/nixarr";
+    stateDir = "/data/nixarr/.state/nixarr";
 
-    sonarr = { enable = true; };
-    prowlarr = { enable = true; };
-    sabnzbd = { enable = true; };
+    sonarr = { enable = true; openFirewall= true; };
+    prowlarr = { enable = true; openFirewall = true;};
+    sabnzbd = { enable = true; openFirewall = true; };
   };
 
   environment.systemPackages = [ pkgs.jellyfin-web pkgs.jellyfin-ffmpeg ];
