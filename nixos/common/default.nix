@@ -60,5 +60,6 @@
     ./features/desktop.nix
     ./features/containers.nix
     ./features/gaming.nix
+    ./services
   ];
 }

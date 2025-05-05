@@ -1,12 +1,10 @@
 { config, pkgs, lib, inputs, ... }: {
-  imports = [
-    inputs.sops-nix.nixosModules.sops
-    ../common/default.nix
-    #"${inputs.nixpkgs-unstable}/nixos/modules/services/misc/jellyfin.nix"
-  ];
-  #  disabledModules = [ "services/misc/jellyfin.nix" ];
-  virt.enable = true;
+  imports = [ inputs.sops-nix.nixosModules.sops ../common ];
 
+  virt.enable = true;
+  custom.arr.enable = true;
+
+  # For remote deployment
   nix.settings.trusted-users = [ "sudo" "alwin" ];
 
   sops = {
@@ -128,24 +126,6 @@
           enableACME = true;
           addSSL = true;
         };
-        "sabnzbd.stockinger.tech" = {
-          acmeRoot = null;
-          enableACME = true;
-          addSSL = true;
-          locations."/".proxyPass = "http://127.0.0.1:8080/";
-        };
-        "sonarr.stockinger.tech" = {
-          acmeRoot = null;
-          enableACME = true;
-          addSSL = true;
-          locations."/".proxyPass = "http://127.0.0.1:8989/";
-        };
-        "prowlarr.stockinger.tech" = {
-          acmeRoot = null;
-          enableACME = true;
-          addSSL = true;
-          locations."/".proxyPass = "http://127.0.0.1:9696/";
-        };
       };
     };
 
@@ -198,26 +178,6 @@
     };
   };
 
-  nixarr = {
-    enable = true;
-    mediaDir = "/data/media";
-    stateDir = "/data/nixarr/.state/nixarr";
-
-    sonarr = {
-      enable = true;
-      openFirewall = true;
-    };
-    prowlarr = {
-      enable = true;
-      openFirewall = true;
-    };
-    sabnzbd = {
-      enable = true;
-      openFirewall = true;
-      whitelistHostnames = [ "alex" "sabnzbd.stockinger.tech" ];
-    };
-  };
-
   environment.systemPackages = [ pkgs.jellyfin-web pkgs.jellyfin-ffmpeg ];
 
   virtualisation.oci-containers.containers.actual = {
@@ -225,29 +185,6 @@
     ports = [ "0.0.0.0:5006:5006" ];
     volumes = [ "/data/actual/data:/data" ];
   };
-
-  # virtualisation = {
-  #   podman = {
-  #     enable = true;
-
-  #     # Create a `docker` alias for podman, to use it as a drop-in replacement
-  #     #dockerCompat = true;
-
-  #     # Required for containers under podman-compose to be able to talk to each other.
-  #     defaultNetwork.settings.dns_enabled = true;
-  #   };
-
-  #   docker = {
-  #     enable = true;
-  #     rootless = {
-  #       enable = true;
-  #       setSocketVariable = true;
-  #     };
-  #     daemon.settings = {
-  #       data-root = "/data/docker";
-  #     };
-  #   };
-  # };
 
   hardware.enableRedistributableFirmware = true;
   system.stateVersion = "23.11";

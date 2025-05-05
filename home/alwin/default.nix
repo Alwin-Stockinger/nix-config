@@ -61,7 +61,7 @@ in {
       autocd = true;
       autosuggestion.enable = true;
 
-      initExtra =
+      initContent =
         "\n  path+=('/run/current-system/sw/bin/')\n  path+=('/Applications/Visual Studio Code.app/Contents/Resources/app/bin')\n  path+=('/etc/profiles/per-user/alwin/bin')\n  path+=('/var/home/alwin/.cargo/bin')\n  path+=('/var/home/alwin/go/bin')\n  path+=('/var/home/alwin/.local/bin')\n\n  eval \"$(zoxide init zsh)\"\n  if [ -n \"\${commands[fzf-share]}\" ]; then\n    source \"$(fzf-share)/key-bindings.zsh\"\n    source \"$(fzf-share)/completion.zsh\"\n  fi\n    #alias ssh=\"kitten ssh\"\n  if [[ $WORK == \"true\" ]]; then\n    echo \"work detected\"\n    export PATH=\"\${KREW_ROOT:-$HOME/.krew}/bin:$PATH\"\n    source <(kubectl completion zsh)\n    complete -C '/usr/bin/aws_completer' aws\n    #source <(pulumi completion zsh)\n    source <(helm completion zsh)\n    source <(kaf completion zsh)\n    eval \"$(/opt/homebrew/bin/brew shellenv)\"\n  fi\n      ";
 
       oh-my-zsh = {
