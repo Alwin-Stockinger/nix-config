@@ -1,10 +1,4 @@
-{ config
-, pkgs
-, inputs
-, lib
-, outputs
-, ...
-}: {
+{ config, pkgs, inputs, lib, outputs, ... }: {
   nixpkgs = {
     overlays = [
       #      outputs.overlays.unstable-packages
@@ -44,6 +38,7 @@
       gum
       maven
       talosctl
+      difftastic
     ];
 
     homeDirectory = "/Users/alwin-stockinger";

@@ -118,7 +118,7 @@
             home-manager = {
               backupFileExtension = "backup";
               useUserPackages = true;
-              extraSpecialArgs = { inherit inputs outputs; };
+              extraSpecialArgs = { inherit inputs outputs system; };
               users.alwin = import ./home/alwin/holden.nix;
             };
           }
@@ -139,7 +139,7 @@
             {
               home-manager = {
                 useUserPackages = true;
-                extraSpecialArgs = { inherit inputs outputs; };
+                extraSpecialArgs = { inherit inputs outputs system; };
                 users.alwin-stockinger = import ./home/alwin/work/default.nix;
                 sharedModules = [ mac-app-util.homeManagerModules.default ];
               };

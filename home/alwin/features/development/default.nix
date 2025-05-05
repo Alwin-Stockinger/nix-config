@@ -1,5 +1,4 @@
-{ config, pkgs, inputs, outputs, lib, system, ... }: {
-  imports = [ ./nvim.nix ./helix.nix ];
+{ config, pkgs, inputs, outputs, lib, ... }: {
 
   options.development = {
     enable = lib.mkEnableOption "enables development stuff";
@@ -24,6 +23,7 @@
       ripgrep # for neovim telescope
       cargo
       go
+      fd
     ];
 
     catppuccin = {
@@ -71,7 +71,15 @@
       };
       yazi.enable = true;
 
-      nushell.enable = true;
+      nushell = {
+        enable = true;
+        configFile = {
+          text = ''
+            const NU_LIB_DIRS = $NU_LIB_DIRS ++ [ "~/Developer/volue/flux-powerbot/nushell"]
+            source "~/Developer/volue/flux-powerbot/nushell/mod.nu"
+          '';
+        };
+      };
 
       starship = {
         enable = true;
@@ -154,4 +162,5 @@
       ];
     };
   };
+  imports = [ ./nvim.nix ./helix.nix ];
 }

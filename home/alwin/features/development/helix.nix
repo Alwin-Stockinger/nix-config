@@ -1,11 +1,4 @@
-{ config
-, pkgs
-, inputs
-, outputs
-, lib
-, system
-, ...
-}: {
+{ config, pkgs, inputs, outputs, lib, system, ... }: {
   config = lib.mkIf config.development.enable {
     programs.helix = {
       enable = true;
@@ -20,19 +13,19 @@
       languages = {
         language-server = {
           typescript-language-server.config.tsserver = {
-            path = "${pkgs.typescript}/lib/node_modules/typescript/lib/tsserver.js";
+            path =
+              "${pkgs.typescript}/lib/node_modules/typescript/lib/tsserver.js";
           };
           efm-lsp-prettier = with pkgs; {
             command = "${efm-langserver}/bin/efm-langserver";
             config = {
               documentFormatting = true;
               languages = {
-                typescript = [
-                  {
-                    formatCommand = "${nodePackages.prettier}/bin/prettier --stdin-filepath \${INPUT}";
-                    formatStdin = true;
-                  }
-                ];
+                typescript = [{
+                  formatCommand =
+                    "${nodePackages.prettier}/bin/prettier --stdin-filepath \${INPUT}";
+                  formatStdin = true;
+                }];
               };
             };
           };
