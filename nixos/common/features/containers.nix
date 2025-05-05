@@ -1,25 +1,19 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}: {
+{ pkgs, lib, config, ... }: {
   options = {
-    virt.enable = lib.mkEnableOption "enables container services (docker, podman)";
+    custom.virt.enable =
+      lib.mkEnableOption "enables container services (docker, podman)";
 
     # podman = true;
     # docker = true;
   };
 
-  config = lib.mkIf config.virt.enable {
+  config = lib.mkIf config.custom.virt.enable {
     virtualisation = {
       podman = {
         enable = true;
         defaultNetwork.settings.dns_enabled = true;
       };
-      docker = {
-        enable = true;
-      };
+      docker = { enable = true; };
     };
   };
 }

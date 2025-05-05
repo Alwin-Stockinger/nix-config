@@ -50,8 +50,10 @@
     after = [ "run-secrets.d.mount" ];
   };
 
-  virt.enable = true;
-  pipewire.enable = true;
-  desktop.enable = true;
-  gaming.enable = true;
+  custom = {
+    virt.enable = true;
+    pipewire.enable = true;
+    desktop.enable = true;
+    gaming.enable = true;
+  };
 }

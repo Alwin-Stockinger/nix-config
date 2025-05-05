@@ -1,8 +1,10 @@
 { config, pkgs, lib, inputs, ... }: {
   imports = [ inputs.sops-nix.nixosModules.sops ../common ];
 
-  virt.enable = true;
-  custom.arr.enable = true;
+  custom = {
+    virt.enable = true;
+    arr.enable = true;
+  };
 
   # For remote deployment
   nix.settings.trusted-users = [ "sudo" "alwin" ];

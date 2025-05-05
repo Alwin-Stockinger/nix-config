@@ -1,14 +1,9 @@
-{ inputs
-, lib
-, config
-, pkgs
-, ...
-}: {
+{ inputs, lib, config, pkgs, ... }: {
   options = {
-    pipewire.enable = lib.mkEnableOption "enables sound with pipewire";
+    custom.pipewire.enable = lib.mkEnableOption "enables sound with pipewire";
   };
 
-  config = lib.mkIf config.pipewire.enable {
+  config = lib.mkIf config.custom.pipewire.enable {
     security.rtkit.enable = true;
     services.pipewire = {
       enable = true;

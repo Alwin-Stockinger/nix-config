@@ -50,11 +50,6 @@
     useRoutingFeatures = "client";
   };
 
-  pipewire.enable = lib.mkDefault false;
-  desktop.enable = lib.mkDefault false;
-  virt.enable = lib.mkDefault false;
-  gaming.enable = lib.mkDefault false;
-
   imports = [
     ./features/sound.nix
     ./features/desktop.nix
