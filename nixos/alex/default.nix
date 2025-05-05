@@ -76,13 +76,10 @@
         "CLOUDFLARE_EMAIL_FILE" = config.sops.secrets.cloudflare_email.path;
         "CLOUDFLARE_API_KEY_FILE" = config.sops.secrets.cloudflare_token.path;
       };
+      dnsResolver = "1.1.1.1:53";
       reloadServices = [ "nginx" ];
     };
-    certs."stockinger.tech" = {
-      domain = "*.stockinger.tech";
-      dnsResolver = "1.1.1.1:53";
-      extraDomainNames = [ "*.stockinger.tech" ];
-    };
+    certs."stockinger.tech" = { domain = "*.stockinger.tech"; };
   };
 
   services = {
@@ -92,21 +89,18 @@
       recommendedTlsSettings = true;
       virtualHosts = {
         "media.stockinger.tech" = {
-          acmeRoot = null;
-          enableACME = true;
-          addSSL = true;
+          useACMEHost = "stockinger.tech";
+          forceSSL = true;
           locations."/".proxyPass = "http://127.0.0.1:8096/";
         };
         "budget.stockinger.tech" = {
-          acmeRoot = null;
-          enableACME = true;
-          addSSL = true;
+          useACMEHost = "stockinger.tech";
+          forceSSL = true;
           locations."/".proxyPass = "http://127.0.0.1:5006/";
         };
         "home.stockinger.tech" = {
-          acmeRoot = null;
-          enableACME = true;
-          addSSL = true;
+          useACMEHost = "stockinger.tech";
+          forceSSL = true;
           extraConfig = ''
             proxy_buffering off;
           '';
@@ -116,9 +110,8 @@
           };
         };
         "immich.stockinger.tech" = {
-          acmeRoot = null;
-          enableACME = true;
-          addSSL = true;
+          useACMEHost = "stockinger.tech";
+          forceSSL = true;
           locations."/".proxyPass = "http://127.0.0.1:2283/";
         };
         "rss.stockinger.tech" = {
@@ -142,8 +135,7 @@
 
     home-assistant = {
       enable = true;
-      extraComponents =
-        [ "esphome" "met" "radio_browser" "denonavr" "hue" "workday" ];
+      extraComponents = [ "esphome" "met" "radio_browser" "denonavr" "hue" ];
       customComponents = with pkgs.home-assistant-custom-components;
         [ epex_spot ];
       configDir = "/data/hass-config";
