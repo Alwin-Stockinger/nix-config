@@ -9,7 +9,6 @@
 
     home.packages = with pkgs; [
       kubectl
-      inputs.alejandra.defaultPackage.${system}
       fzf
       jq
       direnv
@@ -67,6 +66,7 @@
         settings = {
           enable_audio_bell = false;
           macos_option_as_alt = "left";
+          shell = "nu";
         };
       };
       yazi.enable = true;

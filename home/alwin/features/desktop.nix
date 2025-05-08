@@ -1,8 +1,4 @@
-{ config
-, pkgs
-, lib
-, ...
-}: {
+{ config, pkgs, lib, ... }: {
   options.desktop = {
     enable = lib.mkEnableOption "enables a desktop environment via hyprland";
     waybarMonitor = lib.mkOption {
@@ -12,7 +8,10 @@
       description = "Waybar monitor";
     };
     monitors = lib.mkOption {
-      default = [ "HDMI-A-1, 2560x1440, 0x0, 1, transform, 1" "DP-1, 3440x1440, 1440x1200, 1" ];
+      default = [
+        "HDMI-A-1, 2560x1440, 0x0, 1, transform, 1"
+        "DP-1, 3440x1440, 1440x1200, 1"
+      ];
       example = [ "DVI-D-1, 1680x1050, 0x0, 1" "DP-1, 3440x1440, 1680x0, 1" ];
       type = lib.types.listOf lib.types.str;
       description = "Hyprland monitors";
@@ -39,9 +38,7 @@
 
           preload = [ "/home/alwin/wallpaper.webp" ];
 
-          wallpaper = [
-            "DP-1,/home/alwin/wallpaper.webp"
-          ];
+          wallpaper = [ "DP-1,/home/alwin/wallpaper.webp" ];
         };
       };
       hypridle = {
@@ -69,9 +66,7 @@
     };
 
     programs = {
-      rofi = {
-        enable = true;
-      };
+      rofi = { enable = true; };
       waybar = {
         enable = true;
         settings = {
@@ -81,7 +76,7 @@
             #// "position": "bottom", // Waybar position (top|bottom|left|right)
             #        height = 15; #// Waybar height (to be removed for auto height)
             #// "width": 1280, // Waybar width
-            spacing = 100; #// Gaps between modules (4px)
+            spacing = 100; # // Gaps between modules (4px)
             #// Choose the order of the modules
             modules-center = [ "clock" ];
             modules-right = [ "bluetooth" "battery" ];
@@ -90,16 +85,18 @@
               #tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
               format-alt = "{:%d-%m-%Y}";
             };
-            battery = {
-              format = "{capacity}%";
-            };
+            battery = { format = "{capacity}%"; };
             bluetooth = {
               format = " {status}";
               format-disabled = ""; # an empty format will hide the module
               format-connected = "{num_connections}  ";
-              tooltip-format = "{controller_alias}\t{controller_address}";
-              tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{device_enumerate}";
-              tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
+              tooltip-format = "{controller_alias}	{controller_address}";
+              tooltip-format-connected = ''
+                {controller_alias}	{controller_address}
+
+                {device_enumerate}'';
+              tooltip-format-enumerate-connected =
+                "{device_alias}	{device_address}";
             };
             #wireplumber = {
             #  format = "{volume}%";
@@ -319,31 +316,25 @@
           no_fade_in = false;
         };
 
-        background = [
-          {
-            path = "screenshot";
-            blur_passes = 3;
-            blur_size = 8;
-          }
-        ];
-        authentication = {
-          "pam:module" = "login";
-        };
+        background = [{
+          path = "screenshot";
+          blur_passes = 3;
+          blur_size = 8;
+        }];
+        authentication = { "pam:module" = "login"; };
 
-        input-field = [
-          {
-            size = "200, 50";
-            position = "0, -80";
-            monitor = "";
-            dots_center = true;
-            fade_on_empty = false;
-            font_color = "rgb(202, 211, 245)";
-            inner_color = "rgb(91, 96, 120)";
-            outer_color = "rgb(24, 25, 38)";
-            outline_thickness = 5;
-            shadow_passes = 2;
-          }
-        ];
+        input-field = [{
+          size = "200, 50";
+          position = "0, -80";
+          monitor = "";
+          dots_center = true;
+          fade_on_empty = false;
+          font_color = "rgb(202, 211, 245)";
+          inner_color = "rgb(91, 96, 120)";
+          outer_color = "rgb(24, 25, 38)";
+          outline_thickness = 5;
+          shadow_passes = 2;
+        }];
       };
     };
   };
