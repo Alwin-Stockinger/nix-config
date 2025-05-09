@@ -66,20 +66,12 @@
         settings = {
           enable_audio_bell = false;
           macos_option_as_alt = "left";
-          shell = "nu";
+          shell = "${pkgs.nushell}/bin/nu";
         };
       };
       yazi.enable = true;
 
-      nushell = {
-        enable = true;
-        configFile = {
-          text = ''
-            const NU_LIB_DIRS = $NU_LIB_DIRS ++ [ "~/Developer/volue/flux-powerbot/nushell"]
-            source "~/Developer/volue/flux-powerbot/nushell/mod.nu"
-          '';
-        };
-      };
+      nushell = { enable = true; };
 
       starship = {
         enable = true;
@@ -96,7 +88,7 @@
     };
 
     programs.vscode = {
-      enable = !config.custom.work;
+      enable = true;
       profiles.default.userSettings = {
         "window.titleBarStyle" = "custom";
         "window.zoomLevel" = 0.4;
