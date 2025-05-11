@@ -135,7 +135,6 @@
       dataDir = "/data/media";
       configDir = "/data/jellyfin/config";
     };
-    environment.systemPackages = [ pkgs.jellyfin-web pkgs.jellyfin-ffmpeg ];
 
     home-assistant = {
       enable = true;
@@ -178,6 +177,8 @@
       registration.enable = true;
     };
   };
+
+  environment.systemPackages = [ pkgs.jellyfin-web pkgs.jellyfin-ffmpeg ];
 
   virtualisation.oci-containers.containers.actual = {
     image = " ghcr.io/actualbudget/actual-server:25.4.0-alpine";

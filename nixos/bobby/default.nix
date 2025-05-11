@@ -18,6 +18,8 @@
     nameservers = [ "192.168.1.1" ];
   };
 
+  services.openssh.enable = true;
+
   system.stateVersion = "23.11";
 
   environment.systemPackages = [ pkgs.pulseaudio ];

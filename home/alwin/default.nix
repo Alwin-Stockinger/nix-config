@@ -7,7 +7,6 @@ let
   standard-packages = with pkgs; [
     neofetch
     tldr
-    bat
     sops
     yq-go
     dig
@@ -16,7 +15,6 @@ let
     wget
     difftastic
     diff-so-fancy
-    eza
   ];
 in {
   options = {
@@ -72,9 +70,6 @@ in {
       };
 
       shellAliases = {
-        cat = "bat";
-        cd = "z";
-        ls = "eza";
         diff = "difftastic";
 
         switch = "git switch";

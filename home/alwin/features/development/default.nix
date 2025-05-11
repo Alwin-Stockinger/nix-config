@@ -23,6 +23,10 @@
       cargo
       go
       fd
+      bat
+      eza
+      difftastic
+      diff-so-fancy
     ];
 
     catppuccin = {
@@ -33,6 +37,15 @@
     home = { shell.enableNushellIntegration = true; };
 
     programs = {
+      zsh = {
+        shellAliases = {
+          cat = "bat";
+          cd = "z";
+          ls = "eza";
+          diff = "difftastic";
+        };
+      };
+
       zellij = {
         enable = true;
         enableZshIntegration = true;
