@@ -4,18 +4,7 @@ let
   zsh-theme = builtins.toFile "work.zsh-theme"
     "\n        PROMPT=\"%{$fg_bold[cyan]%}%c%{$reset_color%}\"\n        PROMPT+=' $(kube_ps1) '\n        #PROMPT+=' $(git_prompt_info)'\n\n\n        ZSH_THEME_GIT_PROMPT_PREFIX=\"%{$fg_bold[blue]%}git:(%{$fg[red]%}\"\n        ZSH_THEME_GIT_PROMPT_SUFFIX=\"%{$reset_color%} \"\n        ZSH_THEME_GIT_PROMPT_DIRTY=\"%{$fg[blue]%}) %{$fg[yellow]%}%1{✗%}\"\n        ZSH_THEME_GIT_PROMPT_CLEAN=\"%{$fg[blue]%})\"\n        KUBE_PS1_PREFIX=\"(\"\n        KUBE_PS1_SUFFIX=\")\"\n        KUBE_PS1_SYMBOL_DEFAULT=\"\"\n        KUBE_PS1_CTX_COLOR=\"red\"\n        KUBE_PS1_NS_COLOR=\"red\"\n        KUBE_PS1_BG_COLOR=\"\"\n        KUBE_PS1_DIVIDER=''\n        KUBE_PS1_SEPARATOR=''\n        KUBE_PS1_NS_ENABLE=false";
   min-packages = with pkgs; [ ];
-  standard-packages = with pkgs; [
-    neofetch
-    tldr
-    sops
-    yq-go
-    dig
-    htop
-    zoxide
-    wget
-    difftastic
-    diff-so-fancy
-  ];
+  standard-packages = with pkgs; [ neofetch tldr sops yq-go dig htop wget ];
 in {
   options = {
     custom.work = lib.mkOption {
@@ -70,8 +59,6 @@ in {
       };
 
       shellAliases = {
-        diff = "difftastic";
-
         switch = "git switch";
         pull = "git pull";
         git-link = "gh browse $(git rev-parse HEAD) -n";
