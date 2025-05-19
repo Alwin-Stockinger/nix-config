@@ -1,13 +1,5 @@
-{ pkgs
-, lib
-, inputs
-, outputs
-, system
-, ...
-}: {
-  imports = [
-    ./default.nix
-  ];
+{ pkgs, lib, inputs, outputs, system, ... }: {
+  imports = [ ./default.nix ];
 
   users.users.alwin-stockinger.home = lib.mkForce "/Users/alwin-stockinger";
 
@@ -16,18 +8,9 @@
 
   homebrew = {
     enable = true;
-    taps = [
-      "pulumi/tap"
-    ];
-    brews = [
-      "pulumi"
-    ];
-    casks = [
-      "slack"
-      "microsoft-teams"
-      "microsoft-outlook"
-      "gitify"
-      "1password"
-    ];
+    taps = [ "pulumi/tap" ];
+    brews = [ "pulumi" "gnu-sed" "minikube" ];
+    casks =
+      [ "slack" "microsoft-teams" "microsoft-outlook" "gitify" "1password" ];
   };
 }
