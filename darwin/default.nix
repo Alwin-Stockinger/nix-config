@@ -1,15 +1,10 @@
-{ pkgs
-, lib
-, inputs
-, outputs
-, system
-, ...
-}: {
+{ pkgs, lib, inputs, outputs, system, ... }: {
   nixpkgs.hostPlatform = system;
   #  nixpkgs.hostPlatform = "aarch64-darwin";
 
   # Auto upgrade nix package and the daemon service.
   nix.enable = true;
+  nix.linux-builder.enable = true;
 
   users.users.alwin.home = "/Users/alwin";
 
@@ -23,9 +18,7 @@
     #defaults.CustomUserPreferences."com.apple.mouse.scaling" = -1;
 
     defaults = {
-      controlcenter = {
-        BatteryShowPercentage = true;
-      };
+      controlcenter = { BatteryShowPercentage = true; };
 
       dock = {
         wvous-tr-corner = 2;
@@ -56,6 +49,8 @@
       remapCapsLockToEscape = true;
       nonUS.remapTilde = true;
     };
+
+    primaryUser = "alwin";
   };
 
   # Used for backwards compatibility, please read the changelog before changing.
@@ -72,6 +67,7 @@
     settings = {
       # Enable flakes and new 'nix' command
       experimental-features = "nix-command flakes";
+      build-dir = "/var/tmp";
     };
 
     optimise.automatic = true;
@@ -134,22 +130,16 @@
           "2" = "2";
           "3" = "3";
         };
-        on-window-detected = [
-          {
-            "if" = {
-              app-id = "com.tinyspeck.slackmacgap";
-            };
-            run = [ "move-node-to-workspace 3" ];
-          }
-        ];
+        on-window-detected = [{
+          "if" = { app-id = "com.tinyspeck.slackmacgap"; };
+          run = [ "move-node-to-workspace 3" ];
+        }];
       };
     };
 
     sketchybar = {
       enable = true;
-      extraPackages = [
-        pkgs.aerospace
-      ];
+      extraPackages = [ pkgs.aerospace ];
       config = ''
         ############## BAR ##############
             sketchybar -m --bar \
@@ -252,13 +242,7 @@
 
   homebrew = {
     enable = true;
-    casks = [
-      "firefox"
-      "signal"
-      "visual-studio-code"
-      "ghostty"
-      "kitty"
-    ];
+    casks = [ "firefox" "signal" "visual-studio-code" "ghostty" "kitty" ];
     onActivation = {
       autoUpdate = true;
       cleanup = "zap";

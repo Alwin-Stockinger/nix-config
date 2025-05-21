@@ -9,6 +9,13 @@
   # For remote deployment
   nix.settings.trusted-users = [ "sudo" "alwin" ];
 
+  nixpkgs.overlays = [
+    (final: super: {
+      makeModulesClosure = x:
+        super.makeModulesClosure (x // { allowMissing = true; });
+    })
+  ];
+
   sops = {
     age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
     secrets = {
