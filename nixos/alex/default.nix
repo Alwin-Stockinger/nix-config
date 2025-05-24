@@ -32,7 +32,16 @@
         sopsFile = ../../secrets.yaml;
         neededForUsers = true;
       };
+      bobby_pub_key = {
+        sopsFile = ../../secrets.yaml;
+        neededForUsers = true;
+      };
     };
+  };
+
+  users.users.alwin = {
+    #hashedPasswordFile = config.sops.secrets.password.path;
+    #openssh.authorizedKeys.keyFiles = [ config.sops.secrets.bobby_pub_key.path ]; does not work because file is read at build time https://discourse.nixos.org/t/can-how-do-you-manage-ssh-authorized-keys-with-sops-nix/46467
   };
 
   boot = {

@@ -2,7 +2,7 @@ keys:
   - &users:
     - &alwin 0xB348B2BDC7E49D64
   - &hosts:
-    - &alex age1n0lqflctwvj2krxq3u06pzajqx3qx72vdnpca8dq6f4dlzm4pdxqqr6tza
+    - &alex age1n25hcrrsykahvaw2xjy5sf6skc6092g7a0t8mnpx8n874camh3nq5qx7ye
 creation_rules:
   - path_regex: ".*.yaml"
     key_groups:
