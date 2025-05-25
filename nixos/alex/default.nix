@@ -194,7 +194,8 @@
     };
   };
 
-  environment.systemPackages = [ pkgs.jellyfin-web pkgs.jellyfin-ffmpeg ];
+  environment.systemPackages =
+    [ pkgs.jellyfin-web pkgs.jellyfin-ffmpeg pkgs.mergerfs ];
 
   virtualisation.oci-containers.containers.actual = {
     image = " ghcr.io/actualbudget/actual-server:25.4.0-alpine";
