@@ -10,7 +10,15 @@
     enable = true;
     taps = [ "pulumi/tap" ];
     brews = [ "pulumi" "gnu-sed" "minikube" ];
-    casks =
-      [ "slack" "microsoft-teams" "microsoft-outlook" "gitify" "1password" ];
+    casks = [
+      "slack"
+      "microsoft-teams"
+      "microsoft-outlook"
+      "gitify"
+      "1password"
+      "intellij-idea"
+      "datagrip"
+      "spotify"
+    ];
   };
 }

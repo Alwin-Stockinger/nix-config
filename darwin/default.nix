@@ -50,7 +50,7 @@
       nonUS.remapTilde = true;
     };
 
-    primaryUser = "alwin";
+    primaryUser = "alwin-stockinger";
   };
 
   # Used for backwards compatibility, please read the changelog before changing.

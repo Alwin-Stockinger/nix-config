@@ -12,6 +12,7 @@
       ];
       languages = {
         language-server = {
+          gopls.config.formatting.gofumpt = true;
           typescript-language-server.config.tsserver = {
             path =
               "${pkgs.typescript}/lib/node_modules/typescript/lib/tsserver.js";
@@ -45,7 +46,10 @@
           {
             name = "yaml";
             auto-format = true;
-            language-servers = [{ name = "efm-lsp-prettier"; }];
+            language-servers = [{
+              name = "efm-lsp-prettier";
+              # args = [ "--parser" "yaml" ];
+            }];
           }
           {
             name = "nix";
