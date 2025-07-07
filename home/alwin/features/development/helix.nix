@@ -9,6 +9,7 @@
         gopls
         rust-analyzer
         typescript-language-server
+        yamlfmt
       ];
       languages = {
         language-server = {
@@ -46,6 +47,10 @@
           {
             name = "yaml";
             auto-format = true;
+            formatter = {
+              command = "yamlfmt";
+              args = [ "-" ];
+            };
             language-servers = [{
               name = "efm-lsp-prettier";
               # args = [ "--parser" "yaml" ];
