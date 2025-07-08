@@ -103,8 +103,6 @@
     programs.vscode = {
       enable = true;
       profiles.default.userSettings = {
-        "go.useLanguageServer" = true;
-        "gopls.formatting.gofumpt" = true;
         "window.titleBarStyle" = "custom";
         "window.zoomLevel" = 0.4;
         "editor.minimap.enabled" = false;
@@ -133,6 +131,8 @@
 
         "go.lintTool" = "golangci-lint";
         "go.lintFlags" = [ "--fast" ];
+        "go.useLanguageServer" = true;
+        "gopls" = { "formatting.gofumpt" = true; };
 
         "[yaml]"."editor.defaultFormatter" = "redhat.vscode-yaml";
         "workbench.tree.indent" = 12;
