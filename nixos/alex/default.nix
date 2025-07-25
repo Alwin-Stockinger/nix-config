@@ -110,7 +110,7 @@
         "media.stockinger.tech" = {
           useACMEHost = "stockinger.tech";
           forceSSL = true;
-          locations."/".proxyPass = "http://127.0.0.1:8096/";
+          locations."/".proxyPass = "http://bobby:8096/";
         };
         "budget.stockinger.tech" = {
           useACMEHost = "stockinger.tech";
