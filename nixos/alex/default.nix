@@ -138,6 +138,21 @@
           enableACME = true;
           addSSL = true;
         };
+        "sabnzbd.stockinger.tech" = {
+          useACMEHost = "stockinger.tech";
+          forceSSL = true;
+          locations."/".proxyPass = "http://bobby:8080/";
+        };
+        "sonarr.stockinger.tech" = {
+          useACMEHost = "stockinger.tech";
+          forceSSL = true;
+          locations."/".proxyPass = "http://bobby:8989/";
+        };
+        "prowlarr.stockinger.tech" = {
+          useACMEHost = "stockinger.tech";
+          forceSSL = true;
+          locations."/".proxyPass = "http://bobby:9696/";
+        };
       };
     };
 

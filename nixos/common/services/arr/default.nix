@@ -9,7 +9,7 @@ in {
     nixarr = {
       enable = true;
       mediaDir = "/data/media";
-      stateDir = "/data/nixarr/.state/nixarr";
+      stateDir = "/data/media/.state/nixarr";
 
       sonarr = {
         enable = true;
@@ -22,29 +22,7 @@ in {
       sabnzbd = {
         enable = true;
         openFirewall = true;
-        whitelistHostnames = [ "alex" "sabnzbd.stockinger.tech" ];
-      };
-    };
-
-    services = {
-      nginx = {
-        virtualHosts = {
-          "sabnzbd.stockinger.tech" = {
-            useACMEHost = "stockinger.tech";
-            forceSSL = true;
-            locations."/".proxyPass = "http://127.0.0.1:8080/";
-          };
-          "sonarr.stockinger.tech" = {
-            useACMEHost = "stockinger.tech";
-            forceSSL = true;
-            locations."/".proxyPass = "http://127.0.0.1:8989/";
-          };
-          "prowlarr.stockinger.tech" = {
-            useACMEHost = "stockinger.tech";
-            forceSSL = true;
-            locations."/".proxyPass = "http://127.0.0.1:9696/";
-          };
-        };
+        whitelistHostnames = [ "alex" "bobby" "sabnzbd.stockinger.tech" ];
       };
     };
   };
