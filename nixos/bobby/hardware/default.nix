@@ -19,11 +19,15 @@
     fsType = "ext4";
   };
 
-  #fileSystems."/data" = {
-  #  device = "/dev/disk/by-uuid/6fa1b8b1-00b8-4d35-aca7-af4c4fff7581";
-  #  fsType = "ext4";
-  #  options = [ "nofail" ];
-  #};
+  boot.supportedFilesystems = [ "zfs" ];
+  boot.zfs.extraPools = [ "data" ];
+  networking.hostId = "ae72d104";
+
+  fileSystems."/data" = {
+    device = "data/data";
+    fsType = "zfs";
+    options = [ "zfsutil" ];
+  };
 
   swapDevices = [ ];
 
