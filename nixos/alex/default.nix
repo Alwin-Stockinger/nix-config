@@ -178,7 +178,7 @@
     };
 
     immich = {
-      enable = true;
+      enable = false;
       openFirewall = true;
       mediaLocation = "/data/immich";
       host = "127.0.0.1";
@@ -198,7 +198,7 @@
     [ pkgs.jellyfin-web pkgs.jellyfin-ffmpeg pkgs.mergerfs ];
 
   virtualisation.oci-containers.containers.actual = {
-    image = " ghcr.io/actualbudget/actual-server:25.4.0-alpine";
+    image = " ghcr.io/actualbudget/actual-server:25.6.1-alpine";
     ports = [ "0.0.0.0:5006:5006" ];
     volumes = [ "/data/actual/data:/data" ];
   };
