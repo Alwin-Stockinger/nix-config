@@ -141,7 +141,7 @@
         "sabnzbd.stockinger.tech" = {
           useACMEHost = "stockinger.tech";
           forceSSL = true;
-          locations."/".proxyPass = "http://bobby:8080/";
+          locations."/".proxyPass = "http://bobby:6336/";
         };
         "sonarr.stockinger.tech" = {
           useACMEHost = "stockinger.tech";
