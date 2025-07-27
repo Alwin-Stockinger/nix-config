@@ -1,10 +1,7 @@
 { config, pkgs, lib, inputs, ... }: {
   imports = [ inputs.sops-nix.nixosModules.sops ../common ];
 
-  custom = {
-    virt.enable = true;
-    arr.enable = true;
-  };
+  custom = { virt.enable = true; };
 
   # For remote deployment
   nix.settings.trusted-users = [ "sudo" "alwin" ];
@@ -157,15 +154,6 @@
     };
 
     openssh.enable = true;
-
-    jellyfin = {
-      enable = true;
-      openFirewall = true;
-      user = "alwin";
-      cacheDir = "/data/jellyfin/cache";
-      dataDir = "/data/media";
-      configDir = "/data/jellyfin/config";
-    };
 
     home-assistant = {
       enable = true;
