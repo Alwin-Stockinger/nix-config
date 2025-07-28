@@ -1,7 +1,10 @@
 { config, pkgs, lib, inputs, ... }: {
   imports = [ inputs.sops-nix.nixosModules.sops ../common ];
 
-  custom = { virt.enable = true; };
+  custom = {
+    virt.enable = true;
+    immich.enable = false;
+  };
 
   # For remote deployment
   nix.settings.trusted-users = [ "sudo" "alwin" ];
@@ -121,7 +124,7 @@
             proxy_buffering off;
           '';
           locations."/" = {
-            proxyPass = "http://127.0.0.1:8123/";
+            proxyPass = "http://alex:8123/";
             proxyWebsockets = true;
           };
         };
@@ -180,14 +183,6 @@
       location = "/data/backup";
     };
 
-    immich = {
-      enable = false;
-      openFirewall = true;
-      mediaLocation = "/data/immich";
-      host = "127.0.0.1";
-      port = 2283;
-    };
-
     tt-rss = {
       enable = true;
       # to configure a nginx virtual host directly:
@@ -196,9 +191,6 @@
       registration.enable = true;
     };
   };
-
-  environment.systemPackages =
-    [ pkgs.jellyfin-web pkgs.jellyfin-ffmpeg pkgs.mergerfs ];
 
   virtualisation.oci-containers.containers.actual = {
     image = " ghcr.io/actualbudget/actual-server:25.6.1-alpine";
