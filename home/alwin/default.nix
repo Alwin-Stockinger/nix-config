@@ -75,23 +75,25 @@ in {
         ts = "tailscale";
       };
     };
-    atuin = {
-      enable = true;
-      settings = {
-        # Dont clear screen
-        style = "full";
-        inline_height = 0;
+
+    programs = {
+      atuin = {
+        enable = true;
+        settings = {
+          # Dont clear screen
+          style = "full";
+          inline_height = 0;
+        };
+      };
+      zoxide = {
+        enable = true;
+        enableZshIntegration = true;
+      };
+      zellij = {
+        enable = true;
+        #enableZshIntegration = true;
       };
     };
-    zoxide = {
-      enable = true;
-      enableZshIntegration = true;
-    };
-    zellij = {
-      enable = true;
-      #enableZshIntegration = true;
-    };
-
     custom.helix.enable = true;
 
     # Let Home Manager install and manage itself.
