@@ -10,6 +10,7 @@
         rust-analyzer
         typescript-language-server
         yamlfmt
+        topiary
       ];
       languages = {
         language-server = {
@@ -33,6 +34,14 @@
           };
         };
         language = [
+          {
+            name = "nu";
+            auto-format = true;
+            formatter = {
+              command = "topiary";
+              args = [ "format" "--language" "nu" ];
+            };
+          }
           {
             name = "typescript";
             auto-format = true;

@@ -39,6 +39,9 @@
       maven
       talosctl
       difftastic
+      yamlfmt
+      gawk
+      topiary
     ];
 
     homeDirectory = "/Users/alwin-stockinger";
@@ -46,7 +49,7 @@
   };
 
   programs = {
-    git = { userEmail = lib.mkForce "alwin.stockinger@powerbot-trading.com"; };
+    git = { userEmail = lib.mkForce "alwin.stockinger@volue.com"; };
     zsh = {
       oh-my-zsh.custom = lib.mkForce "$HOME/nix-config/home/alwin/work/zsh";
       oh-my-zsh.theme = lib.mkForce "work";
