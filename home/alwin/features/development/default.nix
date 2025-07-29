@@ -1,10 +1,15 @@
 { config, pkgs, inputs, outputs, lib, ... }: {
 
+  imports = [ ./nvim.nix ./helix.nix ];
+
   options.development = {
     enable = lib.mkEnableOption "enables development stuff";
   };
 
   config = lib.mkIf config.development.enable {
+
+    custom.helix.enable = true;
+
     nixpkgs = { overlays = [ inputs.nix-vscode-extensions.overlays.default ]; };
 
     home.packages = with pkgs; [
@@ -49,18 +54,6 @@
       zellij = {
         enable = true;
         #enableZshIntegration = true;
-      };
-      atuin = {
-        enable = true;
-        settings = {
-          # Dont clear screen
-          style = "full";
-          inline_height = 0;
-        };
-      };
-      zoxide = {
-        enable = true;
-        enableZshIntegration = true;
       };
       ghostty = {
         enable = true;
@@ -169,5 +162,4 @@
       ];
     };
   };
-  imports = [ ./nvim.nix ./helix.nix ];
 }

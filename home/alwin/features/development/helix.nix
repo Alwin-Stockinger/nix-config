@@ -1,5 +1,10 @@
 { config, pkgs, inputs, outputs, lib, system, ... }: {
-  config = lib.mkIf config.development.enable {
+
+  options.custom.development = {
+    enable = lib.mkEnableOption "enables helix editor";
+  };
+
+  config = lib.mkIf config.custom.helix.enable {
     programs.helix = {
       enable = true;
       defaultEditor = true;

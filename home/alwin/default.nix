@@ -75,6 +75,18 @@ in {
         ts = "tailscale";
       };
     };
+    atuin = {
+      enable = true;
+      settings = {
+        # Dont clear screen
+        style = "full";
+        inline_height = 0;
+      };
+    };
+    zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+    };
 
     # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;
