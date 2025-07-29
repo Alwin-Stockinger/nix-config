@@ -71,10 +71,10 @@
       };
 
       #Raspberry Pi
-      nixosConfigurations."alex" = inputs.nixpkgs.lib.nixosSystem {
+      nixosConfigurations."alex" = inputs.nixpkgs.lib.nixosSystem rec {
         system = "aarch64-linux";
 
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs system; };
 
         modules = [
           nixarr.nixosModules.default
@@ -83,7 +83,7 @@
           {
             home-manager = {
               useUserPackages = true;
-              extraSpecialArgs = { inherit inputs outputs; };
+              extraSpecialArgs = { inherit inputs outputs system; };
               users.alwin = import ./home/alwin/alex.nix;
             };
           }
