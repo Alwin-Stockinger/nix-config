@@ -51,10 +51,6 @@
         };
       };
 
-      zellij = {
-        enable = true;
-        #enableZshIntegration = true;
-      };
       ghostty = {
         enable = true;
         package = null; # currently marked as broken

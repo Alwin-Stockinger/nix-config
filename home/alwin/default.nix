@@ -87,6 +87,12 @@ in {
       enable = true;
       enableZshIntegration = true;
     };
+    zellij = {
+      enable = true;
+      #enableZshIntegration = true;
+    };
+
+    custom.helix.enable = true;
 
     # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;
