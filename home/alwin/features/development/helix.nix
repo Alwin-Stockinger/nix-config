@@ -1,6 +1,6 @@
 { config, pkgs, inputs, outputs, lib, system, ... }: {
 
-  options.custom.development = {
+  options.custom.helix = {
     enable = lib.mkEnableOption "enables helix editor";
   };
 
