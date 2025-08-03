@@ -20,7 +20,7 @@
   };
 
   boot.supportedFilesystems = [ "zfs" ];
-  boot.zfs.extraPools = [ "data" ];
+  boot.zfs.extraPools = [ "data" "large" ];
   networking.hostId = "ae72d104";
 
   fileSystems."/data" = {

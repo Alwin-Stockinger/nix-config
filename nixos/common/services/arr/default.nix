@@ -8,8 +8,8 @@ in {
   config = lib.mkIf cfg.enable {
     nixarr = {
       enable = true;
-      mediaDir = "/data/media";
-      stateDir = "/data/media/.state/nixarr";
+      mediaDir = "/large/media";
+      stateDir = "/data/media-metadata/nixarr";
 
       sonarr = {
         enable = true;
@@ -23,6 +23,10 @@ in {
         enable = true;
         openFirewall = true;
         whitelistHostnames = [ "alex" "bobby" "sabnzbd.stockinger.tech" ];
+      };
+      jellyfin = {
+        enable = true;
+        openFirewall = true;
       };
     };
   };

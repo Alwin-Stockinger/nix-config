@@ -57,7 +57,6 @@
     pipewire.enable = true;
     desktop.enable = true;
     gaming.enable = true;
-    jellyfin.enable = true;
     arr.enable = true;
   };
 }
