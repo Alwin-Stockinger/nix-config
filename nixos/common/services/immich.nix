@@ -3,12 +3,11 @@
 
   config = lib.mkIf config.custom.immich.enable {
     services.immich = {
-      enable = false;
+      enable = true;
       openFirewall = true;
-      mediaLocation = "/data/immich";
+      mediaLocation = "/large/photos";
       host = "127.0.0.1";
       port = 2283;
     };
-
   };
 }

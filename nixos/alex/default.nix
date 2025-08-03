@@ -131,7 +131,7 @@
         "immich.stockinger.tech" = {
           useACMEHost = "stockinger.tech";
           forceSSL = true;
-          locations."/".proxyPass = "http://127.0.0.1:2283/";
+          locations."/".proxyPass = "http://bobby:2283/";
         };
         "rss.stockinger.tech" = {
           acmeRoot = null;

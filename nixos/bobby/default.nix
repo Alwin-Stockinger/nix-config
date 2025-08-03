@@ -58,5 +58,8 @@
     desktop.enable = true;
     gaming.enable = true;
     arr.enable = true;
+    immich.enable = true;
+    postgres.enable =
+      true; # sets sensible postgres setting for other applications that depend on local pg like immich
   };
 }
