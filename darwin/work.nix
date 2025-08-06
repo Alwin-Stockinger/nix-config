@@ -9,7 +9,7 @@
   homebrew = {
     enable = true;
     taps = [ "pulumi/tap" ];
-    brews = [ "pulumi" "gnu-sed" "minikube" ];
+    brews = [ "pulumi" "gnu-sed" "minikube" "podman-compose" ];
     casks = [
       "slack"
       "microsoft-teams"
@@ -19,6 +19,7 @@
       "intellij-idea"
       "datagrip"
       "spotify"
+      "jetbrains-toolbox"
     ];
   };
 }
