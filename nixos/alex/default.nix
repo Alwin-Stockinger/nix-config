@@ -153,6 +153,21 @@
           forceSSL = true;
           locations."/".proxyPass = "http://bobby:9696/";
         };
+        "audiobook.stockinger.tech" = {
+          useACMEHost = "stockinger.tech";
+          forceSSL = true;
+          locations."/".proxyPass = "http://bobby:9292/";
+        };
+        "lidarr.stockinger.tech" = {
+          useACMEHost = "stockinger.tech";
+          forceSSL = true;
+          locations."/".proxyPass = "http://bobby:8686/";
+        };
+        "radrr.stockinger.tech" = {
+          useACMEHost = "stockinger.tech";
+          forceSSL = true;
+          locations."/".proxyPass = "http://bobby:7878/";
+        };
       };
     };
 

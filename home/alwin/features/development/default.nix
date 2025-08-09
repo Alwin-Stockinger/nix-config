@@ -32,6 +32,7 @@
       eza
       difftastic
       diff-so-fancy
+      sqlite
     ];
 
     catppuccin = {

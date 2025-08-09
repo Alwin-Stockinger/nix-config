@@ -61,5 +61,6 @@
     immich.enable = true;
     postgres.enable =
       true; # sets sensible postgres setting for other applications that depend on local pg like immich
+    budget.enable = true;
   };
 }
