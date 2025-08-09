@@ -163,7 +163,7 @@
           forceSSL = true;
           locations."/".proxyPass = "http://bobby:8686/";
         };
-        "radrr.stockinger.tech" = {
+        "radarr.stockinger.tech" = {
           useACMEHost = "stockinger.tech";
           forceSSL = true;
           locations."/".proxyPass = "http://bobby:7878/";

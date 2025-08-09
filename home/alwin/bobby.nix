@@ -1,8 +1,4 @@
-{ config
-, pkgs
-, inputs
-, ...
-}: {
+{ config, pkgs, inputs, ... }: {
   home.packages = with pkgs; [
     firefox
     wl-clipboard
@@ -10,11 +6,10 @@
     vlc
     handbrake
     python3
+    signal-desktop
   ];
 
-  imports = [
-    ./default.nix
-  ];
+  imports = [ ./default.nix ];
 
   desktop.enable = true;
   gpg.enable = true;
