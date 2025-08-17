@@ -62,7 +62,7 @@
   nix = {
     gc = {
       automatic = true;
-      options = "--delete-older-than 1w";
+      options = "--delete-older-than 14d";
     };
     settings = {
       # Enable flakes and new 'nix' command

@@ -23,12 +23,6 @@
   boot.zfs.extraPools = [ "data" "large" ];
   networking.hostId = "ae72d104";
 
-  fileSystems."/data" = {
-    device = "data/data";
-    fsType = "zfs";
-    options = [ "zfsutil" ];
-  };
-
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
