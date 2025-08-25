@@ -1,26 +1,17 @@
-{ config
-, pkgs
-, inputs
-, outputs
-, lib
-, ...
-}: {
+{ config, pkgs, inputs, outputs, lib, ... }: {
   config = lib.mkIf config.development.enable {
-    home.packages = with pkgs; [
-      delve # go debugger
-    ];
+    home.packages = with pkgs;
+      [
+        delve # go debugger
+      ];
 
     programs.nixvim = {
       enable = true;
       defaultEditor = false;
 
-      filetype = {
-        extension = {
-          hujson = "json";
-        };
-      };
+      filetype = { extension = { hujson = "json"; }; };
 
-      clipboard.providers.wl-copy.enable = true;
+      #clipboard.providers.wl-copy.enable = true;
 
       globals.mapleader = " ";
 
@@ -93,10 +84,7 @@
 
         # Gitsigns
         {
-          mode = [
-            "n"
-            "v"
-          ];
+          mode = [ "n" "v" ];
           key = "<leader>gh";
           action = "gitsigns";
           options = {
@@ -165,7 +153,8 @@
         smartindent = true;
         shiftwidth = 2;
 
-        breakindent = true; # https://stackoverflow.com/questions/1204149/smart-wrap-in-vim
+        breakindent =
+          true; # https://stackoverflow.com/questions/1204149/smart-wrap-in-vim
 
         ignorecase = true;
         smartcase = true;
@@ -173,11 +162,7 @@
         grepformat = "%f:%l:%c:%m";
 
         # Set completeopt to have a better completion experience
-        completeopt = [
-          "menuone"
-          "noselect"
-          "noinsert"
-        ]; # mostly just for cmp
+        completeopt = [ "menuone" "noselect" "noinsert" ]; # mostly just for cmp
 
         # Enable persistent undo history
         swapfile = false;
@@ -187,7 +172,8 @@
         # Enable 24-bit colors
         termguicolors = true;
 
-        scrolloff = 8; # Always keep 8 lines above/below cursor unless at start/end of file
+        scrolloff =
+          8; # Always keep 8 lines above/below cursor unless at start/end of file
 
         # Set encoding type
         encoding = "utf-8";
@@ -214,9 +200,7 @@
       '';
 
       plugins = {
-        treesitter = {
-          enable = true;
-        };
+        treesitter = { enable = true; };
         lualine.enable = true;
         markdown-preview.enable = true;
         trouble.enable = true;
@@ -232,27 +216,17 @@
 
         oil = {
           enable = true;
-          settings = {
-            view_options = {
-              show_hidden = true;
-            };
-          };
+          settings = { view_options = { show_hidden = true; }; };
         };
 
         dap-virtual-text.enable = true;
         dap-ui.enable = true;
         dap-go = {
           enable = true;
-          settings = {
-            delve = {
-              path = "${pkgs.delve}/bin/dlv";
-            };
-          };
+          settings = { delve = { path = "${pkgs.delve}/bin/dlv"; }; };
         };
 
-        dap = {
-          enable = true;
-        };
+        dap = { enable = true; };
 
         gitsigns = {
           enable = true;
@@ -260,24 +234,12 @@
             trouble = true;
             current_line_blame = true;
             signs = {
-              add = {
-                text = "│";
-              };
-              change = {
-                text = "│";
-              };
-              delete = {
-                text = "_";
-              };
-              topdelete = {
-                text = "‾";
-              };
-              changedelete = {
-                text = "~";
-              };
-              untracked = {
-                text = "│";
-              };
+              add = { text = "│"; };
+              change = { text = "│"; };
+              delete = { text = "_"; };
+              topdelete = { text = "‾"; };
+              changedelete = { text = "~"; };
+              untracked = { text = "│"; };
             };
           };
         };
@@ -345,13 +307,7 @@
 
             gopls = {
               enable = true;
-              extraOptions = {
-                settings = {
-                  gopls = {
-                    gofumpt = true;
-                  };
-                };
-              };
+              extraOptions = { settings = { gopls = { gofumpt = true; }; }; };
             };
 
             yamlls.enable = true;
@@ -360,11 +316,7 @@
               enable = true;
               installCargo = false;
               installRustc = false;
-              settings = {
-                check = {
-                  command = "clippy";
-                };
-              };
+              settings = { check = { command = "clippy"; }; };
             };
             bashls.enable = true;
           };
@@ -380,8 +332,10 @@
               "<C-e>" = "cmp.mapping.close()";
               "<C-f>" = "cmp.mapping.scroll_docs(4)";
               "<CR>" = "cmp.mapping.confirm({ select = true })";
-              "<S-Tab>" = "cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})";
-              "<Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
+              "<S-Tab>" =
+                "cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})";
+              "<Tab>" =
+                "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
             };
 
             snippet.expand = ''
@@ -424,9 +378,7 @@
               refactoring.enable = true;
               ts_node_action.enable = true;
             };
-            completion = {
-              spell.enable = true;
-            };
+            completion = { spell.enable = true; };
             diagnostics = {
               actionlint.enable = true;
               buf.enable = true;
@@ -440,17 +392,13 @@
               markdownlint = {
                 enable = true;
                 settings = {
-                  no-duplicate-heading = {
-                    siblings_only = true;
-                  };
+                  no-duplicate-heading = { siblings_only = true; };
                 };
               };
             };
             formatting = {
               nixpkgs_fmt.enable = true;
-              black = {
-                enable = true;
-              };
+              black = { enable = true; };
               prettier = {
                 enable = true;
                 disableTsServerFormatter = true;

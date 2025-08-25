@@ -19,7 +19,7 @@
       ];
       settings = {
         keys.normal = {
-          "C-y" = [
+          "C-y" = [ # Open yazi
             ":sh rm -f /tmp/unique-file"
             ":insert-output yazi %{buffer_name} --chooser-file=/tmp/unique-file"
             '':insert-output echo "x1b[?1049hx1b[?2004h" > /dev/tty''

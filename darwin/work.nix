@@ -9,7 +9,7 @@
   homebrew = {
     enable = true;
     taps = [ "pulumi/tap" ];
-    brews = [ "pulumi" "gnu-sed" "minikube" "podman-compose" ];
+    brews = [ "pulumi" "gnu-sed" "minikube" "podman-compose" "azure-cli" ];
     casks = [
       "slack"
       "microsoft-teams"
