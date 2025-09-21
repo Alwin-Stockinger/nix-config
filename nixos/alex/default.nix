@@ -115,7 +115,7 @@
         "budget.stockinger.tech" = {
           useACMEHost = "stockinger.tech";
           forceSSL = true;
-          locations."/".proxyPass = "http://bobby:8096/";
+          locations."/".proxyPass = "http://bobby:5006/";
         };
         "home.stockinger.tech" = {
           useACMEHost = "stockinger.tech";
