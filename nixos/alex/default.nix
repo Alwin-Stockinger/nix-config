@@ -115,7 +115,7 @@
         "budget.stockinger.tech" = {
           useACMEHost = "stockinger.tech";
           forceSSL = true;
-          locations."/".proxyPass = "http://127.0.0.1:5006/";
+          locations."/".proxyPass = "http://bobby:8096/";
         };
         "home.stockinger.tech" = {
           useACMEHost = "stockinger.tech";
@@ -208,7 +208,7 @@
   };
 
   virtualisation.oci-containers.containers.actual = {
-    image = " ghcr.io/actualbudget/actual-server:25.6.1-alpine";
+    image = "ghcr.io/actualbudget/actual-server:25.6.1-alpine";
     ports = [ "0.0.0.0:5006:5006" ];
     volumes = [ "/data/actual/data:/data" ];
   };
