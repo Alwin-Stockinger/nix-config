@@ -32,7 +32,6 @@
       hwatch
       rainfrog
       kubeconform
-      azure-cli
       kubelogin
       nufmt # this is broken af
       gum
@@ -42,6 +41,7 @@
       yamlfmt
       gawk
       topiary
+      terraform
     ];
 
     homeDirectory = "/Users/alwin-stockinger";

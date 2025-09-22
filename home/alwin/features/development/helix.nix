@@ -16,6 +16,7 @@
         typescript-language-server
         yamlfmt
         topiary
+        terraform-ls
       ];
       settings = {
         keys.normal = {
@@ -50,6 +51,10 @@
           };
         };
         language = [
+          {
+            name = "hcl";
+            auto-format = true;
+          }
           {
             name = "nu";
             auto-format = true;

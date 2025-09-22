@@ -33,6 +33,7 @@
       difftastic
       diff-so-fancy
       sqlite
+      pre-commit
     ];
 
     catppuccin = {
@@ -149,7 +150,6 @@
         jnoortheen.nix-ide
         esbenp.prettier-vscode
         ms-python.vscode-pylance
-        ms-python.python
         ms-python.debugpy
         timonwong.shellcheck
         redhat.vscode-yaml
