@@ -4,7 +4,17 @@
   sops = {
     gnupg.home = "/home/alwin/.gnupg";
     gnupg.sshKeyPaths = [ ];
-    secrets.valheim_env = { sopsFile = ../../secrets.yaml; };
+    secrets = {
+      valheim_env = { sopsFile = ../../secrets.yaml; };
+      cloudflare_token = {
+        sopsFile = ../../secrets.yaml;
+        neededForUsers = true;
+      };
+      cloudflare_email = {
+        sopsFile = ../../secrets.yaml;
+        neededForUsers = true;
+      };
+    };
   };
 
   networking = {
@@ -62,5 +72,6 @@
     postgres.enable =
       true; # sets sensible postgres setting for other applications that depend on local pg like immich
     budget.enable = true;
+    nginx.enable = true;
   };
 }
