@@ -24,14 +24,6 @@
         sopsFile = ../../secrets.yaml;
         neededForUsers = true;
       };
-      cloudflare_token = {
-        sopsFile = ../../secrets.yaml;
-        neededForUsers = true;
-      };
-      cloudflare_email = {
-        sopsFile = ../../secrets.yaml;
-        neededForUsers = true;
-      };
       bobby_pub_key = {
         sopsFile = ../../secrets.yaml;
         neededForUsers = true;
@@ -83,93 +75,7 @@
     firewall = { allowedTCPPorts = [ 80 443 ]; };
   };
 
-  security.acme = {
-    acceptTerms = true;
-    defaults = {
-      group = "nginx";
-      email = "alwin@stockinger.tech";
-      dnsPropagationCheck = true;
-      dnsProvider = "cloudflare";
-      #      server = "https://acme-staging-v02.api.letsencrypt.org/directory";
-      credentialFiles = {
-        "CLOUDFLARE_EMAIL_FILE" = config.sops.secrets.cloudflare_email.path;
-        "CLOUDFLARE_API_KEY_FILE" = config.sops.secrets.cloudflare_token.path;
-      };
-      dnsResolver = "1.1.1.1:53";
-      reloadServices = [ "nginx" ];
-    };
-    certs."stockinger.tech" = { domain = "*.stockinger.tech"; };
-  };
-
   services = {
-    nginx = {
-      enable = true;
-      recommendedProxySettings = true;
-      recommendedTlsSettings = true;
-      virtualHosts = {
-        "media.stockinger.tech" = {
-          useACMEHost = "stockinger.tech";
-          forceSSL = true;
-          locations."/".proxyPass = "http://bobby:8096/";
-        };
-        "budget.stockinger.tech" = {
-          useACMEHost = "stockinger.tech";
-          forceSSL = true;
-          locations."/".proxyPass = "http://bobby:5006/";
-        };
-        "home.stockinger.tech" = {
-          useACMEHost = "stockinger.tech";
-          forceSSL = true;
-          extraConfig = ''
-            proxy_buffering off;
-          '';
-          locations."/" = {
-            proxyPass = "http://alex:8123/";
-            proxyWebsockets = true;
-          };
-        };
-        "immich.stockinger.tech" = {
-          useACMEHost = "stockinger.tech";
-          forceSSL = true;
-          locations."/".proxyPass = "http://bobby:2283/";
-        };
-        "rss.stockinger.tech" = {
-          acmeRoot = null;
-          enableACME = true;
-          addSSL = true;
-        };
-        "sabnzbd.stockinger.tech" = {
-          useACMEHost = "stockinger.tech";
-          forceSSL = true;
-          locations."/".proxyPass = "http://bobby:6336/";
-        };
-        "sonarr.stockinger.tech" = {
-          useACMEHost = "stockinger.tech";
-          forceSSL = true;
-          locations."/".proxyPass = "http://bobby:8989/";
-        };
-        "prowlarr.stockinger.tech" = {
-          useACMEHost = "stockinger.tech";
-          forceSSL = true;
-          locations."/".proxyPass = "http://bobby:9696/";
-        };
-        "audiobook.stockinger.tech" = {
-          useACMEHost = "stockinger.tech";
-          forceSSL = true;
-          locations."/".proxyPass = "http://bobby:9292/";
-        };
-        "lidarr.stockinger.tech" = {
-          useACMEHost = "stockinger.tech";
-          forceSSL = true;
-          locations."/".proxyPass = "http://bobby:8686/";
-        };
-        "radarr.stockinger.tech" = {
-          useACMEHost = "stockinger.tech";
-          forceSSL = true;
-          locations."/".proxyPass = "http://bobby:7878/";
-        };
-      };
-    };
 
     openssh.enable = true;
 
@@ -198,13 +104,6 @@
       location = "/data/backup";
     };
 
-    tt-rss = {
-      enable = true;
-      # to configure a nginx virtual host directly:
-      selfUrlPath = "https://rss.stockinger.tech";
-      virtualHost = "rss.stockinger.tech";
-      registration.enable = true;
-    };
   };
 
   virtualisation.oci-containers.containers.actual = {
