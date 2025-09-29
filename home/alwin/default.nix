@@ -92,6 +92,9 @@ in {
       zellij = {
         enable = true;
         #enableZshIntegration = true;
+        extraConfig = ''
+          default_shell "nu"
+        '';
       };
     };
     custom.helix.enable = true;

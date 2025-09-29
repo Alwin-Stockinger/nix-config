@@ -103,7 +103,7 @@
           cmd-2 = "workspace 2";
           cmd-3 = "workspace 3";
           cmd-4 = "workspace 4";
-          #cmd-5 = "workspace 5";
+          # cmd-5 = "workspace 5";
           #cmd-6 = "workspace 6";
           #cmd-7 = "workspace 7";
           #cmd-8 = "workspace 8";
@@ -124,21 +124,33 @@
 
           cmd-minus = "resize smart -50";
           cmd-equal = "resize smart +50";
+
+          # alt-shift-s = "exec-and-forget screencapture -i -c";
         };
         workspace-to-monitor-force-assignment = {
           "1" = "1";
           "2" = "2";
           "3" = "3";
         };
-        on-window-detected = [{
-          "if" = { app-id = "com.tinyspeck.slackmacgap"; };
-          run = [ "move-node-to-workspace 3" ];
-        }];
+        on-window-detected = [
+          {
+            "if" = { app-id = "com.tinyspeck.slackmacgap"; };
+            run = [ "move-node-to-workspace 3" ];
+          }
+          {
+            "if" = { app-id = "com.microsoft.teams"; };
+            run = [ "move-node-to-workspace 3" ];
+          }
+          {
+            "if" = { app-id = "com.microsoft.outlook"; };
+            run = [ "move-node-to-workspace 3" ];
+          }
+        ];
       };
     };
 
     sketchybar = {
-      enable = true;
+      enable = false;
       extraPackages = [ pkgs.aerospace ];
       config = ''
         ############## BAR ##############
@@ -242,7 +254,7 @@
 
   homebrew = {
     enable = true;
-    casks = [ "firefox" "signal" "visual-studio-code" "ghostty" "kitty" ];
+    casks = [ "firefox" "signal" "visual-studio-code" "kitty" ];
     onActivation = {
       autoUpdate = true;
       cleanup = "zap";

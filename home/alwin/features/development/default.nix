@@ -70,12 +70,26 @@
         settings = {
           enable_audio_bell = false;
           macos_option_as_alt = "left";
-          #shell = "${pkgs.nushell}/bin/nu";
+          shell = "${pkgs.nushell}/bin/nu";
         };
       };
       yazi.enable = true;
 
-      nushell = { enable = true; };
+      nushell = {
+        enable = true;
+
+        # https://github.com/nix-community/home-manager/issues/6568
+        envFile.text = ''
+          $env.PATH ++= ['/etc/profiles/per-user/alwin-stockinger/bin']
+        '';
+
+        shellAliases = {
+          cat = "bat";
+          cd = "z";
+          ls = "eza";
+          diff = "difft";
+        };
+      };
 
       starship = {
         enable = true;
