@@ -148,7 +148,7 @@
 
         exec-once = mako & polkit-kde-agent & waybar
 
-        $terminal = kitty
+        $terminal = kitty zellij
 
         env = XCURSOR_SIZE,24
         env = QT_QPA_PLATFORMTHEME,qt5ct # change to qt6ct if you have that

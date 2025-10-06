@@ -41,7 +41,7 @@
             proxy_buffering off;
           '';
           locations."/" = {
-            proxyPass = "http://alex:8123/";
+            proxyPass = "http://bobby:8123/";
             proxyWebsockets = true;
           };
         };

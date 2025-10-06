@@ -89,6 +89,15 @@
           ls = "eza";
           diff = "difft";
         };
+
+        extraConfig = ''
+          def nix-update [] {
+            nix flake update
+            sudo nixos-rebuild switch --flake .
+          }
+        '';
+
+        settings = { show_banner = false; };
       };
 
       starship = {
