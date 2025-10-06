@@ -104,7 +104,7 @@ in {
   };
 
   imports = [
-    inputs.nixvim.homeManagerModules.nixvim
+    inputs.nixvim.homeModules.nixvim
     inputs.catppuccin.homeModules.catppuccin
     ./features/desktop.nix
     ./features/development
