@@ -27,14 +27,16 @@ in {
     programs = {
       git = {
         enable = true;
-        userName = "Alwin";
-        userEmail = "alwin@stockinger.tech";
-        ignores = [ "*.DS_Store" ];
-        extraConfig = {
+        settings = {
+          user = {
+            name = "Alwin";
+            email = "alwin@stockinger.tech";
+          };
           rebase.autostash = true;
           pull = { rebase = true; };
           push = { autoSetupRemote = true; };
         };
+        ignores = [ "*.DS_Store" ];
         diff-so-fancy.enable = true;
       };
 

@@ -31,7 +31,6 @@
       bat
       eza
       difftastic
-      diff-so-fancy
       sqlite
       pre-commit
     ];
@@ -44,6 +43,11 @@
     home = { shell.enableNushellIntegration = true; };
 
     programs = {
+      diff-so-fancy = {
+        enable = true;
+        enableGitIntegration = true;
+      };
+
       zsh = {
         shellAliases = {
           cat = "bat";

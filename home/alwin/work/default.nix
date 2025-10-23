@@ -47,7 +47,11 @@
   };
 
   programs = {
-    git = { userEmail = lib.mkForce "alwin.stockinger@volue.com"; };
+    git = {
+      settings = {
+        user = { email = lib.mkForce "alwin.stockinger@volue.com"; };
+      };
+    };
     zsh = {
       oh-my-zsh.custom = lib.mkForce "$HOME/nix-config/home/alwin/work/zsh";
       oh-my-zsh.theme = lib.mkForce "work";
