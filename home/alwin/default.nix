@@ -37,7 +37,6 @@ in {
           push = { autoSetupRemote = true; };
         };
         ignores = [ "*.DS_Store" ];
-        diff-so-fancy.enable = true;
       };
 
       gh = { enable = true; };
