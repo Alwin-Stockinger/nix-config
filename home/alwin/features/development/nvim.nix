@@ -202,7 +202,7 @@
       plugins = {
         treesitter = { enable = true; };
         lualine.enable = true;
-        markdown-preview.enable = true;
+        # markdown-preview.enable = true;
         trouble.enable = true;
         bufferline.enable = true;
         telescope.enable = true;
@@ -380,7 +380,7 @@
             };
             completion = { spell.enable = true; };
             diagnostics = {
-              actionlint.enable = true;
+              # actionlint.enable = true;
               buf.enable = true;
               checkmake.enable = true;
               checkstyle.enable = true;

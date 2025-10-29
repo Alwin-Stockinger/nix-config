@@ -20,6 +20,7 @@
       "datagrip"
       "spotify"
       "jetbrains-toolbox"
+      "kubelogin"
     ];
   };
 }

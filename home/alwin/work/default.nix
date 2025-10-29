@@ -1,4 +1,19 @@
-{ config, pkgs, inputs, lib, outputs, ... }: {
+{ config, pkgs, inputs, lib, outputs, ... }:
+
+# Current version is broken
+# let
+#   kubeLoginPkgs = import (builtins.fetchGit {
+#     # Descriptive name to make the store path easier to identify
+#     name = "my-old-revision";
+#     url = "https://github.com/NixOS/nixpkgs/";
+#     ref = "refs/heads/nixpkgs-unstable";
+#     rev = "e6f23dc08d3624daab7094b701aa3954923c6bbb";
+#   }) { };
+
+#   kubeLoginPkg = kubeLoginPkgs.kubelogin;
+
+# in {
+{
   nixpkgs = {
     overlays = [
       #      outputs.overlays.unstable-packages
@@ -29,7 +44,7 @@
       hwatch
       rainfrog
       kubeconform
-      kubelogin
+      # kubeLoginPkg
       nufmt # this is broken af
       gum
       maven
