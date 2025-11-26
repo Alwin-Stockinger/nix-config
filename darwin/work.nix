@@ -9,7 +9,14 @@
   homebrew = {
     enable = true;
     taps = [ "pulumi/tap" ];
-    brews = [ "pulumi" "gnu-sed" "minikube" "podman-compose" "azure-cli" ];
+    brews = [
+      "pulumi"
+      "gnu-sed"
+      "minikube"
+      "podman-compose"
+      "azure-cli"
+      "Azure/kubelogin/kubelogin"
+    ];
     casks = [
       "slack"
       "microsoft-teams"
@@ -20,7 +27,6 @@
       "datagrip"
       "spotify"
       "jetbrains-toolbox"
-      "kubelogin"
     ];
   };
 }

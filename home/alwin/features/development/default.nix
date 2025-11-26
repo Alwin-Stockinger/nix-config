@@ -74,7 +74,7 @@
         settings = {
           enable_audio_bell = false;
           macos_option_as_alt = "left";
-          shell = "${pkgs.nushell}/bin/nu";
+          # shell = "${pkgs.nushell}/bin/nu";
         };
       };
       yazi.enable = true;
