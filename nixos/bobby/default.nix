@@ -20,7 +20,7 @@
   networking = {
     hostName = "bobby";
     firewall = { allowedUDPPorts = [ 2456 2457 ]; };
-    interfaces.enp6s0.ipv4.addresses = [{
+    interfaces.enp3s0.ipv4.addresses = [{
       address = "192.168.1.31";
       prefixLength = 24;
     }];
@@ -73,5 +73,6 @@
       true; # sets sensible postgres setting for other applications that depend on local pg like immich
     budget.enable = true;
     nginx.enable = true;
+    home-assistant.enable = true;
   };
 }

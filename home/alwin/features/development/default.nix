@@ -37,7 +37,7 @@
 
     catppuccin = {
       enable = true;
-      ghostty.enable = true;
+      # ghostty.enable = true;
     };
 
     home = { shell.enableNushellIntegration = true; };
@@ -58,7 +58,7 @@
       };
 
       ghostty = {
-        enable = true;
+        enable = false;
         package = null; # currently marked as broken
         enableZshIntegration = true;
         clearDefaultKeybinds = true;

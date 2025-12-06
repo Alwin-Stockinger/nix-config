@@ -17,9 +17,22 @@
         http = {
           trusted_proxies = [ "127.0.0.1" ];
           use_x_forwarded_for = true;
+          server_host = "127.0.0.1";
         };
-        recorder = { "db_url" = "postgresql://@/home"; };
+        # recorder = { "db_url" = "postgresql://@/home"; };
       };
+      extraPackages = python3Packages: [
+        python3Packages.psycopg2
+        pkgs.zlib-ng
+        python3Packages.isal
+      ];
+    };
+    services.postgresql = {
+      ensureDatabases = [ "hass" ];
+      ensureUsers = [{
+        name = "hass";
+        ensureDBOwnership = true;
+      }];
     };
   };
 }
