@@ -50,7 +50,7 @@
       nonUS.remapTilde = true;
     };
 
-    primaryUser = "alwin-stockinger";
+    primaryUser = "alwin";
   };
 
   # Used for backwards compatibility, please read the changelog before changing.
@@ -254,7 +254,8 @@
 
   homebrew = {
     enable = true;
-    casks = [ "firefox" "signal" "visual-studio-code" "kitty" ];
+    casks =
+      [ "firefox" "signal" "visual-studio-code" "kitty" "microsoft-teams" ];
     onActivation = {
       autoUpdate = true;
       cleanup = "zap";
