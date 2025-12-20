@@ -27,7 +27,6 @@
 
     nix-homebrew = {
       url = "github:zhaofengli-wip/nix-homebrew";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-vscode-extensions = {
@@ -56,19 +55,6 @@
     let inherit (self) outputs;
     in {
       #     overlays = import ./overlays { inherit inputs; };
-
-      nix.settings = {
-        substituters = [
-          "https://hyprland.cachix.org"
-          "https://cache.nixos.org"
-          "https://nix-community.cachix.org"
-        ];
-        trusted-public-keys = [
-          "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-          "binarycache.example.com-1:dsafdafDFW123fdasfa123124FADSAD"
-          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        ];
-      };
 
       #Raspberry Pi
       nixosConfigurations."alex" = inputs.nixpkgs.lib.nixosSystem rec {
