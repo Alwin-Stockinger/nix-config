@@ -55,7 +55,6 @@
       topiary
       terraform
       raycast
-      claude-code
     ];
 
     homeDirectory = "/Users/alwin-stockinger";

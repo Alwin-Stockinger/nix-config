@@ -33,6 +33,7 @@
       difftastic
       sqlite
       pre-commit
+      claude-code
     ];
 
     catppuccin = {
@@ -162,28 +163,29 @@
         "window.restoreFullscreen" = true;
         "window.newWindowDimensions" = "maximized";
       };
-      profiles.default.extensions = with pkgs.vscode-marketplace; [
-        kamadorueda.alejandra
-        ms-python.black-formatter
-        fabiospampinato.vscode-diff
-        ms-azuretools.vscode-docker
-        ms-python.flake8
-        github.vscode-github-actions
-        github.vscode-pull-request-github
-        eamodio.gitlens
-        golang.go
-        ms-kubernetes-tools.vscode-kubernetes-tools
-        bierner.markdown-mermaid
-        jnoortheen.nix-ide
-        esbenp.prettier-vscode
-        ms-python.vscode-pylance
-        ms-python.debugpy
-        timonwong.shellcheck
-        redhat.vscode-yaml
-        hilleer.yaml-plus-json
-        tailscale.vscode-tailscale
-        kennylong.kubernetes-yaml-formatter
-      ];
+      profiles.default.extensions = with pkgs.vscode-marketplace;
+        [
+          # kamadorueda.alejandra
+          # ms-python.black-formatter
+          # fabiospampinato.vscode-diff
+          # ms-azuretools.vscode-docker
+          # ms-python.flake8
+          # github.vscode-github-actions
+          # github.vscode-pull-request-github
+          # eamodio.gitlens
+          # golang.go
+          # ms-kubernetes-tools.vscode-kubernetes-tools
+          # bierner.markdown-mermaid
+          # jnoortheen.nix-ide
+          # esbenp.prettier-vscode
+          # ms-python.vscode-pylance
+          # ms-python.debugpy
+          # timonwong.shellcheck
+          # redhat.vscode-yaml
+          # hilleer.yaml-plus-json
+          # tailscale.vscode-tailscale
+          # kennylong.kubernetes-yaml-formatter
+        ];
     };
   };
 }

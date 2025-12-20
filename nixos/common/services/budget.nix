@@ -12,7 +12,7 @@
     # };
 
     virtualisation.oci-containers.containers.actual = {
-      image = "ghcr.io/actualbudget/actual-server:25.9.0-alpine";
+      image = "ghcr.io/actualbudget/actual-server:25.12.0-alpine";
       ports = [ "0.0.0.0:5006:5006" ];
       volumes = [ "/data/actual-budget/data:/data" ];
     };
