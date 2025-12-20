@@ -12,12 +12,9 @@
       configDir = "/data/hass-config";
       config = {
         default_config = { };
-        "automation ui" = "!include automations.yaml";
-        "script ui" = "!include scripts.yaml";
         http = {
-          trusted_proxies = [ "127.0.0.1" ];
+          trusted_proxies = [ "127.0.0.1" "::1" ];
           use_x_forwarded_for = true;
-          server_host = "127.0.0.1";
         };
         # recorder = { "db_url" = "postgresql://@/home"; };
       };
@@ -26,6 +23,10 @@
         pkgs.zlib-ng
         python3Packages.isal
       ];
+      lovelaceConfig = {
+        title = "Home";
+      };
+      lovelaceConfigWritable = true;
     };
     services.postgresql = {
       ensureDatabases = [ "hass" ];
