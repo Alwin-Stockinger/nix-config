@@ -34,6 +34,7 @@
       sqlite
       pre-commit
       claude-code
+      iperf3
     ];
 
     catppuccin = {

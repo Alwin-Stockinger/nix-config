@@ -11,6 +11,8 @@ let
     yq-go
     dig
     htop
+    btop
+    lm_sensors
     wget
     postgresql
   ];
