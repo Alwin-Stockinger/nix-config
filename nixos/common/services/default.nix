@@ -7,5 +7,7 @@
     ./budget.nix
     ./nginx.nix
     ./home-assistant.nix
+    ./miniflux.nix
+    ./grafana.nix
   ];
 }

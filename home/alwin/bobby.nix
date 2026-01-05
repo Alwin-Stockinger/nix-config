@@ -7,6 +7,8 @@
     handbrake
     python3
     signal-desktop
+    ffmpeg
+    lm_sensors
   ];
 
   imports = [ ./default.nix ];

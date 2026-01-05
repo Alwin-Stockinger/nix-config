@@ -50,10 +50,6 @@
           forceSSL = true;
           locations."/".proxyPass = "http://bobby:2283/";
         };
-        "rss.stockinger.tech" = {
-          useACMEHost = "stockinger.tech";
-          locations."/".proxyPass = "http://bobby:6666/";
-        };
         "sabnzbd.stockinger.tech" = {
           useACMEHost = "stockinger.tech";
           forceSSL = true;

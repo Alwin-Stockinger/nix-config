@@ -14,6 +14,10 @@
         sopsFile = ../../secrets.yaml;
         neededForUsers = true;
       };
+      miniflux_admin = {
+        sopsFile = ../../secrets.yaml;
+        neededForUsers = true;
+      };
     };
   };
 
@@ -74,5 +78,7 @@
     budget.enable = true;
     nginx.enable = true;
     home-assistant.enable = true;
+    miniflux.enable = true;
+    grafana.enable = true;
   };
 }
