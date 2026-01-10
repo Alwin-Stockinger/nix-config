@@ -19,7 +19,6 @@ in {
             title = "CPU Usage";
             type = "timeseries";
             gridPos = { x = 0; y = 0; w = 12; h = 8; };
-            datasource = { type = "prometheus"; uid = "prometheus"; };
             targets = [{
               expr = ''100 - (avg by (instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)'';
               legendFormat = "CPU Usage";
@@ -47,7 +46,6 @@ in {
             title = "Memory Usage";
             type = "timeseries";
             gridPos = { x = 12; y = 0; w = 12; h = 8; };
-            datasource = { type = "prometheus"; uid = "prometheus"; };
             targets = [{
               expr = ''(1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100'';
               legendFormat = "Memory Usage";
@@ -75,7 +73,6 @@ in {
             title = "Disk Usage";
             type = "timeseries";
             gridPos = { x = 0; y = 8; w = 12; h = 8; };
-            datasource = { type = "prometheus"; uid = "prometheus"; };
             targets = [{
               expr = ''(1 - (node_filesystem_avail_bytes{fstype!="tmpfs",fstype!="ramfs"} / node_filesystem_size_bytes)) * 100'';
               legendFormat = "{{mountpoint}}";
@@ -100,20 +97,17 @@ in {
           }
           {
             id = 4;
-            title = "ZFS Pool Usage";
+            title = "ZFS Available Storage";
             type = "timeseries";
             gridPos = { x = 12; y = 8; w = 12; h = 8; };
-            datasource = { type = "prometheus"; uid = "prometheus"; };
             targets = [{
-              expr = ''(node_zfs_zpool_used_bytes / node_zfs_zpool_size_bytes) * 100'';
-              legendFormat = "{{zpool}}";
+              expr = ''node_filesystem_avail_bytes{fstype="zfs",device=~"data|large"}'';
+              legendFormat = "{{device}}";
               refId = "A";
             }];
             fieldConfig = {
               defaults = {
-                unit = "percent";
-                min = 0;
-                max = 100;
+                unit = "bytes";
                 custom = {
                   drawStyle = "line";
                   lineInterpolation = "smooth";
@@ -131,7 +125,6 @@ in {
             title = "Network Traffic";
             type = "timeseries";
             gridPos = { x = 0; y = 16; w = 12; h = 8; };
-            datasource = { type = "prometheus"; uid = "prometheus"; };
             targets = [
               {
                 expr = ''rate(node_network_receive_bytes_total{device!="lo"}[5m])'';
@@ -164,7 +157,6 @@ in {
             title = "System Load";
             type = "timeseries";
             gridPos = { x = 12; y = 16; w = 12; h = 8; };
-            datasource = { type = "prometheus"; uid = "prometheus"; };
             targets = [
               { expr = "node_load1"; legendFormat = "1 minute"; refId = "A"; }
               { expr = "node_load5"; legendFormat = "5 minutes"; refId = "B"; }
@@ -173,6 +165,65 @@ in {
             fieldConfig = {
               defaults = {
                 unit = "short";
+                custom = {
+                  drawStyle = "line";
+                  lineInterpolation = "smooth";
+                  fillOpacity = 10;
+                };
+              };
+            };
+            options = {
+              legend = { displayMode = "list"; placement = "bottom"; };
+              tooltip = { mode = "multi"; };
+            };
+          }
+          {
+            id = 7;
+            title = "Disk I/O Utilization";
+            type = "timeseries";
+            gridPos = { x = 0; y = 24; w = 12; h = 8; };
+            targets = [{
+              expr = ''rate(node_disk_io_time_seconds_total{device=~"sd.*|nvme.*"}[5m]) * 100'';
+              legendFormat = "{{device}}";
+              refId = "A";
+            }];
+            fieldConfig = {
+              defaults = {
+                unit = "percent";
+                min = 0;
+                max = 100;
+                custom = {
+                  drawStyle = "line";
+                  lineInterpolation = "smooth";
+                  fillOpacity = 10;
+                };
+              };
+            };
+            options = {
+              legend = { displayMode = "list"; placement = "bottom"; };
+              tooltip = { mode = "multi"; };
+            };
+          }
+          {
+            id = 8;
+            title = "Disk Throughput";
+            type = "timeseries";
+            gridPos = { x = 12; y = 24; w = 12; h = 8; };
+            targets = [
+              {
+                expr = ''rate(node_disk_read_bytes_total{device=~"sd.*|nvme.*"}[5m])'';
+                legendFormat = "{{device}} Read";
+                refId = "A";
+              }
+              {
+                expr = ''rate(node_disk_write_bytes_total{device=~"sd.*|nvme.*"}[5m])'';
+                legendFormat = "{{device}} Write";
+                refId = "B";
+              }
+            ];
+            fieldConfig = {
+              defaults = {
+                unit = "Bps";
                 custom = {
                   drawStyle = "line";
                   lineInterpolation = "smooth";
@@ -202,11 +253,13 @@ in {
         datasources.settings.datasources = [{
           name = "Prometheus";
           type = "prometheus";
+          access = "proxy";
           url = "http://127.0.0.1:9090";
           isDefault = true;
         }];
         dashboards.settings.providers = [{
           name = "System Metrics";
+          type = "file";
           options.path = "/etc/grafana-dashboards";
         }];
       };
@@ -228,7 +281,7 @@ in {
       exporters = {
         node = {
           enable = true;
-          enabledCollectors = [ "systemd" ];
+          enabledCollectors = [ "systemd" "zfs" ];
           port = 9100;
         };
       };
