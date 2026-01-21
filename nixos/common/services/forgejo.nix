@@ -14,6 +14,7 @@ in {
           DOMAIN = "git.stockinger.tech";
           ROOT_URL = "https://git.stockinger.tech/";
           HTTP_PORT = 3001;
+          SSH_PORT = lib.head config.services.openssh.ports;
         };
       };
     };
