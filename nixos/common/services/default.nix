@@ -9,5 +9,6 @@
     ./home-assistant.nix
     ./miniflux.nix
     ./grafana.nix
+    ./forgejo.nix
   ];
 }

@@ -80,5 +80,6 @@
     home-assistant.enable = true;
     miniflux.enable = true;
     grafana.enable = true;
+    forgejo.enable = true;
   };
 }
