@@ -2,6 +2,7 @@
   imports = [ ./default.nix ];
 
   users.users.alwin-stockinger.home = lib.mkForce "/Users/alwin-stockinger";
+  system.primaryUser = lib.mkForce "alwin-stockinger";
 
   # because previous install was fucked
   ids.gids.nixbld = 350;

@@ -55,6 +55,8 @@
       topiary
       terraform
       raycast
+      crossplane-cli
+      azure-storage-azcopy
     ];
 
     homeDirectory = "/Users/alwin-stockinger";
@@ -122,8 +124,8 @@
       enable = true;
       configFile = {
         text = ''
-          const NU_LIB_DIRS = $NU_LIB_DIRS ++ [ "~/Developer/volue/flux-powerbot/nushell"]
-          source "~/Developer/volue/flux-powerbot/nushell/mod.nu"
+          const NU_LIB_DIRS = $NU_LIB_DIRS ++ [ "~/Developer/volue/powerbot-nushell/nushell"]
+          source "~/Developer/volue/powerbot-nushell/nushell/mod.nu"
         '';
       };
       shellAliases = {
