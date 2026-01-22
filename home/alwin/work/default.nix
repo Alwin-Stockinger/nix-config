@@ -57,6 +57,7 @@
       raycast
       crossplane-cli
       azure-storage-azcopy
+      gettext
     ];
 
     homeDirectory = "/Users/alwin-stockinger";
